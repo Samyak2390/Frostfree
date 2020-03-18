@@ -32,7 +32,7 @@
                 {{-- <a class="offcanvas-user-wishlist-link" href="wishlist.html">
                     <i class="fa fa-heart-o"></i> My Wishlist
                 </a> --}}
-                <a class="offcanvas-user-account-link" href="#">
+                <a class="offcanvas-user-account-link login-toggle" href="#">
                     <i class="fa fa-user"></i> Login
                 </a>
             </div>
