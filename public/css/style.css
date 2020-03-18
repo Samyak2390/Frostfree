@@ -1,8 +1,4 @@
 /**
-Theme Name: DMCS
-Description: CSS
-*/
-/**
  * Table of Contents
  *
  * 1.0 - Browser Reset
@@ -4062,7 +4058,7 @@ body.admin-bar .offcanvas-wrap {
 .offcanvas-user {
   margin-left: -15px;
   margin-right: -15px;
-  background: #1e1e1e;
+  background: #00AF66;
   padding: 0 15px;
   margin-bottom: 20px;
 }
@@ -4070,7 +4066,7 @@ body.admin-bar .offcanvas-wrap {
   height: 74px;
   line-height: 74px;
   color: #fff;
-  width: 50%;
+  /* width: 50%; */
   float: left;
   text-align: center;
   display: block;
@@ -5255,7 +5251,7 @@ a[data-toggle="tooltip"]:hover {
   padding: 0;
 }
 .dhslider .slide-bg {
-  background-position: center 0;
+  background-position: center;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -5272,7 +5268,7 @@ a[data-toggle="tooltip"]:hover {
   background-image:url(../images/slideshow/1.jpg)
 }
 .dhslider .slide-bg-2 {
-  background-image:url(../images/slideshow/home-slide-2.png)
+  background-image:url(../images/slideshow/2.jpg)
 }
 .dhslider .slide-bg-3 {
   background-image:url(../images/slideshow/7.jpg)
@@ -5373,7 +5369,7 @@ a[data-toggle="tooltip"]:hover {
   top: 50%;
 }
 .dhslider .slider-caption.caption-align-left {
-  padding-left: 15%;
+  padding-left: 10%;
   width: 50%;
 }
 .dhslider .slider-caption.caption-align-left .slider-caption-text {
@@ -5384,7 +5380,7 @@ a[data-toggle="tooltip"]:hover {
   text-align: center;
 }
 .dhslider .slider-caption.caption-align-right {
-  padding-right: 15%;
+  padding-right: 13%;
   width: 50%;
   left: auto;
   right: 0;
@@ -5812,7 +5808,7 @@ a[data-toggle="tooltip"]:hover {
 26.0 - Header
 --------------------------------------------------------------*/
 .topbar {
-  background: #000000;
+  background: #00AF66;
   position: relative;
   color: #ffffff;
   font-size: 90%;

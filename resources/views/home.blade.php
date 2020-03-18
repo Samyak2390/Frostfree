@@ -5,8 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
         <title>FrostFree</title>
-        {{-- <link rel="shortcut icon" href="images/favicon.png"> --}}
-
+        <link rel="shortcut icon" href="images/favicon.png">
+        
         <link rel='stylesheet' href='{{ URL::asset('css/settings.css') }}' type='text/css' media='all' />
         <link rel='stylesheet' href='{{ URL::asset('css/swatches-and-photos.css') }}' type='text/css' media='all'/>
         <link rel='stylesheet' href='{{ URL::asset('css/font-awesome.min.css') }}' type='text/css' media='all'/>
@@ -28,18 +28,18 @@
     <body>
       <div class="offcanvas open">
         <div class="offcanvas-wrap">
-            <div class="offcanvas-user clearfix">
-                <a class="offcanvas-user-wishlist-link" href="wishlist.html">
+            <div class="offcanvas-user clearfix text-center">
+                {{-- <a class="offcanvas-user-wishlist-link" href="wishlist.html">
                     <i class="fa fa-heart-o"></i> My Wishlist
-                </a>
-                <a class="offcanvas-user-account-link" href="my-account.html">
+                </a> --}}
+                <a class="offcanvas-user-account-link" href="#">
                     <i class="fa fa-user"></i> Login
                 </a>
             </div>
             <nav class="offcanvas-navbar">
                 <ul class="offcanvas-nav">
                     <li class="menu-item-has-children dropdown">
-                        <a href="index.html" class="dropdown-hover">Home <span class="caret"></span></a>
+                    <a href="{{url('/')}}" class="dropdown-hover">Home <span class="caret"></span></a>
 
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -50,8 +50,6 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="shop-by-category.html">Nulla</a></li>
                                     <li><a href="shop-by-category.html">Maecenas</a></li>
-                                    <li><a href="shop-by-category.html">Aliquam</a></li>
-                                    <li><a href="shop-by-category.html">Donec</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children dropdown-submenu">
@@ -59,22 +57,31 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="shop-by-category.html">Adesso</a></li>
                                     <li><a href="shop-by-category.html">Barbour</a></li>
-                                    <li><a href="shop-by-category.html">Carvela</a></li>
-                                    <li><a href="shop-by-category.html">Crocs</a></li>
-                                    <li><a href="shop-by-category.html">Evans</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children dropdown-submenu">
+                                <a href="shop-by-category.html">Greengrocer <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="shop-by-category.html">Adesso</a></li>
+                                    <li><a href="shop-by-category.html">Barbour</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children dropdown-submenu">
+                                <a href="shop-by-category.html">Bakery <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="shop-by-category.html">Adesso</a></li>
+                                    <li><a href="shop-by-category.html">Barbour</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children dropdown-submenu">
+                                <a href="shop-by-category.html">Delicatessen <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="shop-by-category.html">Adesso</a></li>
+                                    <li><a href="shop-by-category.html">Barbour</a></li>
                                 </ul>
                             </li>
                            
-                            <li class="menu-item-has-children dropdown-submenu">
-                                <a href="#">Woo <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="shop-masonry.html">Shop Masonry</a></li>
-                                    <li><a href="shop-detail.html">Shop Detail</a></li>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="cart-empty.html">Empty Cart</a></li>
-                                </ul>
-                            </li>
+                            
                         </ul>
                     </li>
                     <li><a href="collection.html">Collections</a></li>
@@ -91,18 +98,15 @@
             </nav>
             <div class="offcanvas-widget">
                 <div class="widget social-widget">
-                    <div class="social-widget-wrap social-widget-none">
-                        <a href="#" title="Facebook" target="_blank">
-                            <i class="fa fa-facebook"></i>
+                    <div class="social-widget-wrap social-widget-none" style="display: flex; justify-content: center">
+                        <a href="www.facebook.com" title="Facebook" target="_blank">
+                            <i class="fa fa-facebook facebook-bg-hover"></i>
                         </a>
-                        <a href="#" title="Twitter" target="_blank">
-                            <i class="fa fa-twitter"></i>
+                        <a href="www.twitter.com" title="Twitter" target="_blank">
+                            <i class="fa fa-twitter twitter-bg-hover"></i>
                         </a>
-                        <a href="#" title="Google+" target="_blank">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" title="Pinterest" target="_blank">
-                            <i class="fa fa-pinterest"></i>
+                        <a href="www.instagram.com" title="Instagram" target="_blank">
+                            <i class="fa fa-instagram instagram-bg-hover"></i>
                         </a>
                     </div>
                 </div>
@@ -118,22 +122,13 @@
                         <div class="col-sm-6">
                             <div class="left-topbar">
                                 <div class="topbar-social">
-                                    <a href="#" title="Facebook" target="_blank">
+                                    <a href="www.facebook.com" title="Facebook" target="_blank">
                                         <i class="fa fa-facebook facebook-bg-hover"></i>
                                     </a>
-                                    <a href="#" title="Twitter" target="_blank">
+                                    <a href="www.twitter.com" title="Twitter" target="_blank">
                                         <i class="fa fa-twitter twitter-bg-hover"></i>
                                     </a>
-                                    <a href="#" title="Google+" target="_blank">
-                                        <i class="fa fa-google-plus google-plus-bg-hover"></i>
-                                    </a>
-                                    <a href="#" title="Pinterest" target="_blank">
-                                        <i class="fa fa-pinterest pinterest-bg-hover"></i>
-                                    </a>
-                                    <a href="#" title="RSS" target="_blank">
-                                        <i class="fa fa-rss rss-bg-hover"></i>
-                                    </a>
-                                    <a href="#" title="Instagram" target="_blank">
+                                    <a href="www.instagram.com" title="Instagram" target="_blank">
                                         <i class="fa fa-instagram instagram-bg-hover"></i>
                                     </a>
                                 </div>
@@ -141,9 +136,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="right-topbar">
-                                <div class="user-wishlist">
+                                {{-- <div class="user-wishlist">
                                     <a href="wishlist.html"><i class="fa fa-heart-o"></i> My Wishlist</a>
-                                </div>
+                                </div> --}}
                                 <div class="user-login">
                                     <ul class="nav top-nav">
                                         <li class="menu-item">
@@ -151,13 +146,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="language-switcher">
+                                {{-- <div class="language-switcher">
                                     <div class="wpml-languages disabled">
                                         <a class="active" href="#" data-toggle="dropdown">
                                             <img src="images/en.png" alt="English"/> EN
                                         </a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -183,6 +178,13 @@
                                             <a class="cart-icon-mobile" href="#">
                                                 <i class="elegant_icon_bag"></i><span>0</span>
                                             </a>
+                                            {{-- <a class="navbar-brand" href="{{ url('/') }}" style="display: flex">
+                                                <div><img src="/svg/snow.svg" style="height:60px;"></div>
+                                                <div style="display: flex; align-items: center; padding-left: 15px">Frostfree</div>
+                                                <img class="logo" alt="FrostFree" src="images/logo-transparent.png">
+                                                <img class="logo-fixed" alt="FrostFree" src="images/logo-fixed.png">
+                                                <img class="logo-mobile" alt="FrostFree" src="images/logo-mobile.png">  
+                                            </a> --}}
                                             <a class="navbar-brand" href="index.html">
                                                 <img class="logo" alt="FrostFree" src="images/logo-transparent.png">
                                                 <img class="logo-fixed" alt="FrostFree" src="images/logo-fixed.png">
@@ -208,8 +210,7 @@
                                                             <ul class="dropdown-menu">
                                                                 <li><a href="shop-by-category.html">Nulla</a></li>
                                                                 <li><a href="shop-by-category.html">Maecenas</a></li>
-                                                                <li><a href="shop-by-category.html">Aliquam</a></li>
-                                                                <li><a href="shop-by-category.html">Donec</a></li>
+                                                                
                                                             </ul>
                                                         </li>
                                                         <li class="menu-item-has-children mega-col-3 dropdown-submenu">
@@ -217,62 +218,55 @@
                                                                 Fishmonger <span class="caret"></span>
                                                             </h3>
                                                             <ul class="dropdown-menu">
-                                                                <li><a href="shop-by-category.html">Adesso</a></li>
-                                                                <li><a href="shop-by-category.html">Barbour</a></li>
-                                                                <li><a href="shop-by-category.html">Carvela</a></li>
-                                                                <li><a href="shop-by-category.html">Crocs</a></li>
-                                                                <li><a href="shop-by-category.html">Evans</a></li>
+                                                                <li><a href="shop-by-category.html">Nulla</a></li>
+                                                                <li><a href="shop-by-category.html">Maecenas</a></li>
+                                                                
                                                             </ul>
                                                         </li>
                                                         <li class="menu-item-has-children mega-col-3 dropdown-submenu">
                                                             <h3 class="megamenu-title">
-                                                                Fishmonger <span class="caret"></span>
+                                                                Greengrocer <span class="caret"></span>
                                                             </h3>
                                                             <ul class="dropdown-menu">
-                                                                <li><a href="shop-by-category.html">Adesso</a></li>
-                                                                <li><a href="shop-by-category.html">Barbour</a></li>
-                                                                <li><a href="shop-by-category.html">Carvela</a></li>
-                                                                <li><a href="shop-by-category.html">Crocs</a></li>
-                                                                <li><a href="shop-by-category.html">Evans</a></li>
+                                                                <li><a href="shop-by-category.html">Nulla</a></li>
+                                                                <li><a href="shop-by-category.html">Maecenas</a></li>
+                                                                
                                                             </ul>
                                                         </li>
                                                         <li class="menu-item-has-children mega-col-3 dropdown-submenu">
                                                             <h3 class="megamenu-title">
-                                                                Fishmonger <span class="caret"></span>
+                                                                Bakery <span class="caret"></span>
                                                             </h3>
                                                             <ul class="dropdown-menu">
-                                                                <li><a href="shop-by-category.html">Adesso</a></li>
-                                                                <li><a href="shop-by-category.html">Barbour</a></li>
-                                                                <li><a href="shop-by-category.html">Carvela</a></li>
-                                                                <li><a href="shop-by-category.html">Crocs</a></li>
-                                                                <li><a href="shop-by-category.html">Evans</a></li>
+                                                                <li><a href="shop-by-category.html">Nulla</a></li>
+                                                                <li><a href="shop-by-category.html">Maecenas</a></li>
+                                                                
                                                             </ul>
                                                         </li>
                                                         <li class="menu-item-has-children mega-col-3 dropdown-submenu">
                                                             <h3 class="megamenu-title">
-                                                                Green Grocer<span class="caret"></span>
+                                                                Delicatessen <span class="caret"></span>
                                                             </h3>
                                                             <ul class="dropdown-menu">
-                                                                <li><a href="shop-by-collection.html">Spring/Summer 2014</a></li>
-                                                                <li><a href="shop-by-collection.html">Sweet Summer</a></li>
-                                                                <li><a href="shop-by-collection.html">Winter 2015</a></li>
+                                                                <li><a href="shop-by-category.html">Nulla</a></li>
+                                                                <li><a href="shop-by-category.html">Maecenas</a></li>
+                                                                
                                                             </ul>
                                                         </li>
-                                                        <li class="menu-item-has-children mega-col-3 dropdown-submenu">
-                                                            <h3 class="megamenu-title">
-                                                                Woo <span class="caret"></span>
-                                                            </h3>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a href="shop-masonry.html">Shop Masonry</a></li>
-                                                                <li><a href="shop-detail.html">Shop Detail</a></li>
-                                                                <li><a href="my-account.html">My Account</a></li>
-                                                                <li><a href="cart.html">Cart</a></li>
-                                                                <li><a href="cart-empty.html">Empty Cart</a></li>
-                                                            </ul>
-                                                        </li>
+                                                        
                                                     </ul>
                                                 </li>
-                                                <li><a href="collection.html"><span class="underline">Collections</span></a></li>
+                                                <li class="menu-item-has-children dropdown">
+                                                    <a href="#" class="dropdown-hover">
+                                                        <span class="underline">Categories</span> <span class="caret"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#">Meat</a></li>
+                                                        <li><a href="#">Fish</a></li>
+                                                        <li><a href="#">Cake</a></li>
+                                                    </ul>
+                                                </li>
+                                                
                                                 <li class="menu-item-has-children dropdown">
                                                     <a href="#" class="dropdown-hover">
                                                         <span class="underline">Pages</span> <span class="caret"></span>
@@ -348,13 +342,14 @@
                                         <div class="slide-bg slide-bg-1"></div>  
                                         <div class="slider-caption caption-align-left">
                                             <div class="slider-caption-wrap">
-                                                <span class="slider-top-caption-text">Great Deals</span>
-                                               
-                                                <div class="slider-caption-text">NEW COLLECTIONS</div>
+                                                <span class="slider-top-caption-text">Great daily deals</span>
+                                                <h2 class="slider-heading-text">Always fresh, never frozen</h2>
+                                                {{-- <div class="slider-caption-text">NEW COLLECTIONS</div>
+                                                
                                                 <div class="slider-buttons">
                                                     <a href="#" class="btn btn-lg btn-white-outline">Detail</a>
                                                     <a href="#" class="btn btn-lg btn-white-outline">Buy Now</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -363,12 +358,12 @@
                                         <div class="slider-caption caption-align-right">
                                             <div class="slider-caption-wrap">
                                                 <span class="slider-top-caption-text">Great daily deals</span>
-                                                <h2 class="slider-heading-text">LIMITED STOCK FOR UP TO 50% OFF</h2>
-                                                <div class="slider-caption-text">NEW COLLECTIONS</div>
+                                                <h2 class="slider-heading-text">Big food, little money</h2>
+                                                {{-- <div class="slider-caption-text">NEW COLLECTIONS</div>
                                                 <div class="slider-buttons">
                                                     <a href="#" class="btn btn-lg btn-white">SEE MORE</a>
                                                     <a href="#" class="btn btn-lg btn-white-outline">GET NOW</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
