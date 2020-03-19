@@ -281,7 +281,7 @@ html {
 }
 body {
   font-family: "Montserrat", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 14.5px;
   line-height: 1.6;
   color: #1e1e1e;
   background: #ffffff;
@@ -12024,5 +12024,5 @@ img.grayscale:hover {
   background: url(../images/lookbook/lookbook2.jpg) no-repeat scroll center center;
 }
 .lookbook-info-wrap.bg-2 {
-  background: url(../images/lookbook/lookbook-2.jpg) no-repeat scroll center center;
+  background: url(../images/lookbook/lookbook3.jpg) no-repeat scroll center center;
 }
