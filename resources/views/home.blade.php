@@ -22,7 +22,7 @@
 
         <!-- Styles -->
         <style>
-        
+
         </style>
     </head>
     <body>
@@ -64,7 +64,7 @@
                                     <li><a href="shop-by-category.html">Evans</a></li>
                                 </ul>
                             </li>
-                           
+
                             <li class="menu-item-has-children dropdown-submenu">
                                 <a href="#">Woo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -345,11 +345,11 @@
                                 </div>
                                 <div class="carousel-inner dhslider-wrap">
                                     <div class="item slider-item active">
-                                        <div class="slide-bg slide-bg-1"></div>  
+                                        <div class="slide-bg slide-bg-1"></div>
                                         <div class="slider-caption caption-align-left">
                                             <div class="slider-caption-wrap">
                                                 <span class="slider-top-caption-text">Great Deals</span>
-                                               
+
                                                 <div class="slider-caption-text">NEW COLLECTIONS</div>
                                                 <div class="slider-buttons">
                                                     <a href="#" class="btn btn-lg btn-white-outline">Detail</a>
@@ -359,7 +359,7 @@
                                         </div>
                                     </div>
                                     <div class="item slider-item">
-                                        <div class="slide-bg slide-bg-2"></div>  
+                                        <div class="slide-bg slide-bg-2"></div>
                                         <div class="slider-caption caption-align-right">
                                             <div class="slider-caption-wrap">
                                                 <span class="slider-top-caption-text">Great daily deals</span>
@@ -1992,7 +1992,7 @@
                         <div class="modal fade user-login-modal" id="userloginModal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form id="userloginModalForm">
+                                    <form id="userloginModalForm" method="post" action="/login">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">
                                                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -2008,6 +2008,7 @@
                                                 <label for="password">Password</label>
                                                 <input type="password" id="password" required value="" name="pwd" class="form-control" placeholder="Password">
                                             </div>
+                                            @csrf
                                             <div class="checkbox clearfix">
                                                 <div class="form-flat-checkbox pull-left">
                                                     <input type="checkbox" name="rememberme" id="rememberme" value="forever"><i></i>&nbsp;Remember Me
@@ -2024,13 +2025,14 @@
                                             <button type="submit" class="btn btn-default btn-outline">Sign in</button>
                                         </div>
                                     </form>
+                                    @error('name'){{$message}}@enderror
                                 </div>
                             </div>
                         </div>
                         <div class="modal fade user-register-modal" id="userregisterModal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form id="userregisterModalForm">
+                                    <form id="userregisterModalForm" method="post" action="/register">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">
                                                 <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -2047,25 +2049,25 @@
                                                 </div>
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" name="user_login" required class="form-control" value="" placeholder="Username">
+                                                <input type="text" name="user_login" required class="form-control" placeholder="Username">
                                             </div>
                                             <div class="form-group">
                                                 <label for="user_email">Email</label>
-                                                <input type="email" id="user_email" name="user_email" required class="form-control" value="" placeholder="Email">
+                                                <input type="email" id="user_email" name="user_email" required class="form-control" placeholder="Email">
                                             </div>
                                             <div class="form-group">
                                                 <label for="user_password">Password</label>
-                                                <input type="password" id="user_password" required value="" name="user_password" class="form-control" placeholder="Password">
+                                                <input type="password" id="user_password" required  name="user_password" class="form-control" placeholder="Password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="user_password">Retype password</label>
-                                                <input type="password" id="cuser_password" required value="" name="cuser_password" class="form-control" placeholder="Retype password">
+                                                <input type="password" id="cuser_password" required  name="cuser_password" class="form-control" placeholder="Retype password">
                                             </div>
-                                           
+@csrf
                                                 <div class="form-group" id="otherFieldDiv">
                                                     <label for="otherField">Shop</label>
-                                                    <input type="text" name="trader_name" required class="form-control" value="" placeholder="Shop" id="otherField">
-                                               
+                                                    <input type="text" name="trader_name" required class="form-control"  placeholder="Shop" id="otherField">
+
                                                   </div>
                                         </div>
                                         <div class="modal-footer">
@@ -2075,6 +2077,7 @@
                                             <button type="submit" class="btn btn-default btn-outline">Register</button>
                                         </div>
                                     </form>
+                                    @error('name'){{$message}}@enderror
                                 </div>
                             </div>
                         </div>
@@ -2104,7 +2107,7 @@
                                 </div>
                             </div>
                         </div>
-   
+
 
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
     <script type='text/javascript' src='{{ URL::asset('js/jquery-migrate.min.js') }}'></script>
