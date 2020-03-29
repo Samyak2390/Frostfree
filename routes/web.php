@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes(['verify' => true]);
+
+Route::group(['middleware'=>'auth'], function () {
+	Route::get('/admin',['middleware'=>'check-role:admin','uses'=>'HomeController@admin'])->middleware('verified');
+	Route::get('/trader',['middleware'=>'check-role:trader','uses'=>'HomeController@trader'])->middleware('verified');
+	Route::get('/customer',['middleware'=>'check-role:customer','uses'=>'HomeController@index'])->middleware('verified');
 });
+
+Route::get('/', 'HomeController@index')->name('home');
+
+// Route::get('/register', function () {
+// 	abort(404);
+// });;
+
+

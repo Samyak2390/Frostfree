@@ -457,6 +457,10 @@
 				}
 			});
 		},
+		clickLogin: function () {
+
+
+		},
 		userInit: function () {
 			//User Nav
 			$(document).on("mouseenter", ".navuser-nav", function () {

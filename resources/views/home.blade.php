@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 @section('title', 'FrostFree | Home')
 @section('content')
   <div class="content-container no-padding">
