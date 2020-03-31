@@ -48,4 +48,21 @@ class VerificationController extends Controller
                         ? redirect($this->redirectPath())
                         : view('Auths.verify');
     }
+
+    public function redirectTo(){
+        // User role
+        $role = auth()->user()->role; 
+
+        switch ($role) {
+            case 0:
+              return '/admin';
+              break;
+            case 1:
+              return '/trader';
+              break;
+            default:
+              return '/customer';
+              break;
+          }
+    }
 }
