@@ -42,10 +42,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function trader(){
-        return '<p> You are trader</p>';
-    }
-
     public function admin(){
         return '<p> You are admin</p>';
     }
