@@ -56,12 +56,12 @@
           <div class="form-group" id="otherFieldDiv">
             <label for="trader_category">Trader Category:</label>
             <select class="form-control" name="trader_category" value ="{{old('trader_category')}}">
-              <option value=""  {{old('trader') == null ? 'selected' : ''}}>Choose a category</option>
-              <option value="butcher" {{old('trader') == "butcher" ? 'selected' : ''}}>Butcher</option>
-              <option value="fishmonger" {{old('trader') == "fishmonger" ? 'selected' : ''}}>Fishmonger</option>
-              <option value="greengrocer" {{old('trader') == "greengrocer" ? 'selected' : ''}}>Greengrocer</option>
-              <option value="bakery" {{old('trader') == "bakery" ? 'selected' : ''}}>Bakery</option>
-              <option value="delicatessen" {{old('trader') == "delicatessen" ? 'selected' : ''}}>Delicatessen</option>
+              <option value=""  {{old('trader_category') == null ? 'selected' : ''}}>Choose a category</option>
+              <option value="butcher" {{old('trader_category') == "butcher" ? 'selected' : ''}}>Butcher</option>
+              <option value="fishmonger" {{old('trader_category') == "fishmonger" ? 'selected' : ''}}>Fishmonger</option>
+              <option value="greengrocer" {{old('trader_category') == "greengrocer" ? 'selected' : ''}}>Greengrocer</option>
+              <option value="bakery" {{old('trader_category') == "bakery" ? 'selected' : ''}}>Bakery</option>
+              <option value="delicatessen" {{old('trader_category') == "delicatessen" ? 'selected' : ''}}>Delicatessen</option>
             </select>
             @error('trader_category')
               <span style="color: red">
