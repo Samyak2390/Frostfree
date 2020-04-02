@@ -10,7 +10,7 @@
         </li>
         <li class="submenu {{$menu_active==3? ' active':''}}"> <a href="#"><i class="icon icon-th-list"></i> <span>Products</span></a>
             <ul>
-                <li><a href="#">Add New Products</a></li>
+                <li><a href="{{url('/trader/product/create')}}">Add New Products</a></li>
                 <li><a href="#">List Products</a></li>
             </ul>
         </li>

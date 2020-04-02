@@ -31,6 +31,7 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::put('/trader/category/update/{category}',['middleware'=>'check-role:admin|trader','uses'=>'CategoryController@update'])->middleware('verified')->name('category.update');
 	Route::delete('/trader/category/{category}',['middleware'=>'check-role:admin|trader','uses'=>'CategoryController@destroy'])->middleware('verified')->name('category.destroy');
 
+	Route::get('/trader/product/create',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@create'])->middleware('verified')->name('product.create');
 	
 
 	Route::get('/customer',['middleware'=>'check-role:customer','uses'=>'HomeController@index'])->middleware('verified');
@@ -38,8 +39,6 @@ Route::group(['middleware'=>'auth'], function () {
 
 Route::get('/', 'HomeController@index')->name('home');
 
-// Route::get('/register', function () {
-// 	abort(404);
-// });;
+
 
 

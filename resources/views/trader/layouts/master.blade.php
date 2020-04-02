@@ -22,6 +22,7 @@
             font-size: 16px;
         }
     </style>
+    @yield('css');
 </head>
 <body>
 
