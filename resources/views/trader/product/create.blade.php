@@ -14,19 +14,20 @@
                 <h5>Add New Products</h5>
             </div>
             <div class="widget-content nopadding">
-                <form action="#" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form action="{{route('product.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" name="shop_id" value="{{$shop_id}}">
                     <div class="control-group">
-                        <label for="productName" class="control-label">Name</label>
-                        <div class="controls{{$errors->has('productName')?' has-error':''}}">
-                            <input type="text" name="productName" id="productName" class="form-control" value="{{old('productName')}}" title="" required="required">
-                            <span class="text-danger">{{$errors->first('productName')}}</span>
+                        <label for="product_name" class="control-label">Name</label>
+                        <div class="controls{{$errors->has('product_name')?' has-error':''}}">
+                            <input type="text" name="product_name" id="product_name" class="form-control" value="{{old('product_name')}}" title="" required="required">
+                            <span class="text-danger">{{$errors->first('product_name')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Select Category</label>
                         <div class="controls">
-                            <select name="categories_id">
+                            <select name="category_id">
                                 @foreach($categories as $key=>$value)
                                     <option value="{{$value}}">{{$key}}</option>
                                 @endforeach
@@ -34,42 +35,43 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="stockQuantity" class="control-label">Stock Quantity</label>
-                        <div class="controls{{$errors->has('stockQuantity')?' has-error':''}}">
-                            <input type="number" name="stockQuantity" id="stockQuantity" class="form-control" min="1" value="{{old('stockQuantity')}}" title="" required="required">
-                            <span class="text-danger">{{$errors->first('stockQuantity')}}</span>
+                        <label for="stock_quantity" class="control-label">Stock Quantity</label>
+                        <div class="controls{{$errors->has('stock_quantity')?' has-error':''}}">
+                            <input type="number" name="stock_quantity" id="stock_quantity" class="form-control" min="1" value="{{old('stock_quantity')}}" title="" required="required">
+                            <span class="text-danger">{{$errors->first('stock_quantity')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="price" class="control-label">Price</label>
                         <div class="controls{{$errors->has('price')?' has-error':''}}">
                             <div class="input-prepend"> <span class="add-on">$</span>
-                                <input type="number" name="price" id="price" class="" value="{{old('price')}}" title="" required="required">
-                                <span class="text-danger">{{$errors->first('price')}}</span>
+                                <input type="number" name="price" id="price" class="" value="{{old('price')}}" title="" required="required" min="0" step=".01">
+                                
                             </div>
+                            <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="discount" class="control-label">Discount</label>
                         <div class="controls{{$errors->has('discount')?' has-error':''}}">
                             <div class="input-prepend"> <span class="add-on">%</span>
-                                <input type="number" name="discount" id="discount" class="" value="{{old('discount')}}" title="">
-                                <span class="text-danger">{{$errors->first('discount')}}</span>
+                                <input type="number" name="discount" id="discount" class="" value="{{old('discount')}}" title="" min="0" max="100">
                             </div>
+                            <span style="color: red">{{$errors->first('discount')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="minOrder" class="control-label">Minimum Order</label>
-                        <div class="controls{{$errors->has('minOrder')?' has-error':''}}">
-                            <input type="number" name="minOrder" id="minOrder" class="form-control" min="1" value="{{old('minOrder')}}" title="" required="required">
-                            <span class="text-danger">{{$errors->first('minOrder')}}</span>
+                        <label for="min_order" class="control-label">Minimum Order</label>
+                        <div class="controls{{$errors->has('min_order')?' has-error':''}}">
+                            <input type="number" name="min_order" id="min_order" class="form-control" min="1" value="{{old('min_order')}}" title="" required="required">
+                            <div class="text-danger">{{$errors->first('min_order')}}</div>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="maxOrder" class="control-label">Maximum Order</label>
-                        <div class="controls{{$errors->has('maxOrder')?' has-error':''}}">
-                            <input type="number" name="maxOrder" id="maxOrder" class="form-control" min="1" value="{{old('minOrder')}}" title="" required="required" >
-                            <span class="text-danger">{{$errors->first('maxOrder')}}</span>
+                        <label for="max_order" class="control-label">Maximum Order</label>
+                        <div class="controls{{$errors->has('max_order')?' has-error':''}}">
+                            <input type="number" name="max_order" id="max_order" class="form-control" min="1" value="{{old('max_order')}}" title="" required="required" >
+                            <span class="text-danger">{{$errors->first('max_order')}}</span>
                         </div>
                     </div>
 
@@ -82,18 +84,18 @@
                     </div>
 
                     <div class="control-group">
-                        <label for="allergyInfo" class="control-label">Allergy Information</label>
-                        <div class="controls{{$errors->has('allergyInfo')?' has-error':''}}">
-                            <textarea class="textarea_editor2 span12" name="allergyInfo" id="allergyInfo" rows="6" placeholder="Allergy Information" >{{old('allergyInfo')}}</textarea>
-                            <span class="text-danger">{{$errors->first('allergyInfo')}}</span>
+                        <label for="allergy_info" class="control-label">Allergy Information</label>
+                        <div class="controls{{$errors->has('allergy_info')?' has-error':''}}">
+                            <textarea class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info')}}</textarea>
+                            <span class="text-danger">{{$errors->first('allergy_info')}}</span>
                         </div>
                     </div>
                    
                     <div class="control-group">
                         <label class="control-label">Image upload</label>
                         <div class="controls">
-                            <input type="file" name="image" id="image"/>
-                            <span class="text-danger">{{$errors->first('image')}}</span>
+                            <input type="file" name="product_image" id="product_image"/>
+                            <span class="text-danger">{{$errors->first('product_image')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
@@ -119,9 +121,9 @@
     {{-- <script src="{{asset('js/matrix.form_common.js')}}"></script> --}}
     <script src="{{asset('js/wysihtml5-0.3.0.js')}}"></script>
     <script src="{{asset('js/jquery.peity.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap-wysihtml5.js')}}"></script>
+    {{-- <script src="{{asset('js/bootstrap-wysihtml5.js')}}"></script>
     <script>
         $('.textarea_editor').wysihtml5();
         $('.textarea_editor2').wysihtml5();
-    </script>
+    </script> --}}
 @endsection

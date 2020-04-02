@@ -1,11 +1,11 @@
-@extends('backEnd.layouts.master')
+@extends('trader.layouts.master')
 @section('title','List Products')
 @section('content')
-    <div id="breadcrumb"> <a href="{{url('/admin')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{route('product.index')}}" class="current">Products</a></div>
+    <div id="breadcrumb"> <a href="{{url('/trader')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="" class="current">Products</a></div>
     <div class="container-fluid">
         @if(Session::has('message'))
             <div class="alert alert-success text-center" role="alert">
-                <strong>Well done!</strong> {{Session::get('message')}}
+                {{Session::get('message')}}
             </div>
         @endif
         <div class="widget-box">
@@ -19,47 +19,39 @@
                         <th>ID</th>
                         <th>Image</th>
                         <th>Product Name</th>
-                        <th>Under Category</th>
-                        <th>Code Of Product</th>
-                        <th>Product Color</th>
+                        <th>Category</th>
+                        <th>Stock Quantity</th>
                         <th>Price</th>
-                        <th>Image Gallery</th>
-                        <th>Add Attribute</th>
+                        <th>Discount</th>
+                        <th>Minimum Order</th>
+                        <th>Maximum Order</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($products as $product)
+                    @forelse($products as $product)
                         <?php $i++; ?>
                         <tr class="gradeC">
-                            <td>{{$i}}</td>
-                            <td style="text-align: center;"><img src="{{url('products/small',$product->image)}}" alt="" width="50"></td>
-                            <td style="vertical-align: middle;">{{$product->p_name}}</td>
-                            <td style="vertical-align: middle;">{{$product->category->name}}</td>
-                            <td style="vertical-align: middle;">{{$product->p_code}}</td>
-                            <td style="vertical-align: middle;">{{$product->p_color}}</td>
-                            <td style="vertical-align: middle;">{{$product->price}}</td>
-                            <td style="vertical-align: middle;text-align: center;"><a href="{{route('image-gallery.show',$product->id)}}" class="btn btn-default btn-mini">Add Images</a></td>
-                            <td style="vertical-align: middle;text-align: center;"><a href="{{route('product_attr.show',$product->id)}}" class="btn btn-success btn-mini">Add Attr</a></td>
+                            <td style="vertical-align: middle; text-align: center;">{{$i}}</td>
+                            <td style="text-align: center;"><img src="{{url('uploads/products',$product->product_image)}}" alt="" width="50"></td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->product_name}}</td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->category->category_name}}</td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->stock_quantity}}</td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->price}}</td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->discount}}</td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->min_order}}</td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->max_order}}</td>
                             <td style="text-align: center; vertical-align: middle;">
-                                <a href="#myModal{{$product->id}}" data-toggle="modal" class="btn btn-info btn-mini">View</a>
-                                <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-mini">Edit</a>
-                                <a href="javascript:" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                {{-- {{route('product.edit',$product->id)}} --}}
+                                <a href="#" class="btn btn-primary btn-mini">Edit</a>
+                                <a href="#" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger btn-mini deleteRecord">Delete</a>
                             </td>
                         </tr>
-                        {{--Pop Up Model for View Product--}}
-                        <div id="myModal{{$product->id}}" class="modal hide">
-                            <div class="modal-header">
-                                <button data-dismiss="modal" class="close" type="button">×</button>
-                                <h3>{{$product->p_name}}</h3>
-                            </div>
-                            <div class="modal-body">
-                                <div class="text-center"><img src="{{url('products/small',$product->image)}}" width="100" alt="{{$product->p_code}}"></div>
-                                <p class="text-center">{{$product->description}}</p>
-                            </div>
-                        </div>
-                        {{--Pop Up Model for View Product--}}
-                    @endforeach
+                    @empty 
+                        <tr class="gradeC">
+                            <td style="text-align: center;" colspan="10">No Products Found.</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
@@ -69,7 +61,7 @@
 @section('jsblock')
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/jquery.ui.custom.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap2.min.js')}}"></script>
     <script src="{{asset('js/jquery.uniform.js')}}"></script>
     <script src="{{asset('js/select2.min.js')}}"></script>
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>

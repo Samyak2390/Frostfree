@@ -32,7 +32,8 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::delete('/trader/category/{category}',['middleware'=>'check-role:admin|trader','uses'=>'CategoryController@destroy'])->middleware('verified')->name('category.destroy');
 
 	Route::get('/trader/product/create',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@create'])->middleware('verified')->name('product.create');
-	
+	Route::post('/trader/product',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@store'])->middleware('verified')->name('product.store');
+	Route::get('/trader/product',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@index'])->middleware('verified')->name('product.index');
 
 	Route::get('/customer',['middleware'=>'check-role:customer','uses'=>'HomeController@index'])->middleware('verified');
 });
