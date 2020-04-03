@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('max_order');
             $table->string('description');
             $table->string('allergy_info');
-            $table->string('product_image');
+            $table->string('product_image')->nullable();
             $table->timestamps();
 
             $table->foreign('shop_id')->references('id')->on('shops');

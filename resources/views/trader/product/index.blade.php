@@ -42,9 +42,12 @@
                             <td style="vertical-align: middle; text-align: center;">{{$product->min_order}}</td>
                             <td style="vertical-align: middle; text-align: center;">{{$product->max_order}}</td>
                             <td style="text-align: center; vertical-align: middle;">
-                                {{-- {{route('product.edit',$product->id)}} --}}
-                                <a href="#" class="btn btn-primary btn-mini">Edit</a>
-                                <a href="#" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-mini">Edit</a>
+                                <a href="javascript:" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                <form id="product-delete-form{{$product->id}}" action="{{ route('product.destroy', $product->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </td>
                         </tr>
                     @empty 
@@ -87,7 +90,7 @@
                 buttonsStyling:false,
                 reverseButtons:true
             },function () {
-                window.location.href="/admin/"+deleteFunction+"/"+id;
+                document.getElementById('product-delete-form'+id).submit();
             });
         });
     </script>

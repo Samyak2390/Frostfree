@@ -34,6 +34,10 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('/trader/product/create',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@create'])->middleware('verified')->name('product.create');
 	Route::post('/trader/product',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@store'])->middleware('verified')->name('product.store');
 	Route::get('/trader/product',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@index'])->middleware('verified')->name('product.index');
+	Route::get('/trader/product/{product}/edit',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@edit'])->middleware('verified')->name('product.edit');
+	Route::delete('/trader/product/image/{product}',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@deleteImage'])->middleware('verified')->name('product.image.destroy');
+	Route::put('/trader/product/update/{product}',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@update'])->middleware('verified')->name('product.update');
+	Route::delete('/trader/product/{product}',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@destroy'])->middleware('verified')->name('product.destroy');
 
 	Route::get('/customer',['middleware'=>'check-role:customer','uses'=>'HomeController@index'])->middleware('verified');
 });

@@ -60,4 +60,78 @@ class ProductController extends Controller
         Product::create($formInput);
         return redirect()->route('product.index')->with('message', 'Product Added Successfully!');
     }
+
+    public function edit($product_id){
+        $menu_active = 3;
+        //get shop_id for currently logged in user
+        $shop_id1 = User::find(auth()->id())->shop->id;
+
+        //get shop_id from the given product id
+        $shop_id2 = Product::findOrFail($product_id)->shop->id;
+
+        //if that $shop_id matches with the shop_id for the product, then only editing is allowed
+        if($shop_id1 == $shop_id2){
+            $product = Product::findOrFail($product_id);
+            $categories = Category::where('status', '1')->pluck('id', 'category_name')->all();
+            return view('trader.product.edit', compact('menu_active','product', 'categories'));
+        }else{
+            return view('errors.check-role');
+        }
+        
+    }
+
+    public function deleteImage($id){
+        $product=Product::findOrFail($id);
+        $imagePath =public_path().'/uploads/products/'.$product->product_image;
+        if($product){
+            $product->product_image='';
+            $product->save();
+            //delete image 
+            unlink($imagePath);
+        }
+        return back();
+    }
+
+    public function update(Request $request, $id){
+        $product=Product::findOrFail($id);
+        $this->validate($request,[
+            'product_name'=> 'required|min:3',
+            'stock_quantity'=>'required|numeric|min:1',
+            'price'=>'required|numeric|min:1',
+            'discount'=>'nullable|numeric|min:1|max:100',
+            'min_order'=>'required|numeric|min:1|max:100',
+            'max_order'=>'required|numeric|min:1|max:100',
+            'description'=>'required',
+            'allergy_info'=>'',
+            'product_image'=>'image|mimes:png,jpg,jpeg|max:1000',
+        ]);
+
+        $formInput = $request->except(['discount']);
+        if($product['product_image'] == ''){
+            if($request->file('product_image')){
+                $image=$request->file('product_image');
+                if($image->isValid()){
+                    $fileName=time().'-'.Str::slug($formInput['product_name'],"-").'.'.$image->getClientOriginalExtension();
+                    $filePath = public_path('uploads/products/'.$fileName);
+    
+                    //Resize Image
+                    Image::make($image)->resize(300, 350)->save($filePath);
+                    $formInput['product_image'] = $fileName;
+                }
+            }else{
+                $formInput['product_image'] = $product['product_image'];
+            }
+        }
+        $product->update($formInput);
+        return redirect()->route('product.index')->with('message', 'Product Updated Successfylly!');
+    }
+
+    public function destroy($id){
+        $delete = Product::findOrFail($id);
+        $image_path = public_path().'/uploads/products/'.$delete->product_image;
+        if($delete->delete()){
+            unlink($image_path);
+        }
+        return redirect()->route('product.index')->with('message','Product Deleted!');
+    }
 }

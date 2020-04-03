@@ -1,96 +1,120 @@
-@extends('backEnd.layouts.master')
-@section('title','Add Products Page')
+@extends('trader.layouts.master')
+@section('title','Edit Products Page')
+
 @section('content')
-    <div id="breadcrumb"> <a href="{{url('/admin')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{route('product.index')}}">Products</a> <a href="#" class="current">Edit Product</a> </div>
+    <div id="breadcrumb"> <a href="{{url('/trader')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Products</a> <a href="#" class="current">Edit Product</a> </div>
     <div class="container-fluid">
         @if(Session::has('message'))
             <div class="alert alert-success text-center" role="alert">
-                <strong>Well done! &nbsp;</strong>{{Session::get('message')}}
+                {{Session::get('message')}}
             </div>
         @endif
         <div class="widget-box">
             <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                <h5>Add New Products</h5>
+                <h5>Edit Product</h5>
             </div>
             <div class="widget-content nopadding">
-                <form action="{{route('product.update',$edit_product->id)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form action="{{route('product.update', $product->id)}}" method="post" class="form-horizontal" enctype="multipart/form-data" id="updateForm">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     {{method_field("PUT")}}
+                    <input type="hidden" name="shop_id" value="{{old('shop_id') ?? $product->shop_id}}">
+                    <div class="control-group">
+                        <label for="product_name" class="control-label">Name</label>
+                        <div class="controls{{$errors->has('product_name')?' has-error':''}}">
+                            <input type="text" name="product_name" id="product_name" class="form-control" value="{{old('product_name') ?? $product->product_name}}" title="" required="required">
+                            <span style="color:red">{{$errors->first('product_name')}}</span>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label class="control-label">Select Category</label>
                         <div class="controls">
-                            <select name="categories_id" style="width: 415px;">
+                            <select name="category_id">
                                 @foreach($categories as $key=>$value)
-                                    <option value="{{$key}}"{{$edit_category->id==$key?' selected':''}}>{{$value}}</option>
-                                    <?php
-                                    if($key!=0){
-                                        $sub_categories=DB::table('categories')->select('id','name')->where('parent_id',$key)->get();
-                                        if(count($sub_categories)>0){
-                                            foreach ($sub_categories as $sub_category){?>
-                                                <option value="{{$sub_category->id}}"{{$edit_category->id==$sub_category->id?' selected':''}}>&nbsp;&nbsp;--{{$sub_category->name}}</option>
-                                           <?php }
-                                        }
-                                    }
-                                    ?>
+                                    <option value="{{$value}}" {{$product->category_id == $value ? 'selected' : ''}}>{{$key}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="p_name" class="control-label">Name</label>
-                        <div class="controls{{$errors->has('p_name')?' has-error':''}}">
-                            <input type="text" name="p_name" id="p_name" class="form-control" value="{{$edit_product->p_name}}" title="" required="required" style="width: 400px;">
-                            <span class="text-danger">{{$errors->first('p_name')}}</span>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="p_code" class="control-label">Code</label>
-                        <div class="controls{{$errors->has('p_code')?' has-error':''}}">
-                            <input type="text" name="p_code" id="p_code" class="form-control" value="{{$edit_product->p_code}}" title="" required="required" style="width: 400px;">
-                            <span class="text-danger">{{$errors->first('p_code')}}</span>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="p_color" class="control-label">Color</label>
-                        <div class="controls{{$errors->has('p_color')?' has-error':''}}">
-                            <input type="text" name="p_color" id="p_color" value="{{$edit_product->p_color}}" required="required" style="width: 400px;">
-                            <span class="text-danger">{{$errors->first('p_color')}}</span>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="description" class="control-label">Description</label>
-                        <div class="controls{{$errors->has('description')?' has-error':''}}">
-                            <textarea class="textarea_editor span12" name="description" id="description" rows="6" placeholder="Product Description" style="width: 580px;">{{$edit_product->description}}</textarea>
-                            <span class="text-danger">{{$errors->first('description')}}</span>
+                        <label for="stock_quantity" class="control-label">Stock Quantity</label>
+                        <div class="controls{{$errors->has('stock_quantity')?' has-error':''}}">
+                            <input type="number" name="stock_quantity" id="stock_quantity" class="form-control" min="1" value="{{old('stock_quantity') ?? $product->stock_quantity}}" title="" required="required">
+                            <span style="color:red">{{$errors->first('stock_quantity')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
                         <label for="price" class="control-label">Price</label>
                         <div class="controls{{$errors->has('price')?' has-error':''}}">
                             <div class="input-prepend"> <span class="add-on">$</span>
-                                <input type="number" name="price" id="price" class="" value="{{$edit_product->price}}" title="" required="required">
-                                <span class="text-danger">{{$errors->first('price')}}</span>
+                                <input type="number" name="price" id="price" class="" value="{{old('price') ?? $product->price}}" title="" required="required" min="0" step=".01">
+                                
                             </div>
+                            <span style="color:red">{{$errors->first('price')}}</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="discount" class="control-label">Discount</label>
+                        <div class="controls{{$errors->has('discount')?' has-error':''}}">
+                            <div class="input-prepend"> <span class="add-on">%</span>
+                                {{-- Have to fix to show discount --}}
+                                <input type="number" name="discount" id="discount" class="" value="{{old('discount')}}" title="" min="0" max="100">
+                            </div>
+                            <span style="color: red">{{$errors->first('discount')}}</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="min_order" class="control-label">Minimum Order</label>
+                        <div class="controls{{$errors->has('min_order')?' has-error':''}}">
+                            <input type="number" name="min_order" id="min_order" class="form-control" min="1" value="{{old('min_order') ?? $product->min_order}}" title="" required="required">
+                            <div style="color:red">{{$errors->first('min_order')}}</div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="max_order" class="control-label">Maximum Order</label>
+                        <div class="controls{{$errors->has('max_order')?' has-error':''}}">
+                            <input type="number" name="max_order" id="max_order" class="form-control" min="1" value="{{old('max_order') ?? $product->max_order}}" title="" required="required" >
+                            <span style="color:red">{{$errors->first('max_order')}}</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="description" class="control-label">Description</label>
+                        <div class="controls{{$errors->has('description')?' has-error':''}}">
+                            <textarea class="textarea_editor span12 areaText" name="description" id="description" rows="6" placeholder="Product Description" >{{old('description') ?? $product->description}}</textarea>
+                            <span style="color:red">{{$errors->first('description')}}</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="allergy_info" class="control-label">Allergy Information</label>
+                        <div class="controls{{$errors->has('allergy_info')?' has-error':''}}">
+                            <textarea class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info') ?? $product->description}}</textarea>
+                            <span style="color:red">{{$errors->first('allergy_info')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Image upload</label>
                         <div class="controls">
-                            <input type="file" name="image" id="image"/>
-                            <span class="text-danger">{{$errors->first('image')}}</span>
-                            @if($edit_product->image!='')
-                                &nbsp;&nbsp;&nbsp;
-                                <a href="javascript:" rel="{{$edit_product->id}}" rel1="delete-image" class="btn btn-danger btn-mini deleteRecord">Delete Old Image</a>
-                                <img src="{{url('products/small/',$edit_product->image)}}" width="35" alt="">
+                            <input type="file" name="product_image" id="product_image"/>
+                            <span style="color:red">{{$errors->first('product_image')}}</span>
+                            @if($product->product_image != '')
+                                <span>
+                                    <img src="{{url('uploads/products/',$product->product_image)}}" width="50" alt="" style="margin-right: 20px">
+                                    <a href="javascript:" rel="{{$product->product_image}}" rel1="delete-image" class="btn btn-danger" id="deleteRecord">Delete Old Image</a>
+                                </span>
                             @endif
                         </div>
                     </div>
+                    
                     <div class="control-group">
-                        <label for="" class="control-label"></label>
                         <div class="controls">
-                            <button type="submit" class="btn btn-success">Edit Product</button>
+                            <button type="submit" class="btn btn-success" id="updateProduct">Update Product</button>
                         </div>
                     </div>
+                </form>
+                <form id="delete-image" action="{{ route('product.image.destroy', $product->id) }}" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
                 </form>
             </div>
         </div>
@@ -99,22 +123,28 @@
 @section('jsblock')
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/jquery.ui.custom.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap-colorpicker.js')}}"></script>
-    <script src="{{asset('js/jquery.toggle.buttons.js')}}"></script>
+    <script src="{{asset('js/bootstrap2.min.js')}}"></script>
+    {{-- <script src="{{asset('js/jquery.toggle.buttons.js')}}"></script> --}}
     <script src="{{asset('js/masked.js')}}"></script>
     <script src="{{asset('js/jquery.uniform.js')}}"></script>
     <script src="{{asset('js/select2.min.js')}}"></script>
     <script src="{{asset('js/matrix.js')}}"></script>
-    <script src="{{asset('js/matrix.form_common.js')}}"></script>
+    {{-- <script src="{{asset('js/matrix.form_common.js')}}"></script> --}}
     <script src="{{asset('js/wysihtml5-0.3.0.js')}}"></script>
     <script src="{{asset('js/jquery.peity.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap-wysihtml5.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    {{-- <script src="{{asset('js/bootstrap-wysihtml5.js')}}"></script>
+    
     <script>
-        $(".deleteRecord").click(function () {
-            var id=$(this).attr('rel');
-            var deleteFunction=$(this).attr('rel1');
+        $('.textarea_editor').wysihtml5();
+        $('.textarea_editor2').wysihtml5();
+    </script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+  
+    <script>
+        //  $("#updateProduct").click(function(){
+        //     document.getElementById('updateForm').submit();
+        // })
+        $("#deleteRecord").click(function () {
             swal({
                 title:'Are you sure?',
                 text:"You won't be able to revert this!",
@@ -129,9 +159,8 @@
                 buttonsStyling:false,
                 reverseButtons:true
             },function () {
-                window.location.href="/admin/"+deleteFunction+"/"+id;
+                document.getElementById('delete-image').submit();
             });
         });
-        $('.textarea_editor').wysihtml5();
     </script>
 @endsection
