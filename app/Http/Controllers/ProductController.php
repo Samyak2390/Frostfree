@@ -54,10 +54,18 @@ class ProductController extends Controller
                 Image::make($image)->resize(300, 350)->save($filePath);
                 $formInput['product_image'] = $fileName;
             }
+        }
 
+        $discount = $request->input('discount', 0);
+        
+        $product = Product::create($formInput);
+        
+        if($discount > 0){
+            $product->discount()->create([
+                'discount' => $discount
+            ]);
         }
         
-        Product::create($formInput);
         return redirect()->route('product.index')->with('message', 'Product Added Successfully!');
     }
 
@@ -122,15 +130,28 @@ class ProductController extends Controller
                 $formInput['product_image'] = $product['product_image'];
             }
         }
+        $discount = $request->input('discount', 0);
         $product->update($formInput);
+        if($discount > 0){
+            $product->discount()->update([
+                'discount' => $discount
+            ]);
+        }
         return redirect()->route('product.index')->with('message', 'Product Updated Successfylly!');
     }
 
     public function destroy($id){
-        $delete = Product::findOrFail($id);
-        $image_path = public_path().'/uploads/products/'.$delete->product_image;
-        if($delete->delete()){
-            unlink($image_path);
+        $product = Product::findOrFail($id);
+        $image_path = public_path().'/uploads/products/'.$product->product_image;
+        // dd($product->discount);
+        if($product->discount){
+            if($product->discount()->delete() && $product->delete()){
+                unlink($image_path);
+            }
+        }else{
+            if($product->delete()){
+                unlink($image_path);
+            }
         }
         return redirect()->route('product.index')->with('message','Product Deleted!');
     }

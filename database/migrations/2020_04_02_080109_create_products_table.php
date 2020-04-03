@@ -20,7 +20,6 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->unsignedBigInteger('stock_quantity');
             $table->double('price', 8, 2);
-            // $table->unsignedInteger('discount')->nullable();
             $table->unsignedBigInteger('min_order');
             $table->unsignedBigInteger('max_order');
             $table->string('description');

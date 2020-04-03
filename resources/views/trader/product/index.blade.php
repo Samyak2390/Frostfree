@@ -38,7 +38,7 @@
                             <td style="vertical-align: middle; text-align: center;">{{$product->category->category_name}}</td>
                             <td style="vertical-align: middle; text-align: center;">{{$product->stock_quantity}}</td>
                             <td style="vertical-align: middle; text-align: center;">{{$product->price}}</td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->discount}}</td>
+                            <td style="vertical-align: middle; text-align: center;">{{$product->discount->discount ?? 0}}</td>
                             <td style="vertical-align: middle; text-align: center;">{{$product->min_order}}</td>
                             <td style="vertical-align: middle; text-align: center;">{{$product->max_order}}</td>
                             <td style="text-align: center; vertical-align: middle;">
