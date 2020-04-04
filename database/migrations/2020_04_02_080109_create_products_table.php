@@ -22,8 +22,8 @@ class CreateProductsTable extends Migration
             $table->double('price', 8, 2);
             $table->unsignedBigInteger('min_order');
             $table->unsignedBigInteger('max_order');
-            $table->string('description');
-            $table->string('allergy_info');
+            $table->longText('description');
+            $table->longText('allergy_info');
             $table->string('product_image')->nullable();
             $table->timestamps();
 

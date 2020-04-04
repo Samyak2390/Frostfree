@@ -13,50 +13,53 @@
                 <h5>List Products</h5>
             </div>
             <div class="widget-content nopadding">
-                <table class="table table-bordered data-table">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Product Name</th>
-                        <th>Category</th>
-                        <th>Stock Quantity</th>
-                        <th>Price</th>
-                        <th>Discount</th>
-                        <th>Minimum Order</th>
-                        <th>Maximum Order</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($products as $product)
-                        <?php $i++; ?>
-                        <tr class="gradeC">
-                            <td style="vertical-align: middle; text-align: center;">{{$i}}</td>
-                            <td style="text-align: center;"><img src="{{url('uploads/products',$product->product_image)}}" alt="" width="50"></td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->product_name}}</td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->category->category_name}}</td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->stock_quantity}}</td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->price}}</td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->discount->discount ?? 0}}</td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->min_order}}</td>
-                            <td style="vertical-align: middle; text-align: center;">{{$product->max_order}}</td>
-                            <td style="text-align: center; vertical-align: middle;">
-                                <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-mini">Edit</a>
-                                <a href="javascript:" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger btn-mini deleteRecord">Delete</a>
-                                <form id="product-delete-form{{$product->id}}" action="{{ route('product.destroy', $product->id) }}" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                            </td>
+                <div style="overflow-x:auto">
+                    <table class="table table-bordered data-table" >
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Stock Quantity</th>
+                            <th>Price</th>
+                            <th>Discount</th>
+                            <th>Minimum Order</th>
+                            <th>Maximum Order</th>
+                            <th>Action</th>
                         </tr>
-                    @empty 
-                        <tr class="gradeC">
-                            <td style="text-align: center;" colspan="10">No Products Found.</td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @forelse($products as $product)
+                            <?php $i++; ?>
+                            <tr class="gradeC">
+                                <td style="vertical-align: middle; text-align: center;">{{$i}}</td>
+                                <td style="text-align: center;"><img src="{{url('uploads/products',$product->product_image)}}" alt="" width="50"></td>
+                                <td style="vertical-align: middle; text-align: center;">{{$product->product_name}}</td>
+                                <td style="vertical-align: middle; text-align: center;">{{$product->category->category_name}}</td>
+                                <td style="vertical-align: middle; text-align: center;">{{$product->stock_quantity}}</td>
+                                <td style="vertical-align: middle; text-align: center;">{{$product->price}}</td>
+                                <td style="vertical-align: middle; text-align: center;">{{$product->discount->discount ?? 0}}</td>
+                                <td style="vertical-align: middle; text-align: center;">{{$product->min_order}}</td>
+                                <td style="vertical-align: middle; text-align: center;">{{$product->max_order}}</td>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary btn-mini">Edit</a>
+                                    <a href="javascript:" rel="{{$product->id}}" rel1="delete-product" class="btn btn-danger btn-mini deleteRecord">Delete</a>
+                                    <form id="product-delete-form{{$product->id}}" action="{{ route('product.destroy', $product->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty 
+                            <tr>
+                                <td style="text-align: center;" colspan="10">No Products Found.</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                    
+                </div>
             </div>
         </div>
     </div>

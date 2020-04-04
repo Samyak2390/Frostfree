@@ -56,7 +56,7 @@
                         <label for="discount" class="control-label">Discount</label>
                         <div class="controls{{$errors->has('discount')?' has-error':''}}">
                             <div class="input-prepend"> <span class="add-on">%</span>
-                                <input type="number" name="discount" id="discount" class="" value="{{old('discount') ?? $product->discount->discount}}" title="" min="0" max="100">
+                                <input type="number" name="discount" id="discount" class="" value="{{old('discount') ?? $product->discount->discount ?? 0}}" title="" min="0" max="100">
                             </div>
                             <span style="color: red">{{$errors->first('discount')}}</span>
                         </div>
@@ -87,7 +87,7 @@
                     <div class="control-group">
                         <label for="allergy_info" class="control-label">Allergy Information</label>
                         <div class="controls{{$errors->has('allergy_info')?' has-error':''}}">
-                            <textarea class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info') ?? $product->description}}</textarea>
+                            <textarea class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info') ?? $product->allergy_info}}</textarea>
                             <span style="color:red">{{$errors->first('allergy_info')}}</span>
                         </div>
                     </div>
