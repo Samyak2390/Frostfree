@@ -62,16 +62,18 @@
 </head>
 <body>
   <?php 
-  use Illuminate\Support\Facades\DB;
-  use Illuminate\Support\Arr;
-  $results = array();
-  $user_shops = DB::table('users')->where('role', 1)->join('shops', 'users.id', '=', 'shops.user_id')->select('users.trader_category', 'shops.shop_name', 'shops.user_id', 'shops.id')->get();
-  
-  foreach($user_shops as $user_shop){
-    if(Arr::exists($user_shop, 'trader_category')){
-      $results[$user_shop->trader_category][] = $user_shop;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Arr;
+    $results = array();
+    $user_shops = DB::table('users')->where('role', 1)->join('shops', 'users.id', '=', 'shops.user_id')->select('users.trader_category', 'shops.shop_name', 'shops.user_id', 'shops.id')->get();
+    
+    foreach($user_shops as $user_shop){
+      if(Arr::exists($user_shop, 'trader_category')){
+        $results[$user_shop->trader_category][] = $user_shop;
+      }
     }
-  }
+
+    $categories = App\Category::all();
   ?>
   <div id="app">
     {{--
@@ -143,60 +145,57 @@
       {{-- mobile Nav --}}
         <div class="offcanvas-wrap">
           <div class="offcanvas-user clearfix text-center">
-            {{-- <a class="offcanvas-user-wishlist-link" href="wishlist.html">
-                          <i class="fa fa-heart-o"></i> My Wishlist
-                      </a> --}}
-            <a class="offcanvas-user-account-link login-toggle" href="#">
-              <i class="fa fa-user"></i> Login
-            </a>
+            @guest
+              <a class="offcanvas-user-account-link login-toggle" href="#">
+                <i class="fa fa-user"></i> Login
+              </a>
+            @else 
+              <a class="offcanvas-user-account-link login-toggle" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('logout-form2').submit();">
+                  <i class="fa fa-user"></i>{{ __('Logout') }}
+              </a>
+
+              <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
+            @endguest
           </div>
+
+
           <nav class="offcanvas-navbar">
             <ul class="offcanvas-nav">
               <li class="menu-item-has-children dropdown">
-                <a href="{{url('/')}}" class="dropdown-hover">Home <span class="caret"></span></a>
+                <a href="{{url('/')}}">Home</a>
     
               </li>
               <li class="menu-item-has-children dropdown">
                 <a href="shop.html" class="dropdown-hover">Shop <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li id="menu-item-10433" class="menu-item-has-children dropdown-submenu">
-                    <a href="shop-by-category.html">Butcher <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="shop-by-category.html">Nulla</a></li>
-                      <li><a href="shop-by-category.html">Maecenas</a></li>
-                    </ul>
-                  </li>
-                  <li class="menu-item-has-children dropdown-submenu">
-                    <a href="shop-by-category.html">Fishmonger <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="shop-by-category.html">Adesso</a></li>
-                      <li><a href="shop-by-category.html">Barbour</a></li>
-                    </ul>
-                  </li>
-                  <li class="menu-item-has-children dropdown-submenu">
-                    <a href="shop-by-category.html">Greengrocer <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="shop-by-category.html">Adesso</a></li>
-                      <li><a href="shop-by-category.html">Barbour</a></li>
-                    </ul>
-                  </li>
-                  <li class="menu-item-has-children dropdown-submenu">
-                    <a href="shop-by-category.html">Bakery <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="shop-by-category.html">Adesso</a></li>
-                      <li><a href="shop-by-category.html">Barbour</a></li>
-                    </ul>
-                  </li>
-                  <li class="menu-item-has-children dropdown-submenu">
-                    <a href="shop-by-category.html">Delicatessen <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="shop-by-category.html">Adesso</a></li>
-                      <li><a href="shop-by-category.html">Barbour</a></li>
-                    </ul>
-                  </li>
+                  @isset($results)
+                    @foreach($results as $key=>$values)
+                      <li class="menu-item-has-children dropdown-submenu">
+                        <a href="#">{{$key}}  <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          @foreach($values as $value )
+                            <li><a href="#">{{$value->shop_name}}</a></li>
+                          @endforeach()
+                        </ul>
+                      </li>
+                    @endforeach
+                  @endisset
                 </ul>
               </li>
-              <li><a href="collection.html">Collections</a></li>
+              <li class="menu-item-has-children dropdown">
+                <a href="#" class="dropdown-hover">Categories <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  @isset($categories)
+                    @foreach($categories as $category)
+                      <li><a href="#">{{$category->category_name}}</a></li>
+                    @endforeach
+                  @endisset
+                </ul>
+              </li>
     
               <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-hover">Pages <span class="caret"></span></a>
@@ -269,13 +268,6 @@
                           </ul>
                         </div>
                       @endif
-                      {{-- <div class="language-switcher">
-                                            <div class="wpml-languages disabled">
-                                                <a class="active" href="#" data-toggle="dropdown">
-                                                    <img src="images/en.png" alt="English"/> EN
-                                                </a>
-                                            </div>
-                                        </div> --}}
                     </div>
                   @else
                     <div class="right-topbar">
@@ -374,9 +366,9 @@
                                 <span class="underline">Categories</span> <span class="caret"></span>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Meat</a></li>
-                                <li><a href="#">Fish</a></li>
-                                <li><a href="#">Cake</a></li>
+                                @foreach($categories as $category)
+                                  <li><a href="#">{{$category->category_name}}</a></li>
+                                @endforeach
                               </ul>
                             </li>
       

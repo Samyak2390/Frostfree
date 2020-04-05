@@ -25,23 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()){
-            if(auth()->user()->role == '1'){
-                return redirect("/trader");
-            }
-            else if(auth()->user()->role == '0'){
-                return redirect("/admin");
-            }
-            else{
-                //if user is verified
-                if(auth()->user()->email_verified_at){
-                    return view('home');
-                }else{
-                    return redirect("/customer");
-                }
-            }
-        }
-
         $meat_fish = array();
         $green_groceries = array();
         $bakery_delicacies = array();
@@ -61,6 +44,25 @@ class HomeController extends Controller
                 array_push($bakery_delicacies, $product);
             }
         }
+
+
+        if(auth()->user()){
+            if(auth()->user()->role == '1'){
+                return redirect("/trader");
+            }
+            else if(auth()->user()->role == '0'){
+                return redirect("/admin");
+            }
+            else{
+                //if user is verified
+                if(auth()->user()->email_verified_at){
+                    return view('home', compact('meat_fish', 'green_groceries', 'bakery_delicacies'));
+                }else{
+                    return redirect("/customer");
+                }
+            }
+        }
+        
         return view('home', compact('meat_fish', 'green_groceries', 'bakery_delicacies'));
     }
 
