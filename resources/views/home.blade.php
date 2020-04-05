@@ -77,190 +77,54 @@
                                 <div class="caroufredsel-wrap">
                                   <div class="shop shop-lookbok columns-3">
                                     <ul class="products columns-3" data-columns="3">
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/steak.jpg"
-                                                      alt="Product-2" />
+                                      @forelse($meat_fish as $meatFish)
+                                        <li class="product" style="width: 364px">
+                                          <div class="product-container">
+                                            <figure>
+                                              <div class="product-wrap">
+                                                <div class="product-images">
+                                                  <div class="shop-loop-thumbnail">
+                                                    <div
+                                                      style="height: 424.65px; background: white; display: flex; align-items: center;">
+                                                      <img width="300" height="350" src="{{url('uploads/products',$meatFish->product_image)}}" alt="{{$meatFish->product_name}}" />
+                                                    </div>
+                                                  </div>
+                                                  {{-- <div class="yith-wcwl-add-to-wishlist">
+                                                                                                          <div class="yith-wcwl-add-button">
+                                                                                                              <a href="#" class="add_to_wishlist">
+                                                                                                                  Add to Wishlist
+                                                                                                              </a>
+                                                                                                          </div>
+                                                                                                      </div> --}}
+                                                  <div class="clear">
+                                                  </div>
+                                                  {{-- <div class="shop-loop-quickview">
+                                                                                                          <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
+                                                                                                      </div> --}}
+                                                </div>
+                                              </div>
+                                              <figcaption>
+                                                <div class="shop-loop-product-info">
+                                                  <div class="info-title">
+                                                    <h3 class="product_title">
+                                                    <a href="#">{{$meatFish->product_name}}</a>
+                                                    </h3>
+                                                  </div>
+                                                  <div class="info-price">
+                                                    <span class="price">
+                                                      <span class="amount">&pound;{{$meatFish->price}}</span>
+                                                    </span>
                                                   </div>
                                                 </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Prime
-                                                      Reserve
-                                                      Local
-                                                      Bone-In Rib
-                                                      Steak</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&pound;90.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/filet.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                        <div class="yith-wcwl-add-button">
-                                                            <a href="#" class="add_to_wishlist">
-                                                                Add to Wishlist
-                                                            </a>
-                                                        </div>
-                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                    <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Filet
-                                                      Mignon</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&pound;39.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/chicken.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Organic
-                                                      Boneless
-                                                      Skinless
-                                                      Chicken
-                                                      Breast</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/rack.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Rack
-                                                      of Lamb</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
+                                              </figcaption>
+                                            </figure>
+                                          </div>
+                                        </li>
+                                      @empty 
+                                        <li>
+                                          No products for this Category.
+                                        </li>
+                                      @endforelse
                                     </ul>
                                   </div>
                                   <a href="#" class="caroufredsel-prev"></a>
@@ -293,185 +157,54 @@
                                 <div class="caroufredsel-wrap">
                                   <div class="shop shop-lookbok columns-3">
                                     <ul class="products columns-3" data-columns="3">
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/aspa.jpg"
-                                                      alt="Product-2" />
+                                      @forelse($green_groceries as $green_grocery)
+                                        <li class="product">
+                                          <div class="product-container">
+                                            <figure>
+                                              <div class="product-wrap">
+                                                <div class="product-images">
+                                                  <div class="shop-loop-thumbnail">
+                                                    <div
+                                                      style="height: 424.65px; background: white; display: flex; align-items: center;">
+                                                      <img width="300" height="350" src="{{url('uploads/products',$green_grocery->product_image)}}" alt="{{$green_grocery->product_name}}" />
+                                                    </div>
+                                                  </div>
+                                                  {{-- <div class="yith-wcwl-add-to-wishlist">
+                                                                                                          <div class="yith-wcwl-add-button">
+                                                                                                              <a href="#" class="add_to_wishlist">
+                                                                                                                  Add to Wishlist
+                                                                                                              </a>
+                                                                                                          </div>
+                                                                                                      </div> --}}
+                                                  <div class="clear">
+                                                  </div>
+                                                  {{-- <div class="shop-loop-quickview">
+                                                                                                          <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
+                                                                                                      </div> --}}
+                                                </div>
+                                              </div>
+                                              <figcaption>
+                                                <div class="shop-loop-product-info">
+                                                  <div class="info-title">
+                                                    <h3 class="product_title">
+                                                      <a href="#">{{$green_grocery->product_name}}</a>
+                                                    </h3>
+                                                  </div>
+                                                  <div class="info-price">
+                                                    <span class="price">
+                                                      <span class="amount">&#36;{{$green_grocery->price}}</span>
+                                                    </span>
                                                   </div>
                                                 </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Asparagus</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/basil.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Organic
-                                                      Basil</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/banana.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Fresho
-                                                      Banana</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/mush.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Button
-                                                      mushrooms</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
+                                              </figcaption>
+                                            </figure>
+                                          </div>
+                                        </li>
+                                      @empty 
+                                        <li>
+                                          No Products for this category.
+                                        </li>
+                                      @endforelse
                                     </ul>
                                   </div>
                                   <a href="#" class="caroufredsel-prev"></a>
@@ -502,186 +235,57 @@
                                 <div class="caroufredsel-wrap">
                                   <div class="shop shop-lookbok columns-3">
                                     <ul class="products columns-3" data-columns="3">
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/italian.jpg"
-                                                      alt="Product-2" />
+                                      @forelse($bakery_delicacies as $delicacy)
+                                        <li class="product">
+                                          <div class="product-container">
+                                            <figure>
+                                              <div class="product-wrap">
+                                                <div class="product-images">
+                                                  <div class="shop-loop-thumbnail">
+                                                    <div
+                                                      style="height: 424.65px; background: white; display: flex; align-items: center;">
+                                                      <img width="300" height="350" src="{{url('uploads/products',$delicacy->product_image)}}"
+                                                        alt="{{$delicacy->product_name}}" />
+                                                    </div>
+                                                  </div>
+                                                  {{-- <div class="yith-wcwl-add-to-wishlist">
+                                                                                                          <div class="yith-wcwl-add-button">
+                                                                                                              <a href="#" class="add_to_wishlist">
+                                                                                                                  Add to Wishlist
+                                                                                                              </a>
+                                                                                                          </div>
+                                                                                                      </div> --}}
+                                                  <div class="clear">
+                                                  </div>
+                                                  {{-- <div class="shop-loop-quickview">
+                                                                                                          <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
+                                                                                                      </div> --}}
+                                                </div>
+                                              </div>
+                                              <figcaption>
+                                                <div class="shop-loop-product-info">
+                                                  <div class="info-title">
+                                                    <h3 class="product_title">
+                                                      <a href="#">{{$delicacy->product_name}}</a>
+                                                    </h3>
+                                                  </div>
+                                                  <div class="info-price">
+                                                    <span class="price">
+                                                      <span class="amount">&pound;{{$delicacy->price}}</span>
+                                                    </span>
                                                   </div>
                                                 </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Herb
-                                                      and Cheese
-                                                      Pull-Apart
-                                                      Bread</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&pound;90.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/loaf.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Loaf
-                                                      Cake</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&pound;39.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/biscuit.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Filled
-                                                      Scone</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
-                                      <li class="product">
-                                        <div class="product-container">
-                                          <figure>
-                                            <div class="product-wrap">
-                                              <div class="product-images">
-                                                <div class="shop-loop-thumbnail">
-                                                  <div
-                                                    style="height: 424.65px; background: white; display: flex; align-items: center;">
-                                                    <img width="300" height="350" src="images/product/waffle.jpg"
-                                                      alt="Product-2" />
-                                                  </div>
-                                                </div>
-                                                {{-- <div class="yith-wcwl-add-to-wishlist">
-                                                                                                        <div class="yith-wcwl-add-button">
-                                                                                                            <a href="#" class="add_to_wishlist">
-                                                                                                                Add to Wishlist
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </div> --}}
-                                                <div class="clear">
-                                                </div>
-                                                {{-- <div class="shop-loop-quickview">
-                                                                                                        <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                                                                                                    </div> --}}
-                                              </div>
-                                            </div>
-                                            <figcaption>
-                                              <div class="shop-loop-product-info">
-                                                <div class="info-title">
-                                                  <h3 class="product_title">
-                                                    <a href="#">Gourmet
-                                                      Waffle</a>
-                                                  </h3>
-                                                </div>
-                                                <div class="info-price">
-                                                  <span class="price">
-                                                    <span class="amount">&#36;12.00</span>&ndash;<span
-                                                      class="amount">&#36;23.00</span>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                            </figcaption>
-                                          </figure>
-                                        </div>
-                                      </li>
+                                              </figcaption>
+                                            </figure>
+                                          </div>
+                                        </li>
+                                      @empty 
+                                        <li>
+                                          <div>
+                                            No products for this category.
+                                          </div>
+                                        </li>
+                                      @endforelse
                                     </ul>
                                   </div>
                                   <a href="#" class="caroufredsel-prev"></a>

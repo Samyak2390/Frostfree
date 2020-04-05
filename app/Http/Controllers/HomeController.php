@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -39,7 +41,27 @@ class HomeController extends Controller
                 }
             }
         }
-        return view('home');
+
+        $meat_fish = array();
+        $green_groceries = array();
+        $bakery_delicacies = array();
+
+        $products = Product::all();
+        foreach($products as $product){
+           $category =  DB::table('categories')->where('id', $product->category_id)->value('category_name');
+            if(strtolower($category) == 'meat' || strtolower($category) == 'fish'){
+                array_push($meat_fish, $product);
+            }
+
+            if(strtolower($category) == 'green groceries'){
+                array_push($green_groceries, $product);
+            }
+
+            if(strtolower($category) == 'bakery' || strtolower($category) == 'delicacies'){
+                array_push($bakery_delicacies, $product);
+            }
+        }
+        return view('home', compact('meat_fish', 'green_groceries', 'bakery_delicacies'));
     }
 
     public function admin(){

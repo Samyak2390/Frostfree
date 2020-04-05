@@ -14,7 +14,8 @@
             </div>
             <div class="widget-content nopadding">
                 <div style="overflow-x:auto">
-                    <table class="table table-bordered data-table" >
+                    {{-- {{dd(sizeof($products))}} --}}
+                    <table class="table table-bordered {{sizeof($products) > 0 ? 'data-table' : ''}}" >
                         <thead>
                         <tr>
                             <th>ID</th>

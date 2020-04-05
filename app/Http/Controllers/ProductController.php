@@ -115,6 +115,7 @@ class ProductController extends Controller
         ]);
 
         $formInput = $request->except(['discount']);
+        // dd($formInput);
         if($product['product_image'] == ''){
             if($request->file('product_image')){
                 $image=$request->file('product_image');

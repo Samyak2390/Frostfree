@@ -61,6 +61,18 @@
   {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 </head>
 <body>
+  <?php 
+  use Illuminate\Support\Facades\DB;
+  use Illuminate\Support\Arr;
+  $results = array();
+  $user_shops = DB::table('users')->where('role', 1)->join('shops', 'users.id', '=', 'shops.user_id')->select('users.trader_category', 'shops.shop_name', 'shops.user_id', 'shops.id')->get();
+  
+  foreach($user_shops as $user_shop){
+    if(Arr::exists($user_shop, 'trader_category')){
+      $results[$user_shop->trader_category][] = $user_shop;
+    }
+  }
+  ?>
   <div id="app">
     {{--
         You can show this snack bar by using
@@ -125,7 +137,10 @@
             </div>
         </div>
     </nav> --}}
+
+    
     <div class="offcanvas open">
+      {{-- mobile Nav --}}
         <div class="offcanvas-wrap">
           <div class="offcanvas-user clearfix text-center">
             {{-- <a class="offcanvas-user-wishlist-link" href="wishlist.html">
@@ -320,7 +335,7 @@
                           <img class="logo-fixed" alt="FrostFree" src="images/logo-fixed.png">
                           <img class="logo-mobile" alt="FrostFree" src="images/logo-mobile.png">
                           </a> --}}
-                          <a class="navbar-brand" href="index.html">
+                          <a class="navbar-brand" href="#">
                             <img class="logo" alt="FrostFree" src="images/logo-fixed.png">
                             <img class="logo-fixed" alt="FrostFree" src="images/logo-fixed.png">
                             <img class="logo-mobile" alt="FrostFree" src="images/logo-mobile.png">
@@ -338,57 +353,20 @@
                                 <span class="underline">Shop</span> <span class="caret"></span>
                               </a>
                               <ul class="dropdown-menu">
-                                <li class="menu-item-has-children mega-col-3 dropdown-submenu">
-                                  <h3 class="megamenu-title">
-                                    Butcher <span class="caret"></span>
-                                  </h3>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="shop-by-category.html">Nulla</a></li>
-                                    <li><a href="shop-by-category.html">Maecenas</a></li>
-      
-                                  </ul>
-                                </li>
-                                <li class="menu-item-has-children mega-col-3 dropdown-submenu">
-                                  <h3 class="megamenu-title">
-                                    Fishmonger <span class="caret"></span>
-                                  </h3>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="shop-by-category.html">Nulla</a></li>
-                                    <li><a href="shop-by-category.html">Maecenas</a></li>
-      
-                                  </ul>
-                                </li>
-                                <li class="menu-item-has-children mega-col-3 dropdown-submenu">
-                                  <h3 class="megamenu-title">
-                                    Greengrocer <span class="caret"></span>
-                                  </h3>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="shop-by-category.html">Nulla</a></li>
-                                    <li><a href="shop-by-category.html">Maecenas</a></li>
-      
-                                  </ul>
-                                </li>
-                                <li class="menu-item-has-children mega-col-3 dropdown-submenu">
-                                  <h3 class="megamenu-title">
-                                    Bakery <span class="caret"></span>
-                                  </h3>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="shop-by-category.html">Nulla</a></li>
-                                    <li><a href="shop-by-category.html">Maecenas</a></li>
-      
-                                  </ul>
-                                </li>
-                                <li class="menu-item-has-children mega-col-3 dropdown-submenu">
-                                  <h3 class="megamenu-title">
-                                    Delicatessen <span class="caret"></span>
-                                  </h3>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="shop-by-category.html">Nulla</a></li>
-                                    <li><a href="shop-by-category.html">Maecenas</a></li>
-      
-                                  </ul>
-                                </li>
-      
+                                @isset($results)
+                                  @foreach($results as $key=>$values)
+                                    <li class="menu-item-has-children mega-col-3 dropdown-submenu">
+                                      <h3 class="megamenu-title">
+                                       {{$key}} <span class="caret"></span>
+                                      </h3>
+                                      <ul class="dropdown-menu">
+                                        @foreach($values as $value )
+                                          <li><a href="shop-by-category.html">{{$value->shop_name}}</a></li>
+                                        @endforeach()
+                                      </ul>
+                                    </li>
+                                  @endforeach
+                                @endisset
                               </ul>
                             </li>
                             <li class="menu-item-has-children dropdown">

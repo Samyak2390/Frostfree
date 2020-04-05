@@ -81,11 +81,12 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'trader_category' => $data['trader_category'],
         ]);
-
-        $user->shop()->create([
-            'shop_name'=>$data['shop_name']
-        ]);
-
+        
+        if($data[role] == '1'){
+            $user->shop()->create([
+                'shop_name'=>$data['shop_name']
+            ]);
+        }
         return $user;
     }
 
