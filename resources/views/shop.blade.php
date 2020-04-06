@@ -76,17 +76,17 @@
                             <div class="shop-loop-thumbnail">
                                 <img width="300" height="350" src="{{ URL::asset("uploads/products/$product->product_image")}}" alt="Product-13"/>
                             </div>
-                            <div class="yith-wcwl-add-to-wishlist">
+                            {{-- <div class="yith-wcwl-add-to-wishlist">
                                 <div class="yith-wcwl-add-button">
                                     <a href="#" class="add_to_wishlist">
                                         Add to Wishlist
                                     </a>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="clear"></div>
                             <div class="shop-loop-quickview">
                               <a href="#" data-rel="quickViewModal"><i class="fa fa-plus"></i></a>
-                            </div>
+                            </div>--}}
                           </div>
                         </div>
                         <figcaption>
@@ -101,8 +101,13 @@
                                   <ins><span class="amount">&pound;{{$product->price}}</span></ins> 
                                 </span>
                               </div>
-                              <div class="loop-add-to-cart">
+                              {{-- <div class="loop-add-to-cart">
                                 <a href="#">Select options</a>
+                              </div> --}}
+                              <div class="yith-wcwl-add-button">
+                                <a href="#" class="add_to_wishlist">
+                                  Add to Cart
+                                </a>
                               </div>
                             </div>
                             <div class="info-excerpt">
@@ -117,14 +122,7 @@
                               </div>
                               <div class="list-action clearfix">
                                 <div class="loop-add-to-cart">
-                                  <a href="#">Select options</a>
-                                </div>
-                                <div class="yith-wcwl-add-to-wishlist">
-                                  <div class="yith-wcwl-add-button">
-                                    <a href="#" class="add_to_wishlist">
-                                      Add to Wishlist
-                                    </a>
-                                  </div>
+                                  <a href="#">Add to Cart</a>
                                 </div>
                               </div>
                             </div>
