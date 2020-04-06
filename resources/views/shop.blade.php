@@ -101,14 +101,14 @@
                                   <ins><span class="amount">&pound;{{$product->price}}</span></ins> 
                                 </span>
                               </div>
-                              {{-- <div class="loop-add-to-cart">
-                                <a href="#">Select options</a>
-                              </div> --}}
-                              <div class="yith-wcwl-add-button">
+                              <div class="loop-add-to-cart">
+                                <a href="#">Add to Cart</a>
+                              </div>
+                              {{-- <div class="yith-wcwl-add-button">
                                 <a href="#" class="add_to_wishlist">
                                   Add to Cart
                                 </a>
-                              </div>
+                              </div> --}}
                             </div>
                             <div class="info-excerpt">
                               {{substr($product->description, 0, 300)}}...
@@ -131,7 +131,10 @@
                       </figure>
                     </div>
                   </li>
-                @empty 
+                @empty
+                  <li style="text-align: center;font-size: 18px;font-weight: bold;">
+                    No products for {{strtoupper($shopInfo->shop_name)}} Shop.
+                  </li>
                 @endforelse
               </ul>
             </div>
@@ -155,7 +158,7 @@
               <h4 class="widget-title"><span>Categories</span></h4>
               <ul class="product-categories">
                 @forelse($categories as $category)
-                  <li><a href="#">{{$category->category_name}}</a></li>
+                  <li><a href="{{route('categories.show', $category->id)}}">{{$category->category_name}}</a></li>
                 @empty 
                   <li><a href="">No categories.</a></li>
                 @endforelse

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -56,5 +57,31 @@ class CategoryController extends Controller
         $delete=Category::findOrFail($id);
         $delete->delete();
         return redirect('/trader/category')->with('message','Category Deleted!');
+    }
+
+    public function show($id){
+        $parallax = "";
+        $validCategory = Category::findOrFail($id);
+        $category = $validCategory->category_name;
+        $category = strtolower($category);
+        $categories = Category::all();
+        // dd($category == 'green groceries');
+        if($category == 'green groceries'){
+            $parallax = 'greengrocer.jpeg';
+        }else if($category == 'fish'){
+            $parallax = 'fishmonger.jpg';
+        }else if($category == 'bakery'){
+            $parallax = 'bakery.jpg';
+        }else if($category == 'delicacy'){
+            $parallax = 'delicatessen.jpg';
+        }else if($category == 'meat'){
+            $parallax = 'butcher.jpg';
+        }else{
+            $parallax = 'bakery.jpg';
+        }
+
+        $recentlyAdded = DB::table('products')->latest()->take(5)->get();
+        $products = DB::table('products')->where('category_id', $id)->get();
+        return view('category', compact('products', 'categories', 'recentlyAdded', 'parallax', 'category'));
     }
 }

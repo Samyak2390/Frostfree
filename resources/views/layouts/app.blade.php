@@ -170,7 +170,7 @@
                 <a href="{{url('/')}}">Home</a>
               </li>
               <li class="menu-item-has-children dropdown">
-                <a href="shop.html" class="dropdown-hover">Shop <span class="caret"></span></a>
+                <a class="dropdown-hover">Shop <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   @isset($results)
                     @foreach($results as $key=>$values)
@@ -187,11 +187,11 @@
                 </ul>
               </li>
               <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-hover">Categories <span class="caret"></span></a>
+                <a class="dropdown-hover">Categories <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   @isset($categories)
                     @foreach($categories as $category)
-                      <li><a href="#">{{$category->category_name}}</a></li>
+                      <li><a href="{{route('categories.show', $category->id)}}">{{$category->category_name}}</a></li>
                     @endforeach
                   @endisset
                 </ul>
@@ -336,12 +336,12 @@
                         <nav class="collapse navbar-collapse primary-navbar-collapse">
                           <ul class="nav navbar-nav primary-nav">
                             <li class="menu-item-has-children dropdown">
-                              <a href="index.html" class="dropdown-hover">
+                              <a href="{{url('/')}}" class="dropdown-hover">
                                 <span class="underline">Home</span> <span class="caret"></span>
                               </a>
                             </li>
                             <li class="menu-item-has-children megamenu megamenu-fullwidth dropdown">
-                              <a href="shop.html" class="dropdown-hover">
+                              <a class="dropdown-hover">
                                 <span class="underline">Shop</span> <span class="caret"></span>
                               </a>
                               <ul class="dropdown-menu">
@@ -362,12 +362,12 @@
                               </ul>
                             </li>
                             <li class="menu-item-has-children dropdown">
-                              <a href="#" class="dropdown-hover">
+                              <a class="dropdown-hover">
                                 <span class="underline">Categories</span> <span class="caret"></span>
                               </a>
                               <ul class="dropdown-menu">
                                 @foreach($categories as $category)
-                                  <li><a href="#">{{$category->category_name}}</a></li>
+                                  <li><a href="{{route('categories.show', $category->id)}}">{{$category->category_name}}</a></li>
                                 @endforeach
                               </ul>
                             </li>
