@@ -43,6 +43,8 @@ Route::group(['middleware'=>'auth'], function () {
 });
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/shops/{shop}', 'ShopController@index')->name('shops.index');
+
 
 
 

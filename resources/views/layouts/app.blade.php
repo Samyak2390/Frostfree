@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>@yield('title')</title>
-  <link rel="shortcut icon" href="images/favicon.png">
+  <link rel="shortcut icon" href="{{ URL::asset('images/favicon.png')}}">
 
   <link rel='stylesheet' href='{{ URL::asset('css/settings.css') }}' type='text/css' media='all' />
   <link rel='stylesheet' href='{{ URL::asset('css/swatches-and-photos.css') }}' type='text/css' media='all'/>
@@ -60,7 +60,7 @@
   </style>
   {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 </head>
-<body>
+<body id="theBody">
   <?php 
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Arr;
@@ -166,8 +166,8 @@
           <nav class="offcanvas-navbar">
             <ul class="offcanvas-nav">
               <li class="menu-item-has-children dropdown">
+                {{-- {{dd(\Request::path())}} --}}
                 <a href="{{url('/')}}">Home</a>
-    
               </li>
               <li class="menu-item-has-children dropdown">
                 <a href="shop.html" class="dropdown-hover">Shop <span class="caret"></span></a>
@@ -178,7 +178,7 @@
                         <a href="#">{{$key}}  <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                           @foreach($values as $value )
-                            <li><a href="#">{{$value->shop_name}}</a></li>
+                            <li><a href="{{route('shops.index', $value->id)}}">{{$value->shop_name}}</a></li>
                           @endforeach()
                         </ul>
                       </li>
@@ -328,9 +328,9 @@
                           <img class="logo-mobile" alt="FrostFree" src="images/logo-mobile.png">
                           </a> --}}
                           <a class="navbar-brand" href="#">
-                            <img class="logo" alt="FrostFree" src="images/logo-fixed.png">
-                            <img class="logo-fixed" alt="FrostFree" src="images/logo-fixed.png">
-                            <img class="logo-mobile" alt="FrostFree" src="images/logo-mobile.png">
+                            <img class="logo" alt="FrostFree" src="{{ URL::asset('images/logo-fixed.png')}}">
+                            <img class="logo-fixed" alt="FrostFree" src="{{ URL::asset('images/logo-fixed.png')}}">
+                            <img class="logo-mobile" alt="FrostFree" src="{{ URL::asset('images/logo-mobile.png')}}">
                           </a>
                         </div>
                         <nav class="collapse navbar-collapse primary-navbar-collapse">
@@ -353,7 +353,7 @@
                                       </h3>
                                       <ul class="dropdown-menu">
                                         @foreach($values as $value )
-                                          <li><a href="shop-by-category.html">{{$value->shop_name}}</a></li>
+                                          <li><a href="{{route('shops.index', $value->id)}}">{{$value->shop_name}}</a></li>
                                         @endforeach()
                                       </ul>
                                     </li>
@@ -493,9 +493,9 @@
             <div class="row">
               <div class="col-md-12 text-center">
                 <div class="footer-info-logo">
-                  <a href="#"><img alt="The DMCS" src="images/footer-logo.png"></a>
+                  <a href="#"><img alt="FrostFree" src="{{ URL::asset('images/footer-logo.png')}}"></a>
                 </div>
-                <div class="copyright text-center">Copyright right © {{date("Y")}}
+                <div class="copyright text-center">Copyright © {{date("Y")}}
                   FrostFree. All Rights Reserved.</div>
                 <div class="footer-social">
                   <a href="//www.facebook.com" title="Facebook" target="_blank">
@@ -515,24 +515,24 @@
       </footer>
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
     <script type='text/javascript' src='{{ URL::asset('js/jquery-migrate.min.js') }}'></script>
-    <script type='text/javascript' src='js/jquery.themepunch.tools.min.js'></script>
-    <script type='text/javascript' src='js/jquery.themepunch.revolution.min.js'></script>
-    <script type='text/javascript' src='js/easing.min.js'></script>
-    <script type='text/javascript' src='js/imagesloaded.pkgd.min.js'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.themepunch.tools.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.themepunch.revolution.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/easing.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/imagesloaded.pkgd.min.js') }}'></script>
     <script type='text/javascript' src='{{ URL::asset('js/bootstrap.min.js') }}'></script>
-    <script type='text/javascript' src='js/superfish-1.7.4.min.js'></script>
-    <script type='text/javascript' src='js/jquery.appear.min.js'></script>
-    <script type='text/javascript' src='js/script.js'></script>
-    <script type='text/javascript' src='js/swatches-and-photos.js'></script>
-    <script type='text/javascript' src='js/jquery.prettyPhoto.min.js'></script>
-    <script type='text/javascript' src='js/jquery.prettyPhoto.init.min.js'></script>
-    <script type='text/javascript' src='js/jquery.selectBox.min.js'></script>
-    <script type='text/javascript' src='js/jquery.parallax.js'></script>
-    <script type='text/javascript' src='js/jquery.touchSwipe.min.js'></script>
-    <script type='text/javascript' src='js/jquery.transit.min.js'></script>
-    <script type='text/javascript' src='js/jquery.carouFredSel.min.js'></script>
-    <script type='text/javascript' src='js/isotope.pkgd.min.js'></script>
-    <script type='text/javascript' src='js/custom.js'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/superfish-1.7.4.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.appear.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/script.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/swatches-and-photos.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.prettyPhoto.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.prettyPhoto.init.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.selectBox.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.parallax.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.touchSwipe.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.transit.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/jquery.carouFredSel.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/isotope.pkgd.min.js') }}'></script>
+    <script type='text/javascript' src='{{ URL::asset('js/custom.js') }}'></script>
     @yield('injectJQuery')
   </div>
 </body>

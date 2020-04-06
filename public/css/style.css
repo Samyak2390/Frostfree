@@ -6400,7 +6400,6 @@ a[data-toggle="tooltip"]:hover {
 }
 .heading-container .heading-parallax.bg-3 {
   transform: translate3d(0px, 0px, 0px);
-  background-image: url(../images/slideshow/4.jpg);
 }
 .heading-container .heading-parallax.bg-4 {
   background-image: url(../images/slideshow/10.jpg);
