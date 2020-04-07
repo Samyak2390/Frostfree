@@ -10,6 +10,7 @@ use App\User;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -159,6 +160,9 @@ class ProductController extends Controller
 
     public function show($id){
         $product = Product::findOrFail($id);
-        return view('product-detail', compact('product'));
+
+        //other products belonging to same category
+        $relatedProducts = DB::table('products')->where('category_id', $product->category_id)->latest()->take(4)->get();
+        return view('product-detail', compact('product', 'relatedProducts'));
     }
 }
