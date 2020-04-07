@@ -17,6 +17,7 @@
   <link rel='stylesheet' href='{{ URL::asset('css/elegant-icon.css') }}' type='text/css' media='all' />
   <link rel='stylesheet' href='{{ URL::asset('css/style.css') }}' type='text/css' media='all'/>
   <link rel='stylesheet' href='{{ URL::asset('css/shop.css') }}' type='text/css' media='all'/>
+  <link rel='stylesheet' href='{{ URL::asset('css/magnific-popup.css') }}' type='text/css' media='all'/>
 
   <!-- Scripts -->
   {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
@@ -26,6 +27,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
   <!-- Styles -->
+  @yield('addCss')
   <style>
     .snackbar {
       z-index: 55;

@@ -45,6 +45,7 @@ Route::group(['middleware'=>'auth'], function () {
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/shops/{shop}', 'ShopController@index')->name('shops.index');
 Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
+Route::get('/products/{product}', 'ProductController@show')->name('products.show');
 
 
 

@@ -156,4 +156,9 @@ class ProductController extends Controller
         }
         return redirect()->route('product.index')->with('message','Product Deleted!');
     }
+
+    public function show($id){
+        $product = Product::findOrFail($id);
+        return view('product-detail', compact('product'));
+    }
 }

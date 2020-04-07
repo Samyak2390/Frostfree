@@ -92,7 +92,7 @@
                         <figcaption>
                           <div class="shop-loop-product-info">
                             <div class="info-title">
-                              <h3 class="product_title"><a href="#">{{$product->product_name}}</a></h3>
+                              <h3 class="product_title"><a href="{{route('products.show', $product->id)}}">{{$product->product_name}}</a></h3>
                             </div>
                             <div class="info-meta">
                               <div class="info-price">
@@ -169,7 +169,7 @@
               <ul class="product_list_widget">
                 @forelse($recentlyAdded as $recent)
                   <li>
-                    <a href="#" title="{{$recent->product_name}}">
+                    <a href="{{route('products.show', $recent->id)}}" title="{{$recent->product_name}}">
                       <img width="100" height="150" src="{{ URL::asset("uploads/products/$recent->product_image")}}" alt="Product-13"/> 
                       <span class="product-title">{{$recent->product_name}}</span>
                     </a>

@@ -107,7 +107,7 @@
                                                 <div class="shop-loop-product-info">
                                                   <div class="info-title">
                                                     <h3 class="product_title">
-                                                    <a href="#">{{$meatFish->product_name}}</a>
+                                                    <a href="{{route('products.show', $meatFish->id)}}">{{$meatFish->product_name}}</a>
                                                     </h3>
                                                   </div>
                                                   <div class="info-price">
@@ -187,7 +187,7 @@
                                                 <div class="shop-loop-product-info">
                                                   <div class="info-title">
                                                     <h3 class="product_title">
-                                                      <a href="#">{{$green_grocery->product_name}}</a>
+                                                      <a href="{{route('products.show', $green_grocery->id)}}">{{$green_grocery->product_name}}</a>
                                                     </h3>
                                                   </div>
                                                   <div class="info-price">
@@ -266,7 +266,7 @@
                                                 <div class="shop-loop-product-info">
                                                   <div class="info-title">
                                                     <h3 class="product_title">
-                                                      <a href="#">{{$delicacy->product_name}}</a>
+                                                      <a href="{{route('products.show', $delicacy->id)}}">{{$delicacy->product_name}}</a>
                                                     </h3>
                                                   </div>
                                                   <div class="info-price">
