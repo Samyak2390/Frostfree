@@ -74,6 +74,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     { 
+
+        // dd($data);
         $user = User::create([
             'role' => $data['role'],
             'username' => $data['username'],
@@ -81,11 +83,17 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'trader_category' => $data['trader_category'],
         ]);
-        
-        if($data[role] == '1'){
+
+        if($data['role'] == '1'){
             $user->shop()->create([
                 'shop_name'=>$data['shop_name']
             ]);
+        }
+
+         //Always create a cart if the user is customer
+
+        if($data['role'] == '2'){
+            $user->cart()->create([]);
         }
         return $user;
     }

@@ -19,4 +19,8 @@ class Product extends Model
     public function discount(){
         return $this->hasOne('App\Discount');
     }
+
+    public function product_details(){
+        return $this->hasMany('App\Product_Detail');
+    }
 }

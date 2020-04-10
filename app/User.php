@@ -40,4 +40,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function shop(){
         return $this->hasOne('App\Shop');
     }
+
+    public function cart(){
+        return $this->hasOne('App\Cart');
+    }
 }

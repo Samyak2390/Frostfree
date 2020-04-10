@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
+use App\Product_Detail;
 
 class LoginController extends Controller
 {
@@ -70,5 +72,28 @@ class LoginController extends Controller
     {
       session()->flash('snackbar-message', 'You have successfully logged out!');
       session()->flash('snack-style', 'background-color: #28B463');
+    }
+
+    /*
+      Whenever a customer logins, check if there are products in 'cart' session. If there is,
+      add those products to table Product_Detail
+    */
+    protected function authenticated(Request $request, $user)
+    {
+
+      if($user['role'] == '2'){
+        $cartId = User::find($user['id'])->cart->id;
+
+        if ($request->session()->exists('cart')) {
+          $cartProducts = $request->session()->get('cart');
+          foreach($cartProducts as $cartProduct){
+            Product_Detail:: create([
+              'product_id' => $cartProduct['id'],
+              'cart_id' => $cartId,
+              'quantity' => $cartProduct['quantity']
+            ]);
+          }
+        }
+      }
     }
 }

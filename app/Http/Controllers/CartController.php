@@ -6,16 +6,42 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Shop;
 use App\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     public function show(Request $request, $id = null){
-        $cartProducts = $request->session()->get('cart');
-        // dd($cartProducts);
-        if($cartProducts ==null ){
-            $cartProducts = array();
+        $cartProducts = array();
+        if(Auth::user() && !$request->session()->exists('cart')){
+            $cartId = Auth::user()->cart->id;
+            $cartProductDetails = DB::table('product__details')->where('cart_id', $cartId)->get();
+            foreach($cartProductDetails as $cartProductDetail){
+                $product = Product::find($cartProductDetail->id);
+                $shop = Shop::find($product->shop_id);
+                $category = Category::find($product->category_id);
+                $cartProducts[$product->id] = array(
+                    'id' => $product->id,
+                    'product_name' => $product->product_name,
+                    'shop_name'=>$shop->shop_name,
+                    'category_name'=> $category->category_name,
+                    'quantity'=>$cartProductDetail->quantity,
+                    'product_image'=>$product->product_image,
+                    'product_price'=>$product->price
+                );
+            }
+            $request->session()->put('cart', $cartProducts);
         }
+
+        if($request->session()->has('cart')){
+            $cartProducts = $request->session()->get('cart');
+            if($cartProducts == null ){
+                $cartProducts = array();
+            }
+        }
+
         return view('cart', compact('cartProducts'));
+        
     }
 
     public function store(Request $request, $productId){

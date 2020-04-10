@@ -326,8 +326,13 @@
                                 if(Session::has('cart')){
                                   $count =sizeOf(Session::get('cart'));
                                 }
+
+                                if(Auth::user() && !Session::has('cart')){
+                                  $cartId = Auth::user()->cart->id;
+                                  $count = DB::table('product__details')->where('cart_id', $cartId)->get()->count();
+                                }
                               ?>
-                              {{$count}}
+                              {{$count ?? 0}}
                             </span>
                           </a>
                           {{-- <a class="navbar-brand" href="{{ url('/') }}" style="display: flex">
@@ -407,8 +412,12 @@
                                       if(Session::has('cart')){
                                         $count =sizeOf(Session::get('cart'));
                                       }
+                                      if(Auth::user() && !Session::has('cart')){
+                                        $cartId = Auth::user()->cart->id;
+                                        $count = DB::table('product__details')->where('cart_id', $cartId)->get()->count();
+                                      }
                                     ?>
-                                    {{$count}}
+                                    {{$count ?? 0}}
                                   </span>
                                 </span>
                               </a>
