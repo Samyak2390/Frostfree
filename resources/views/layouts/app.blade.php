@@ -318,8 +318,17 @@
                           <a class="navbar-search-button search-icon-mobile" href="#">
                             <i class="fa fa-search"></i>
                           </a>
-                          <a class="cart-icon-mobile" href="#">
-                            <i class="elegant_icon_bag"></i><span>0</span>
+                          <a class="cart-icon-mobile" href="{{route('carts.show')}}">
+                            <i class="elegant_icon_bag"></i>
+                            
+                            <span>
+                              <?php 
+                                if(Session::has('cart')){
+                                  $count =sizeOf(Session::get('cart'));
+                                }
+                              ?>
+                              {{$count}}
+                            </span>
                           </a>
                           {{-- <a class="navbar-brand" href="{{ url('/') }}" style="display: flex">
                           <div><img src="/svg/snow.svg" style="height:60px;"></div>
@@ -390,13 +399,20 @@
                               </a>
                             </li>
                             <li class="navbar-minicart navbar-minicart-nav">
-                              <a class="minicart-link" href="#">
+                              <a class="minicart-link" href="{{route('carts.show')}}">
                                 <span class="minicart-icon">
                                   <i class="minicart-icon-svg elegant_icon_bag"></i>
-                                  <span>0</span>
+                                  <span>
+                                    <?php 
+                                      if(Session::has('cart')){
+                                        $count =sizeOf(Session::get('cart'));
+                                      }
+                                    ?>
+                                    {{$count}}
+                                  </span>
                                 </span>
                               </a>
-                              <div class="minicart">
+                              {{-- <div class="minicart">
                                 <div class="minicart-header no-items show">
                                   Your shopping bag is empty.
                                 </div>
@@ -407,7 +423,7 @@
                                     </a>
                                   </div>
                                 </div>
-                              </div>
+                              </div> --}}
                             </li>
                           </ul>
                         </nav>

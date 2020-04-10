@@ -46,7 +46,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/shops/{shop}', 'ShopController@index')->name('shops.index');
 Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
 Route::get('/products/{product}', 'ProductController@show')->name('products.show');
+
 Route::get('/carts/{cart?}', 'CartController@show')->name('carts.show');
+Route::post('/carts/products/{product}', 'CartController@store')->name('carts.store');
+Route::delete('/carts/{product}','CartController@destroy')->name('carts.destroy');
+Route::put('/carts','CartController@update')->name('carts.update');
 
 
 
