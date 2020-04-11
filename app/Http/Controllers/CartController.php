@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Product;
 use App\Shop;
 use App\Category;
+use App\Product_Detail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -13,11 +15,11 @@ class CartController extends Controller
 {
     public function show(Request $request, $id = null){
         $cartProducts = array();
-        if(Auth::user() && !$request->session()->exists('cart')){
+        if(Auth::user() && sizeOf($request->session()->get('cart') ?? array())  ==0){
             $cartId = Auth::user()->cart->id;
             $cartProductDetails = DB::table('product__details')->where('cart_id', $cartId)->get();
             foreach($cartProductDetails as $cartProductDetail){
-                $product = Product::find($cartProductDetail->id);
+                $product = Product::find($cartProductDetail->product_id);
                 $shop = Shop::find($product->shop_id);
                 $category = Category::find($product->category_id);
                 $cartProducts[$product->id] = array(
@@ -45,7 +47,31 @@ class CartController extends Controller
     }
 
     public function store(Request $request, $productId){
-        // $request->session()->forget('cart');
+
+        //If the user is logged in, fill the product_details table
+
+        if(Auth::user()){
+            $cartId = User::find(auth()->id())->cart->id;
+            $quantity = $request->input('quantity');
+
+            $alreadyInCart = DB::table('product__details')->where([
+                ['cart_id', '=', $cartId],
+                ['product_id', '=', $productId]
+            ])->get();
+
+            if(sizeOf($alreadyInCart) == 0){
+                Product_Detail:: create([
+                    'product_id' => $productId,
+                    'cart_id' => $cartId,
+                    'quantity' => $quantity
+                ]);
+            }
+        }
+
+        //If user is not logged in, only run this part to add cart products in session
+        //Again, run this part to put cart products that was just added in product_details table
+        // in session as well.
+
         $product = Product::findOrFail($productId);
         $shop = Shop::find($product->shop_id);
         $category = Category::find($product->category_id);
@@ -79,6 +105,21 @@ class CartController extends Controller
     }
 
     public function destroy(Request $request, $productId){
+        if(Auth::User()){
+            $cartId = User::find(auth()->id())->cart->id;
+            $inCart = DB::table('product__details')->where([
+                ['cart_id', '=', $cartId],
+                ['product_id', '=', $productId]
+            ])->get();
+            if(sizeOf($inCart)==1){
+                DB::table('product__details')
+                ->where([
+                    ['cart_id', '=', $cartId],
+                    ['product_id', '=', $productId]
+                ])->delete();
+            }
+        }
+
         if ($request->session()->exists('cart')) {
             $cartProducts = $request->session()->get('cart');
             unset($cartProducts[$productId]);
@@ -89,6 +130,26 @@ class CartController extends Controller
 
     public function update(Request $request){
         $data = $request->all();
+        if(Auth::User()){
+            $cartId = User::find(auth()->id())->cart->id;
+            foreach($data as $key=>$value){
+                if(is_numeric($key)){
+                    $inCart = DB::table('product__details')->where([
+                        ['cart_id', '=', $cartId],
+                        ['product_id', '=', $key]
+                    ])->get();
+
+                    if(sizeOf($inCart) == 1){
+                        DB::table('product__details')
+                        ->where([
+                            ['cart_id', '=', $cartId],
+                            ['product_id', '=', $key]
+                        ])->update(['quantity'=>$value]);
+                    }
+                }
+            }
+        }
+
         if ($request->session()->exists('cart')) {
             $cartProducts = $request->session()->get('cart');
             foreach($data as $key=>$value){
