@@ -46,13 +46,13 @@
                             class="remove" title="Remove this item">&times;</a>
                         </td>
                         <td class="product-thumbnail hidden-xs">
-                          <a href="#">
+                          <a href="{{route('products.show', $pid)}}">
                             <?php $image = $cart['product_image']?>
                             <img width="100" height="150" src={{url("uploads/products/$image")}} alt="Product-1"/>
                           </a>
                         </td>
                         <td class="product-name">
-                          <a href="#">{{$cart['product_name']}}</a>
+                          <a href="{{route('products.show', $pid)}}">{{$cart['product_name']}}</a>
                           <dl class="variation">
                             <dt class="variation-Color">Category:</dt>
                             <dd class="variation-Color"><p>{{$cart['category_name']}}</p></dd>
@@ -61,7 +61,19 @@
                           </dl>
                         </td>
                         <td class="product-price text-center">
-                          <span class="amount">&pound;{{$cart['product_price']}}</span>
+                          <?php
+                            $netPrice = $cart['product_price'] - (($cart['discount']/100) * $cart['product_price']);
+                            $netPrice = round($netPrice, 2);
+                          ?>
+                          @if($cart['discount'] == 0)
+                            <span class="amount">&pound;{{$cart['product_price']}}</span>
+                          @endif
+                          @if($cart['discount'] > 0)
+                            <span class="amount" style="text-decoration: line-through">&pound;{{$cart['product_price']}}</span>
+                            &nbsp;
+                            <span class="amount">&pound;{{$netPrice}}</span>
+                          @endif
+
                         </td>
                         <td class="product-quantity text-center">
                           <div class="quantity">
@@ -70,9 +82,9 @@
                         </td>
                         <td class="product-subtotal hidden-xs text-center">
                           <?php
-                            $subTotal += $cart['quantity'] * $cart['product_price'];
+                            $subTotal += $cart['quantity'] * $netPrice;
                           ?>
-                          <span class="amount">&pound;{{$cart['quantity'] * $cart['product_price']}}</span>
+                          <span class="amount">&pound;{{$cart['quantity'] *  $netPrice}}</span>
                         </td>
                       </tr>
                     @empty 
@@ -104,17 +116,17 @@
                   <div class="cart_totals">
                     <h2>Cart Totals</h2>
                     <table>
-                      <tr class="cart-subtotal">
+                      {{-- <tr class="cart-subtotal">
                         <th>Subtotal</th>
                         <td><span class="amount">&pound;{{$subTotal}}</span></td>
                       </tr>
                       <tr class="shipping">
                         <th>Discount</th>
                         <td><span class="amount">&pound;0.00</span></td>
-                      </tr>
+                      </tr> --}}
                       <tr class="order-total">
                         <th>Total</th>
-                        <td><strong><span class="amount">&pound;56.00</span></strong></td>
+                        <td><strong><span class="amount">&pound;{{$subTotal}}</span></strong></td>
                       </tr>
                     </table>
                     <div class="wc-proceed-to-checkout">

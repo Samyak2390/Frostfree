@@ -15,11 +15,15 @@ class CartController extends Controller
 {
     public function show(Request $request, $id = null){
         $cartProducts = array();
-        if(Auth::user() && sizeOf($request->session()->get('cart') ?? array())  ==0){
+        if(Auth::user() && sizeOf($request->session()->get('cart') ?? array())  == 0){
             $cartId = Auth::user()->cart->id;
             $cartProductDetails = DB::table('product__details')->where('cart_id', $cartId)->get();
             foreach($cartProductDetails as $cartProductDetail){
                 $product = Product::find($cartProductDetail->product_id);
+                $discount = DB::table('discounts')
+                    ->where('product_id', $cartProductDetail->product_id)
+                    ->get()[0]->discount ?? 0;
+
                 $shop = Shop::find($product->shop_id);
                 $category = Category::find($product->category_id);
                 $cartProducts[$product->id] = array(
@@ -29,7 +33,8 @@ class CartController extends Controller
                     'category_name'=> $category->category_name,
                     'quantity'=>$cartProductDetail->quantity,
                     'product_image'=>$product->product_image,
-                    'product_price'=>$product->price
+                    'product_price'=>$product->price,
+                    'discount'=>$discount
                 );
             }
             $request->session()->put('cart', $cartProducts);
@@ -74,6 +79,7 @@ class CartController extends Controller
 
         $product = Product::findOrFail($productId);
         $shop = Shop::find($product->shop_id);
+        $discount = DB::table('discounts')->where('product_id', $product->id)->get()[0]->discount ?? 0;
         $category = Category::find($product->category_id);
         $quantity = $request->input('quantity');
 
@@ -94,7 +100,8 @@ class CartController extends Controller
                 'category_name'=> $category->category_name,
                 'quantity'=>$quantity,
                 'product_image'=>$product->product_image,
-                'product_price'=>$product->price
+                'product_price'=>$product->price,
+                'discount'=>$discount
             );
             $request->session()->put('cart', $cart);
             session()->flash('snackbar-message', "$product->product_name  added to cart");
