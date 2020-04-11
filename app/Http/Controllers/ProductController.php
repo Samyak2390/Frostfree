@@ -116,7 +116,6 @@ class ProductController extends Controller
         ]);
 
         $formInput = $request->except(['discount']);
-        // dd($formInput);
         if($product['product_image'] == ''){
             if($request->file('product_image')){
                 $image=$request->file('product_image');
@@ -133,11 +132,20 @@ class ProductController extends Controller
             }
         }
         $discount = $request->input('discount', 0);
+
         $product->update($formInput);
         if($discount > 0){
-            $product->discount()->update([
-                'discount' => $discount
-            ]);
+            $productDiscount = DB::table('discounts')->where('product_id', $product->id)->get();
+
+            if(sizeOf($productDiscount) ==1 ){
+                $product->discount()->update([
+                    'discount' => $discount
+                ]);
+            }else{
+                $product->discount()->create([
+                    'discount' => $discount
+                ]);
+            }
         }
         return redirect()->route('product.index')->with('message', 'Product Updated Successfylly!');
     }
