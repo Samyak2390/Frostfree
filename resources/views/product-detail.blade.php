@@ -52,7 +52,9 @@
                           </p>
                         </div>
                         <div class="product-actions res-color-attr">
-                          <form class="cart">
+                          <form class="cart" method="POST" id="cart-form{{$product->id}}" 
+                            action="{{route('carts.store', $product->id)}}">
+                            @csrf
                             <div class="single_variation_wrap">
                               <div class="variations_button">
                                 <div class="quantity">
@@ -222,7 +224,14 @@
                                           </span>
                                         </div>
                                         <div class="loop-add-to-cart">
-                                          <a href="#">Add to Cart</a>
+                                          <a style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('cart-form2{{$relatedProduct->id}}').submit();">
+                                            Add to Cart
+                                          </a>
+                                          <form method="POST" id="cart-form2{{$relatedProduct->id}}" style="display:none" 
+                                            action="{{route('carts.store', $relatedProduct->id)}}">
+                                            @csrf 
+                                            <input type="hidden" value="1" name="quantity">
+                                          </form>
                                         </div>
                                       </div>
                                     </div>

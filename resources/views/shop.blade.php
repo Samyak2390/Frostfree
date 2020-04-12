@@ -129,12 +129,13 @@
                               </div>
                               <div class="list-action clearfix">
                                 <div class="loop-add-to-cart">
-                                  <a onclick="event.preventDefault(); document.getElementById('cart-form').submit();">
+                                  <a style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('cart-form2{{$product->id}}').submit();">
                                     Add to Cart
                                   </a>
-                                  <form method="POST" id="cart-form" style="display:none" 
-                                    action="{{route('carts.store', ['cart'=>'0', 'product'=>$product->id])}}">
+                                  <form method="POST" id="cart-form2{{$product->id}}" style="display:none" 
+                                    action="{{route('carts.store', $product->id)}}">
                                     @csrf 
+                                    <input type="hidden" value="1" name="quantity">
                                   </form>
                                 </div>
                               </div>
