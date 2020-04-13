@@ -52,6 +52,10 @@ Route::post('/carts/products/{product}', 'CartController@store')->name('carts.st
 Route::delete('/carts/{product}','CartController@destroy')->name('carts.destroy');
 Route::put('/carts','CartController@update')->name('carts.update');
 
+Route::view('/about', 'about');
+Route::view('/contact', 'contactus');
+Route::view('/faq', 'faq');
+
 
 
 

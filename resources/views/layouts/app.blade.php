@@ -200,11 +200,11 @@
               </li>
     
               <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-hover">Pages <span class="caret"></span></a>
+                <a class="dropdown-hover">Pages <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="about-us.html">About us</a></li>
-                  <li><a href="contact-us.html">Contact Us</a></li>
-                  <li><a href="faq.html">FAQ</a></li>
+                  <li><a href="{{url('/about')}}">About us</a></li>
+                  <li><a href="{{url('/contact')}}">Contact Us</a></li>
+                  <li><a href="{{url('/faq')}}">FAQ</a></li>
                 </ul>
               </li>
             </ul>
@@ -393,9 +393,9 @@
                                 <span class="underline">Pages</span> <span class="caret"></span>
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a href="about-us.html">About us</a></li>
-                                <li><a href="contact-us.html">Contact Us</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
+                                <li><a href="{{url('/about')}}">About us</a></li>
+                                <li><a href="{{url('/contact')}}">Contact Us</a></li>
+                                <li><a href="{{url('/faq')}}">FAQ</a></li>
                               </ul>
                             </li>
                             <li class="navbar-search">
@@ -463,13 +463,13 @@
         @yield('content')
     </main>
      {{-- Login Form --}}
-     @include('Auths.login');
+     @include('Auths.login')
     
      {{-- Registration form --}}
-     @include('Auths.register');
+     @include('Auths.register')
  
      {{-- Forgot password form --}}
-     @include('Auths.forgotPassword');
+     @include('Auths.forgotPassword')
 
      {{-- Footer one --}}
      <div class="footer-widget" style="background:url('../images/footer.jpg'); background-position: 1043px -27px; background-size:cover; background-repeat: no-repeat">
@@ -488,10 +488,10 @@
                 <div class="widget widget_nav_menu">
                   <h3 class="widget-title"><span>Quick Links</span></h3>
                   <ul class="menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="{{url('/')}}">Home</a></li>
+                    <li><a href="{{url('/about')}}">About Us</a></li>
+                    <li><a href="{{url('/contact')}}">Contact Us</a></li>
+                    <li><a href="{{url('/faq')}}">FAQ</a></li>
                   </ul>
                 </div>
               </div>

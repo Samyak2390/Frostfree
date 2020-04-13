@@ -29,7 +29,7 @@
                 <table class="table shop_table cart">
                   <thead>
                     <tr>
-                      <th class="product-remove hidden-xs">&nbsp;</th>
+                      <th class="product-remove">&nbsp;</th>
                       <th class="product-thumbnail hidden-xs">&nbsp;</th>
                       <th class="product-name">Product</th>
                       <th class="product-price text-center">Price</th>
@@ -40,7 +40,7 @@
                   <tbody>
                     @forelse($cartProducts as $cart)
                       <tr class="cart_item">
-                        <td class="product-remove hidden-xs">
+                        <td class="product-remove">
                           <?php $pid = $cart['id']?>
                           <a style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('cart-del-form{{$pid}}').submit();" 
                             class="remove" title="Remove this item">&times;</a>
