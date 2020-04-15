@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Product_Detail;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -87,12 +88,22 @@ class LoginController extends Controller
         if ($request->session()->exists('cart')) {
           $cartProducts = $request->session()->get('cart');
           foreach($cartProducts as $cartProduct){
-            Product_Detail:: create([
-              'product_id' => $cartProduct['id'],
-              'cart_id' => $cartId,
-              'quantity' => $cartProduct['quantity']
-            ]);
+
+            //Find if a product is already there for a cart_id
+            $alreadyInCart = DB::table('product__details')->where([
+              ['cart_id', '=', $cartId],
+              ['product_id', '=', $cartProduct['id']]
+            ])->get();
+
+            if(sizeOf($alreadyInCart) == 0){
+              Product_Detail:: create([
+                'product_id' => $cartProduct['id'],
+                'cart_id' => $cartId,
+                'quantity' => $cartProduct['quantity']
+              ]);
+            }
           }
+          $request->session()->forget('cart');
         }
       }
     }
