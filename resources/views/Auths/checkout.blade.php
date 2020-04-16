@@ -1,9 +1,13 @@
 @extends('layouts.app')
-@section('title', 'FrostFree | Cart')
+@section('title', 'FrostFree | Checkout')
 @section('addCss')
   <style>
     .product-opt{
 
+    }
+
+    .margin-top{
+      margin-top: 6em;
     }
 
     @media (min-width: 700px){
@@ -13,23 +17,26 @@
         margin-top: 5em;
       }
     }
+    @media (max-width: 700px){
+      .margin-top{
+          margin-top: 0em;
+        }
+    }
   </style>
 @endsection
 @section('content')
   <?php $subTotal = 0 ?>
-  <div class="content-container" style="margin-top: 6em">
+  <div class="content-container margin-top">
     <div class="container">
       <div class="row">
         <div class="col-md-12 main-wrap">
           <div class="main-content">
             <div class="shop">
-              <form method="post" action="{{route('carts.update')}}">
-                @csrf 
-                @method('PUT')
+              <h2>You are buying: </h2>
+              <form>
                 <table class="table shop_table cart">
                   <thead>
                     <tr>
-                      <th class="product-remove">&nbsp;</th>
                       <th class="product-thumbnail hidden-xs">&nbsp;</th>
                       <th class="product-name">Product</th>
                       <th class="product-price text-center">Price</th>
@@ -39,12 +46,8 @@
                   </thead>
                   <tbody>
                     @forelse($cartProducts as $cart)
+                      <?php $pid = $cart['id']?>
                       <tr class="cart_item">
-                        <td class="product-remove">
-                          <?php $pid = $cart['id']?>
-                          <a style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('cart-del-form{{$pid}}').submit();" 
-                            class="remove" title="Remove this item">&times;</a>
-                        </td>
                         <td class="product-thumbnail hidden-xs">
                           <a href="{{route('products.show', $pid)}}">
                             <?php $image = $cart['product_image']?>
@@ -77,7 +80,7 @@
                         </td>
                         <td class="product-quantity text-center">
                           <div class="quantity">
-                            <input type="number" step="1" min="1" name="{{$pid}}" value="<?php echo $cart['quantity'] ?>" title="Qty" class="input-text qty text" size="4"/>
+                            {{$cart['quantity']}}
                           </div>
                         </td>
                         <td class="product-subtotal hidden-xs text-center">
@@ -95,7 +98,6 @@
                     @if(sizeOf($cartProducts) > 0)
                       <tr>
                         <td colspan="6" class="actions">
-                          <input type="submit" class="button update-cart-button" name="update_cart" value="Update Cart"/>
                         </td>
                       </tr>
                     @endif
@@ -116,22 +118,27 @@
                   <div class="cart_totals">
                     <h2>Cart Totals</h2>
                     <table>
-                      {{-- <tr class="cart-subtotal">
-                        <th>Subtotal</th>
-                        <td><span class="amount">&pound;{{$subTotal}}</span></td>
-                      </tr>
-                      <tr class="shipping">
-                        <th>Discount</th>
-                        <td><span class="amount">&pound;0.00</span></td>
-                      </tr> --}}
                       <tr class="order-total">
                         <th>Total</th>
                         <td><strong><span class="amount">&pound;{{$subTotal}}</span></strong></td>
                       </tr>
                     </table>
-                    <div class="wc-proceed-to-checkout">
-                      <a href="{{route('checkout.index')}}" class="checkout-button button alt wc-forward">Proceed to Checkout</a>
+                    {{-- <div>
+                      <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" border="0" alt="PayPal Logo">
                     </div>
+                    <div class="wc-proceed-to-checkout">
+                      <form method="POST" id="items" style="display:none" 
+                        action="#">
+                        @csrf 
+                        @foreach($cartProducts as $product)
+                          <input type="hidden" name="items[]" value="{{serialize($product)}}">
+                        @endforeach
+                        <input type="hidden" name = "total" value= "{{$subTotal}}">
+                      </form>
+                      <a style="cursor: pointer" onclick="event.preventDefault(); document.getElementById('items').submit();"  
+                        class="checkout-button button alt wc-forward">Pay with PayPal</a>
+                    </div> --}}
+                    <div id="paypal-button"></div>
                   </div>
                   
                 </div>
@@ -162,5 +169,41 @@
 
     const cart = document.querySelector('.minicart-link');
     cart.style.color = 'black';
+  </script>
+
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+  <script>
+    paypal.Button.render({
+      env: 'sandbox', // Or 'production'
+      style: {
+        size: 'large',
+        color: 'gold',
+        shape: 'pill',
+      },
+      // Set up the payment:
+      // 1. Add a payment callback
+      payment: function(data, actions) {
+        // 2. Make a request to your server
+        return actions.request.post('/api/create-payment')
+          .then(function(res) {
+            // 3. Return res.id from the response
+            // console.log(res);
+            return res.id;
+          });
+      },
+      // Execute the payment:
+      // 1. Add an onAuthorize callback
+      onAuthorize: function(data, actions) {
+        // 2. Make a request to your server
+        return actions.request.post('/api/execute-payment', {
+          paymentID: data.paymentID,
+          payerID:   data.payerID
+        })
+          .then(function(res) {
+            console.log(res);
+            alert('PAYMENT WENT THROUGH!!');
+          });
+      }
+    }, '#paypal-button');
   </script>
 @endsection

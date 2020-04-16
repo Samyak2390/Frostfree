@@ -39,7 +39,9 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::put('/trader/product/update/{product}',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@update'])->middleware('verified')->name('product.update');
 	Route::delete('/trader/product/{product}',['middleware'=>'check-role:admin|trader','uses'=>'ProductController@destroy'])->middleware('verified')->name('product.destroy');
 
-	Route::get('/customer',['middleware'=>'check-role:customer','uses'=>'HomeController@index'])->middleware('verified');
+	Route::get('/customer',['middleware'=>'check-role:customer','uses'=>'HomeController@index'])->middleware('verified')->name('customer');
+	Route::get('/checkout',['middleware'=>'check-role:customer','uses'=>'CheckoutController@index'])->middleware('verified')->name('checkout.index');
+	Route::get('/checkout-success',['middleware'=>'check-role:customer','uses'=>'CheckoutController@checkoutSuccess'])->middleware('verified')->name('checkout.success');
 });
 
 Route::get('/', 'HomeController@index')->name('home');
