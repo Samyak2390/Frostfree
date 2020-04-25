@@ -21,6 +21,8 @@ class CheckoutController extends Controller
     }
 
     public function checkoutSuccess(){
+        //add to orders table here
+        //firs check session data here to add to orders table
         dd('Checkout Success!');
     }
 }

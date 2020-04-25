@@ -187,8 +187,11 @@
         return actions.request.post('/api/create-payment')
           .then(function(res) {
             // 3. Return res.id from the response
-            // console.log(res);
+            console.log('>>>>>>>>>>>>>>>>'+res);
             return res.id;
+          })
+          .catch(function(error){
+            console.log('Error>>>>>>'+error);
           });
       },
       // Execute the payment:
@@ -200,8 +203,12 @@
           payerID:   data.payerID
         })
           .then(function(res) {
-            console.log(res);
-            alert('PAYMENT WENT THROUGH!!');
+            console.log('lalalal'+res);
+            fetch('/api/checkout-succed', 
+            {method:'POST'})
+            .then(res=>{
+              console.log('res>>>>' + res);
+            })
           });
       }
     }, '#paypal-button');

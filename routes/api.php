@@ -30,8 +30,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('checkout-succed', 'CheckoutController@checkoutSuccess');
 
-Route::post('create-payment', function () {
+Route::post('create-payment', function (Request $request) {
     $apiContext = new \PayPal\Rest\ApiContext(
         new \PayPal\Auth\OAuthTokenCredential(
             'AZfqn96KlpKVgUiXzbg5hcW24C_JhShHOHDbWom2SH-yayh4X1eM9jzXCTdt7madS8bjEVhOVvTJz-pY',     // ClientID
@@ -42,34 +43,26 @@ Route::post('create-payment', function () {
     $payer = new Payer();
     $payer->setPaymentMethod("paypal");
 
-    // $item1 = new Item();
-    // $item1->setName('Ground Coffee 40 oz')
-    //     ->setCurrency('GBP')
-    //     ->setQuantity(1)
-    //     ->setSku("123123") // Similar to `item_number` in Classic API
-    //     ->setPrice(7.5);
-    // $item2 = new Item();
-    // $item2->setName('Granola bars')
-    //     ->setCurrency('GBP')
-    //     ->setQuantity(5)
-    //     ->setSku("321321") // Similar to `item_number` in Classic API
-    //     ->setPrice(2);
-
-    // $itemList = new ItemList();
-    // $itemList->setItems(array($item1, $item2));
+    $total = 0;
+    if ($request->session()->exists('cart')) {
+        $cartProducts = $request->session()->get('cart');
+        foreach($cartProducts as $key=>$value){
+            $subTotal = ($value['product_price'] - (($value['discount']/100) * $value['product_price'])) * $value['quantity'];
+            $total = $total + $subTotal;
+        }
+    }
 
     $details = new Details();
     $details->setShipping(0)
         ->setTax(0)
-        ->setSubtotal(0.1);
+        ->setSubtotal($total);
 
     $amount = new Amount();
     $amount->setCurrency("GBP")
-        ->setTotal(0.1)
+        ->setTotal($total)
         ->setDetails($details);
 
     $transaction = new Transaction();
-    // ->setItemList($itemList)
     $transaction->setAmount($amount)
         ->setDescription("Payment description")
         ->setInvoiceNumber(uniqid());
