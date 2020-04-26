@@ -139,6 +139,8 @@
                         class="checkout-button button alt wc-forward">Pay with PayPal</a>
                     </div> --}}
                     <div id="paypal-button"></div>
+                    {{-- SImulate checkout Success --}}
+                    <div><a href="{{route('checkout.success')}}">success</a></div>
                   </div>
                   
                 </div>

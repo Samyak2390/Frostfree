@@ -17,7 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('cart_id')->index();
             $table->unsignedBigInteger('collection_slot_id')->index();
-            $table->boolean('delivery_status');
+            $table->string('collection_date');
+            $table->boolean('delivery_status')->default(false);
             $table->timestamps();
 
             $table->foreign('cart_id')->references('id')->on('carts');
