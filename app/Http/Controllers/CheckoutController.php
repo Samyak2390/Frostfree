@@ -35,7 +35,8 @@ class CheckoutController extends Controller
         //send invoice to the customer
         //send invoice to the admin
         //send individual invoices to the trader
-        dd('succeed');
+
+        return redirect()->route('carts.show')->with('message', 'Checkout Successfull!');
     }
 
     protected function fillPayments($orderId, $payment){

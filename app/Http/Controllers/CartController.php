@@ -7,6 +7,7 @@ use App\User;
 use App\Product;
 use App\Shop;
 use App\Category;
+use App\Payment;
 use App\Product_Detail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ class CartController extends Controller
 {
     public function show(Request $request, $id = null){
         $cartProducts = array();
+        $collectionInfo = array();
         if(Auth::user() && sizeOf($request->session()->get('cart') ?? array())  == 0){
             $cartId = Auth::user()->cart->id;
             $cartProductDetails = DB::table('product__details')->where('cart_id', $cartId)->get();
@@ -47,8 +49,37 @@ class CartController extends Controller
             }
         }
 
-        return view('cart', compact('cartProducts'));
-        
+        //seeing if there is pending order
+        if(Auth::user()){
+            $cartId = Auth::user()->cart->id;
+            $orders = DB::table('orders')->select('id', 'collection_slot_id', 'collection_date')->where([
+                ['cart_id', '=', "$cartId"],
+                ['delivery_status', '=', false],
+            ])->get();
+            // dd($cartId, $orders);
+
+            if(sizeof($orders) > 0){
+                foreach($orders as $order){
+                    $payment = DB::table('payments')->select('price')->where([
+                        ['order_id', '=', $order->id]
+                    ])->get()[0]->price;
+    
+                    $collectionSlot = DB::table('collection_slots')->select('time', 'day')->where([
+                        ['id', '=', $order->collection_slot_id]
+                    ])->get()[0];
+                    
+                    $collectionInfo[$order->id] = array(
+                        'orderId'=>$order->id,
+                        'payment'=>$payment,
+                        'collectionTime'=>$collectionSlot->time,
+                        'collectionDay'=>$collectionSlot->day,
+                        'collectionDate'=>$order->collection_date
+                    );
+                }
+            }
+        }
+
+        return view('cart', compact('cartProducts', 'collectionInfo'));
     }
 
     public function store(Request $request, $productId){

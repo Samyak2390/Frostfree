@@ -6,23 +6,51 @@
 
     }
 
+    .margin-top{
+
+    }
+
     @media (min-width: 700px){
       .product-opt{
         display: flex; 
         justify-content: space-between; 
         margin-top: 5em;
       }
+
+      .margin-top{
+        margin-top: 6em
+      }
+    }
+
+    .notification{
+      border: 2px solid green;
+      padding: 15px 11px;
+      font-size: 17px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      color: green;
+      font-weight: bold;
     }
   </style>
 @endsection
 @section('content')
   <?php $subTotal = 0 ?>
-  <div class="content-container" style="margin-top: 6em">
+  <div class="content-container margin-top">
     <div class="container">
       <div class="row">
         <div class="col-md-12 main-wrap">
           <div class="main-content">
             <div class="shop">
+              @if (sizeOf($collectionInfo)>0)
+                @foreach($collectionInfo as $info)
+                  <p class="notification">
+                    You recently gave an order of &pound;{{$info['payment']}}. 
+                    Your scheduled collection time is {{$info['collectionTime']}} {{$info['collectionDay']}} on {{$info['collectionDate']}} (d/m/y).
+                  <p>
+                @endforeach
+              @endif
               <form method="post" action="{{route('carts.update')}}">
                 @csrf 
                 @method('PUT')
