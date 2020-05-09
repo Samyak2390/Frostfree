@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     public function user(){
-        $this->belongsTo('\App\User');
+        return $this->belongsTo('\App\User');
     }
 
     public function product_detail(){
-        $this->hasMany('\App\Product_Detail');
+        return $this->hasMany('\App\Product_Detail');
     }
 
     public function orders(){
-        $this->hasMany('\App\Order');
+        return $this->hasMany('\App\Order');
     }
 }

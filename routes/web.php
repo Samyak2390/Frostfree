@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,15 @@ Route::put('/carts','CartController@update')->name('carts.update');
 Route::view('/about', 'about');
 Route::view('/contact', 'contactus');
 Route::view('/faq', 'faq');
+Route::get('mailable', function (Request $request) {
+	$invoiceInfo = new App\Http\Controllers\CheckoutController;
+	$orderData = $invoiceInfo->invoiceInfo($request);
+	// foreach($orderData['traders'] as $trader){
 
+	// }
+	dd($orderData);
+	return new App\Mail\OrderInvoice($orderData['traders']['21']);
+});
 
 
 

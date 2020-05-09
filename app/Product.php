@@ -25,6 +25,6 @@ class Product extends Model
     }
 
     public function order_products(){
-        $this->hasMany('\App\OrderProduct');
+        return $this->hasMany('\App\OrderProduct');
     }
 }

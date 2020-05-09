@@ -9,7 +9,7 @@ class Shop extends Model
     protected $fillable = ['user_id', 'shop_name', 'shop_phone', 'shop_address'];
 
     public function user(){
-        $this->belongsTo('\App\User');
+        return $this->belongsTo('\App\User');
     }
 
     public function products(){

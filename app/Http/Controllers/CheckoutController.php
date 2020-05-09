@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderInvoice;
+use App\Order;
+use App\OrderProduct;
+use App\Product;
+use App\Shop;
 
 class CheckoutController extends Controller
 {
@@ -32,11 +38,53 @@ class CheckoutController extends Controller
         //fill payments table
         $this->fillPayments($orderId, $payment);
 
-        //send invoice to the customer
-        //send invoice to the admin
-        //send individual invoices to the trader
+        //Get invoice information
+        $orderData = $this->invoiceInfo($request, $orderId);
 
-        return redirect()->route('carts.show')->with('message', 'Checkout Successfull!');
+        //send invoice to the customer
+        Mail::to(Auth::user()->email)->send(new OrderInvoice($orderData['customer']));
+        
+        //send invoice to the admin
+        Mail::to("frostfree.demo@gmail.com")->send(new OrderInvoice($orderData['customer']));
+
+        //send individual invoices to the trader
+        foreach($orderData['traders'] as $trader){
+            Mail::to($trader['email'])->send(new OrderInvoice($trader));
+        }
+
+        session()->flash('snackbar-message', "Checkout Successfull!");
+        return redirect()->route('carts.show');
+    }
+
+    public function invoiceInfo(Request $request, $orderId = '33127'){
+        $total = 0;
+        $invoiceInfo = array();
+        $traders = array();
+        $customerName = Auth::user()->username;
+        $cartProducts = array();
+        if ($request->session()->exists('cart')) {
+            $cartProducts = $request->session()->get('cart');
+            foreach($cartProducts as $key=>$value){
+                $shopId = Product::find($key)->shop_id;
+                $trader = Shop::find($shopId)->user;
+                $traders[$shopId]['orderId'] = $orderId;
+                $traders[$shopId]['customerName'] = $customerName;
+                $traders[$shopId]['email'] = $trader->email;
+                $traders[$shopId]['name'] = $trader->username;
+                $traders[$shopId]['products'][$key] = $value; 
+                $subTotal = ($value['product_price'] - (($value['discount']/100) * $value['product_price'])) * $value['quantity'];
+                $total = $total + $subTotal;
+            }
+        }
+        $invoiceInfo['customer'] = array(
+            'orderId' => $orderId,
+            'customerName' => $customerName,
+            'products' => $cartProducts,
+            'total' => $total
+        );
+
+        $invoiceInfo['traders'] = $traders;
+        return $invoiceInfo;
     }
 
     protected function fillPayments($orderId, $payment){
@@ -102,7 +150,7 @@ class CheckoutController extends Controller
             }
             $collectionSlotId = $this->findCollectionSlotId($collectionDay, $collectionTime);
             $collectionDate = $this->findNearestDate($collectionDay, $timeAfterOneDay);
-            if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 2){
+            if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 20){
                 $this->countRecursionNo = $this->countRecursionNo + 1;
                 $addTime = $timeAfterOneDay + ($this->countRecursionNo * 11000);
                 return $this->findCollectionDetails($addTime);
@@ -118,7 +166,7 @@ class CheckoutController extends Controller
             }
             $collectionSlotId = $this->findCollectionSlotId($collectionDay, $collectionTime);
             $collectionDate = $this->findNearestDate($collectionDay, $timeAfterOneDay);
-            if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 2){
+            if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 20){
                 $this->countRecursionNo = $this->countRecursionNo + 1;
                 $addTime = time() + ($this->countRecursionNo * 11000);
                 return $this->findCollectionDetails($addTime);
@@ -134,7 +182,7 @@ class CheckoutController extends Controller
             }
             $collectionSlotId = $this->findCollectionSlotId($collectionDay, $collectionTime);
             $collectionDate = $this->findNearestDate($collectionDay, $timeAfterOneDay);
-            if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 2){
+            if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 20){
                 $this->countRecursionNo = $this->countRecursionNo + 1;
                 $addTime = time() + ($this->countRecursionNo * 11000);
                 return $this->findCollectionDetails($addTime);

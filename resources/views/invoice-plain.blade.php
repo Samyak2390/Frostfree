@@ -1,0 +1,1 @@
+Please see the attachment of invoice below.

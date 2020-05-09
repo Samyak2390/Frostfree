@@ -14,11 +14,11 @@ class Order extends Model
     }
 
     public function cart(){
-        $this->belongsTo('\App\Cart');
+        return $this->belongsTo('\App\Cart');
     }
 
     public function order_products(){
-        $this->hasMany('\App\OrderProduct');
+        return $this->hasMany('\App\OrderProduct');
     }
 
     public function payment()
