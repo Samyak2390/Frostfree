@@ -8101,7 +8101,7 @@ p.comment-form-rating {
 .form-control:not(.submit)[readonly],
 fieldset[disabled] .form-control:not(.submit) {
   cursor: not-allowed;
-  background-color: #515151;
+  background-color: #eee;
   opacity: 1;
   filter: alpha(opacity=100);
 }

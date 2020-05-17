@@ -43,6 +43,13 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('/customer',['middleware'=>'check-role:customer','uses'=>'HomeController@index'])->middleware('verified')->name('customer');
 	Route::get('/checkout',['middleware'=>'check-role:customer','uses'=>'CheckoutController@index'])->middleware('verified')->name('checkout.index');
 	Route::get('/checkout-success',['middleware'=>'check-role:customer','uses'=>'CheckoutController@checkoutSuccess'])->middleware('verified')->name('checkout.success');
+
+	Route::get('/profile/create',['middleware'=>'check-role:customer|trader|admin','uses'=>'ProfileController@create'])->middleware('verified')->name('profile.create');
+	Route::put('/profile/update',['middleware'=>'check-role:customer|trader|admin','uses'=>'ProfileController@update'])->middleware('verified')->name('profile.update');
+	Route::delete('/profile/delete/image',['middleware'=>'check-role:customer|trader|admin','uses'=>'ProfileController@deleteImage'])->middleware('verified')->name('profile.image.destroy');
+
+
+
 });
 
 Route::get('/', 'HomeController@index')->name('home');
