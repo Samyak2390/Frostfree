@@ -463,13 +463,13 @@
         @yield('content')
     </main>
      {{-- Login Form --}}
-     @include('Auths.login')
+     @include('before-auth.login')
     
      {{-- Registration form --}}
-     @include('Auths.register')
+     @include('before-auth.register')
  
      {{-- Forgot password form --}}
-     @include('Auths.forgotPassword')
+     @include('before-auth.forgotPassword')
 
      {{-- Footer one --}}
      <div class="footer-widget" style="background:url('../images/footer.jpg'); background-position: 1043px -27px; background-size:cover; background-repeat: no-repeat">

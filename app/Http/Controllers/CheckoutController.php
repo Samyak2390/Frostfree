@@ -24,7 +24,7 @@ class CheckoutController extends Controller
                     $cartProducts = array();
                 }
             }
-            return view('Auths.checkout', compact('cartProducts'));
+            return view('after-auth.checkout', compact('cartProducts'));
         }
     }
 
