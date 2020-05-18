@@ -5,9 +5,15 @@
 ?>
 <div id="header">
     <div style="display:flex; align-items: center">
-        <div style="font-size: 50px; color:white; margin-right: 13px; padding: 10px 0 0 10px">
-            <i class="fa fa-user-circle" aria-hidden="true"></i>
-        </div>
+        @if(Auth::user()->user_photo)
+            <div style="max-width: 65px; margin-right: 13px; padding: 10px 0 0 10px">
+                <img style= "border-radius: 50% " src="{{url('uploads/profile/',Auth::user()->user_photo)}}" alt="avatar">
+            </div>
+        @else
+            <div style="font-size: 50px; color:white; margin-right: 13px; padding: 10px 0 0 10px">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+            </div>
+        @endif
         <div style="color: white; font-size: 18px; margin-right: 13px;">
             <a href="{{url('/trader/profile/create')}}">{{$user->username}}</a>
             <div class="trader-logout" style="color: white; font-size: 13px"> 
