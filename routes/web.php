@@ -60,6 +60,7 @@ Route::get('/products/{product}', 'ProductController@show')->name('products.show
 
 Route::get('/carts/{cart?}', 'CartController@show')->name('carts.show');
 Route::post('/carts/products/{product}', 'CartController@store')->name('carts.store');
+Route::delete('/carts/destroyAll','CartController@emptyCart')->name('carts.destroyAll');
 Route::delete('/carts/{product}','CartController@destroy')->name('carts.destroy');
 Route::put('/carts','CartController@update')->name('carts.update');
 

@@ -64,7 +64,7 @@ class ProfileController extends Controller
         $filePath = public_path('uploads/profile/' . $fileName);
 
         //Resize Image
-        Image::make($image)->resize(350, 350)->save($filePath);
+        Image::make($image)->fit(350, 350)->save($filePath);
         $formInput['user_photo'] = $fileName;
       }
     }else{

@@ -104,7 +104,7 @@
 
                         </td>
                         <td class="product-quantity text-center">
-                          <div class="quantity">
+                          <div class="quantity" style="max-width: 80px">
                             <input type="number" step="1" min="1" name="{{$pid}}" value="<?php echo $cart['quantity'] ?>" title="Qty" class="input-text qty text" size="4"/>
                           </div>
                         </td>
@@ -122,13 +122,20 @@
                     @endforelse 
                     @if(sizeOf($cartProducts) > 0)
                       <tr>
-                        <td colspan="6" class="actions">
+                        <td colspan="5" class="actions">
+                          <input type="button" onclick="event.preventDefault();document.getElementById('remove-all').submit()" class="button update-cart-button" name="empty_cart" value="Remove all"/>
+                        </td>
+                        <td class="actions">
                           <input type="submit" class="button update-cart-button" name="update_cart" value="Update Cart"/>
                         </td>
                       </tr>
                     @endif
                   </tbody>
                 </table>
+              </form>
+              <form id="remove-all" action="{{route('carts.destroyAll')}}" method="POST" style="display: none;">
+                @csrf
+                @method('DELETE')
               </form>
               @forelse($cartProducts as $cart) 
                 <?php $pid = $cart['id']?>

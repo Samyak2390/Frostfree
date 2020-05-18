@@ -166,6 +166,18 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    public function emptyCart(Request $request){
+        if(Auth::User()){
+            $cartId = Auth::User()->cart->id;
+            DB::table('product__details')->where('cart_id', $cartId)->delete();
+        }
+
+        if ($request->session()->exists('cart')) {
+            $request->session()->forget('cart');
+        }
+        return back();
+    }
+
     public function update(Request $request){
         $data = $request->all();
         if(Auth::User()){
