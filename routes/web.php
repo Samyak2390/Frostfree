@@ -49,6 +49,7 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::put('/profile/update',['middleware'=>'check-role:customer|trader|admin','uses'=>'ProfileController@update'])->middleware('verified')->name('profile.update');
 	Route::delete('/profile/delete/image',['middleware'=>'check-role:customer|trader|admin','uses'=>'ProfileController@deleteImage'])->middleware('verified')->name('profile.image.destroy');
 
+	Route::get('/trader/contact', ['middleware'=>'check-role:trader|admin','uses'=>'TraderController@contact'])->middleware('verified')->name('trader.contact');
 
 
 });

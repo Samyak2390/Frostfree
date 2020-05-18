@@ -14,6 +14,7 @@
                 <li><a href="{{url('/trader/product')}}">List Products</a></li>
             </ul>
         </li>
+        <li {{$menu_active==4? ' class=active':''}}><a href="{{url('/trader/contact')}}"><i class="icon icon-th-list"></i> <span>Report Product Clash</span></a> </li>
        
     </ul>
 </div>

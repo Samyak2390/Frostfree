@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <title>@yield('title','Master Page')</title>
+    <link rel="shortcut icon" href="{{ URL::asset('images/favicon.png')}}">
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @if(strcmp(Route::current()->uri, "trader/profile/create") == 0)
+    @if(strcmp(Route::current()->uri, "trader/profile/create") == 0 || strcmp(Route::current()->uri, "trader/contact") == 0)
         <link rel='stylesheet' href='{{ URL::asset('css/style.css') }}' type='text/css' media='all'/>
     @endif
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
