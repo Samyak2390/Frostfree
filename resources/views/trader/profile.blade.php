@@ -1,16 +1,15 @@
-@extends('layouts.app')
+@extends('trader.layouts.master')
 @section('title', 'FrostFree | Profile')
 @section('addCss')
 {{-- <link rel="stylesheet" href="{{ URL::asset('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')}}"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> --}}
   <style>
     .margin-top{
-
     }
 
     @media (min-width: 700px){
       .margin-top{
-        margin-top: 15em
+        margin-top: 5em
       }
     }
 
@@ -28,12 +27,18 @@
       border-bottom: 2px solid grey;
     }
 
+    .container {
+      margin-right: auto;
+      margin-left: auto;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
   </style>
         
 @endsection
 @section('content')
-  <div class="container margin-top">
-    <div class="row my-2">
+  <div class="container">
+    <div class="row my-2 margin-top">
       <div class="col-lg-3 order-lg-1 text-center">
         <div> 
           <img style= "border-radius: 50% " class="mobile" src="{{url('uploads/profile/',Auth::user()->user_photo ?? 'default-profile.png')}}" class="mx-auto img-fluid img-circle d-block"
@@ -50,7 +55,7 @@
           </li>
         </ul> --}}
         <h2>Your Profile </h2>
-        <div class="tab-content py-4">
+        <div class=" py-4">
           <div class="tab-pane active" id="edit">
             <form role="form" method="post" action="{{route('profile.update')}}" enctype="multipart/form-data">
               {{ csrf_field() }}
@@ -122,7 +127,7 @@
                   <span style="color: red">{{$errors->first('password')}}</span>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row" style="display:none">
                 <div class="col-lg-9">
                   <input class="form-control" type="hidden" name="role" value="{{ Auth::user()->role }}">
                 </div>
@@ -147,7 +152,7 @@
                     <span>
                       <img src="{{url('uploads/profile/',Auth::user()->user_photo)}}" width="50" alt=""
                           style="margin-right: 20px">
-                      <a href="javascript:" class="btn btn-danger" id="deleteRecord">Remove Image</a>
+                      <a class="btn btn-danger" id="deleteRecord" onclick="document.getElementById('delete-image').submit();">Remove Image</a>
                     </span>
                   @endif
                 </div>
@@ -173,7 +178,7 @@
     </div>
   </div>
 @endsection
-@section('injectJQuery')
+@section('jsblock')
 {{-- <script src="{{ URL::asset('https://code.jquery.com/jquery-3.4.1.slim.min.js')}}"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -183,23 +188,4 @@
 <script src="{{ URL::asset('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js')}}"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script> --}}
-
-  <script>
-    const elements = document.querySelectorAll('.underline');
-    elements.forEach(element => {
-      element.style.color = 'black';
-    });
-
-    const search = document.querySelectorAll('.navbar-search-button')[1];
-    search.style.color = 'black';
-
-    const cart = document.querySelector('.minicart-link');
-    cart.style.color = 'black';
-  </script>
-  
-  <script>
-    $("#deleteRecord").click(function () {
-      document.getElementById('delete-image').submit();
-    });
-  </script>
 @endsection

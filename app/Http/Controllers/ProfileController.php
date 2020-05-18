@@ -22,6 +22,11 @@ class ProfileController extends Controller
     return view('after-auth.profile');
   }
 
+  public function createTrader(){
+    $menu_active = 0;
+    return view('trader.profile', compact('menu_active'));
+  }
+
   public function deleteImage(){
     $id = Auth::user()->id;
     $user = User::find($id);

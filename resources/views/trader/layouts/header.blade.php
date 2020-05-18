@@ -9,7 +9,7 @@
             <i class="fa fa-user-circle" aria-hidden="true"></i>
         </div>
         <div style="color: white; font-size: 18px; margin-right: 13px;">
-            <a href="#">{{$user->username}}</a>
+            <a href="{{url('/trader/profile/create')}}">{{$user->username}}</a>
             <div class="trader-logout" style="color: white; font-size: 13px"> 
                 <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

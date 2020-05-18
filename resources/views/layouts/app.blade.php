@@ -398,6 +398,13 @@
                                 <li><a href="{{url('/faq')}}">FAQ</a></li>
                               </ul>
                             </li>
+                            @if(Auth::user())
+                              <li class="menu-item-has-children dropdown">
+                                <a href="{{url('/profile/create')}}" class="dropdown-hover">
+                                  <span class="underline">Profile</span> <span class="caret"></span>
+                                </a>
+                              </li>
+                            @endif
                             <li class="navbar-search">
                               <a class="navbar-search-button" href="#">
                                 <i class="fa fa-search"></i>
