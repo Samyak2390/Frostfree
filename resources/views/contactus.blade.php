@@ -35,27 +35,32 @@
                         <div class="title">
                           <h2>GET IN TOUCH</h2>
                         </div>
-                        <form>
+                        <form method="POST" action="{{route('send.mail')}}">
+                          @csrf
                           <div class="row">
                             <div class="col-sm-6">
                               <div>Your Name (required)<br />
                                   <p class="form-control-wrap your-name">
-                                    <input type="text" name="your-name" value="" size="40" class="form-control text validates-as-required" />
+                                    <input type="text" name="name" value="{{old('name') ?? ''}}" size="40" class="form-control text validates-as-required" />
                                   </p>
+                                  <span style="color: red">{{$errors->first('name')}}</span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                               <div>Your Email (required)<br />
                                   <p class="form-control-wrap your-email">
-                                    <input type="email" name="your-email" value="" size="40" class="form-control text email validates-as-required validates-as-email" />
+                                    <input type="email" name="email" value="{{old('email') ?? Auth::User()->email ?? ''}}" size="40" class="form-control text email validates-as-required validates-as-email" />
                                   </p>
+                                  <span style="color: red">{{$errors->first('email')}}</span>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                               <div>Your Message<br />
-                                  <p class="form-control-wrap your-message">	<textarea name="your-message" cols="40" rows	="10" class="form-control textarea"></textarea>
+                                  <p class="form-control-wrap your-message">	
+                                    <textarea name="message_body" cols="40" rows	="10" class="form-control textarea">{{old('message_body') ?? ''}}</textarea>
                                   </p>
                                 </div>
+                                <span style="color: red">{{$errors->first('message_body')}}</span>
                             </div>
                           </div>
                           <input type="submit" value="Send" class="form-control submit" />

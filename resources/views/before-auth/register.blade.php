@@ -87,7 +87,7 @@
           </span>
           <button type="submit" class="btn btn-default btn-outline">Register</button>
         </div>
-        @if($errors->any())
+        @if($errors->any() && !strcmp(Route::current()->uri, "contact") == 0)
           @section('injectJQuery')
             <script type="text/javascript">
               $(document).ready(function() {

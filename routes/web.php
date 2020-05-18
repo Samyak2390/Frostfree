@@ -65,6 +65,7 @@ Route::delete('/carts/{product}','CartController@destroy')->name('carts.destroy'
 Route::put('/carts','CartController@update')->name('carts.update');
 
 Route::view('/about', 'about');
+Route::post('/contact/sendMail', 'MailController@sendMail')->name('send.mail');
 Route::view('/contact', 'contactus');
 Route::view('/faq', 'faq');
 Route::get('mailable', function (Request $request) {
