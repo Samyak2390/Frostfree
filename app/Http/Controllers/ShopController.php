@@ -40,7 +40,31 @@ class ShopController extends Controller
 
             $recentlyAdded = DB::table('products')->latest()->take(5)->get();
             $categories = Category::all();
-            $products = DB::table('products')->where('shop_id', $shop_id)->get();
+
+            //Sorting products 
+            if(isset($_GET['orderby'])){
+                $orderBy = $_GET['orderby'];
+                switch($orderBy){
+                    case 'price':
+                        //low to high 
+                        $products = DB::table('products')->where('shop_id', $shop_id)->orderBy('price')->get();
+                        break;
+
+                    case 'price-desc': 
+                        //high to low
+                        $products = DB::table('products')->where('shop_id', $shop_id)->orderBy('price', 'desc')->get();
+                        break;
+
+                    case 'date': 
+                        $products = DB::table('products')->where('shop_id', $shop_id)->orderBy('updated_at', 'desc')->get();
+                        break;
+
+                    default:
+                        $products = DB::table('products')->where('shop_id', $shop_id)->get();
+                }
+            }else{
+                $products = DB::table('products')->where('shop_id', $shop_id)->get();
+            }
             return view('shop', compact('shopInfo', 'products', 'parallax', 'categories', 'recentlyAdded'));
         }else{
             abort(404);
