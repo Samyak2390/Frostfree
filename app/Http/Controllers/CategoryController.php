@@ -81,7 +81,32 @@ class CategoryController extends Controller
         }
 
         $recentlyAdded = DB::table('products')->latest()->take(5)->get();
-        $products = DB::table('products')->where('category_id', $id)->get();
-        return view('category', compact('products', 'categories', 'recentlyAdded', 'parallax', 'category'));
+        // $products = DB::table('products')->where('category_id', $id)->get();
+
+        //Sorting products 
+        if(isset($_GET['orderby'])){
+            $orderBy = $_GET['orderby'];
+            switch($orderBy){
+                case 'price':
+                    //low to high 
+                    $products = DB::table('products')->where('category_id', $id)->orderBy('price')->get();
+                    break;
+
+                case 'price-desc': 
+                    //high to low
+                    $products = DB::table('products')->where('category_id', $id)->orderBy('price', 'desc')->get();
+                    break;
+
+                case 'date': 
+                    $products = DB::table('products')->where('category_id', $id)->orderBy('updated_at', 'desc')->get();
+                    break;
+
+                default:
+                    $products = DB::table('products')->where('category_id', $id)->get();
+            }
+        }else{
+            $products = DB::table('products')->where('category_id', $id)->get();
+        }
+        return view('category', compact('id', 'products', 'categories', 'recentlyAdded', 'parallax', 'category'));
     }
 }

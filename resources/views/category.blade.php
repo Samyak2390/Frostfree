@@ -28,22 +28,25 @@
             <a class="grid-mode active" title="Grid"><i class="fa fa-th"></i></a>
             <a class="list-mode" title="List" href="#"><i class="fa fa-th-list"></i></a>
           </div>
-          <form class="shop-ordering clearfix">
+          <form class="shop-ordering clearfix" method="GET" action="/categories/{{$id}}">
+            @csrf
             <div class="shop-ordering-select">
               <label class="hide">Sorting:</label>
               <div class="form-flat-select">
-                <select name="orderby" class="orderby">
-                  <option value="menu_order" selected='selected'>Default sorting</option>
-                  <option value="popularity">Sort by popularity</option>
-                  <option value="rating">Sort by average rating</option>
-                  <option value="date">Sort by newness</option>
-                  <option value="price">Sort by price: low to high</option>
-                  <option value="price-desc">Sort by price: high to low</option>
+                <select name="orderby" class="orderby" onchange="this.form.submit()">
+                  <option value="default" {{isset($_GET['orderby']) ? ($_GET['orderby']=='default' ? 'selected' : '') : ''}}>
+                    Default sorting</option>
+                  <option value="date" {{isset($_GET['orderby']) ? ($_GET['orderby']=='date' ? 'selected' : '') : ''}}>
+                    Sort by newness</option>
+                  <option value="price" {{isset($_GET['orderby']) ? ($_GET['orderby']=='price' ? 'selected' : '') : ''}}>
+                    Sort by price: low to high</option>
+                  <option value="price-desc" {{isset($_GET['orderby']) ? ($_GET['orderby']=='price-desc' ? 'selected' : '') : ''}}>
+                    Sort by price: high to low</option>
                 </select>
                 <i class="fa fa-angle-down"></i>
               </div>
             </div>
-            <div class="shop-ordering-select">
+            {{-- <div class="shop-ordering-select">
               <label class="hide">Show:</label>
               <div class="form-flat-select">
                 <select name="per_page" class="per_page">
@@ -53,7 +56,7 @@
                 </select>
                 <i class="fa fa-angle-down"></i>
               </div>
-            </div>
+            </div> --}}
           </form>
         </div>
       </div>
