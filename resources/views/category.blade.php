@@ -155,7 +155,7 @@
                 @endforelse
               </ul>
             </div>
-            <nav class="shop-pagination">
+            {{-- <nav class="shop-pagination">
               <p class="shop-result-count">
                 Showing 1&ndash;12 of 14 results
               </p>
@@ -166,7 +166,7 @@
                   <a class="next page-numbers" href="#"><i class="fa fa-angle-right"></i></a>
                 </div>
               </div>
-            </nav>
+            </nav> --}}
           </div>
         </div>
         <div class="col-md-3 sidebar-wrap">
