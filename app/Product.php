@@ -27,4 +27,8 @@ class Product extends Model
     public function order_products(){
         return $this->hasMany('\App\OrderProduct');
     }
+
+    public function reviews(){
+        return $this->hasMany('\App\Review');
+    }
 }
