@@ -7,6 +7,7 @@ use App\Category;
 use App\Shop;
 use App\Product;
 use App\User;
+use App\Review;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -168,9 +169,12 @@ class ProductController extends Controller
 
     public function show($id){
         $product = Product::findOrFail($id);
+        $reviews = Review::where('product_id', $id)->get();
+        //calculate average rating
+        $averageRating = Review::where('product_id', $id)->avg('rating');
 
         //other products belonging to same category
         $relatedProducts = DB::table('products')->where('category_id', $product->category_id)->latest()->take(4)->get();
-        return view('product-detail', compact('product', 'relatedProducts'));
+        return view('product-detail', compact('product', 'relatedProducts', 'reviews', 'averageRating'));
     }
 }

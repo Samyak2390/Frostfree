@@ -87,9 +87,9 @@
                         <h1 class="product_title entry-title">{{$product->product_name}}</h1>
                         <div class="shop-product-rating">
                           <div class="star-rating">
-                            <span style="width:80%"></span>
+                            <span style="width:{{$averageRating * 20}}%"></span>
                           </div>
-                          <a href="#reviews" class="shop-review-link">(<span class="count">1</span> customer review)</a>
+                          <a href="#reviews" class="shop-review-link">(<span class="count">{{sizeof($reviews)}}</span> customer review)</a>
                         </div>
                         <p class="price"><span class="amount">&pound;{{$product->price}}</span></p>
                         <div class="product-excerpt">
@@ -132,7 +132,7 @@
                               <a data-toggle="tab" role="tab" href="#tab-additional_information">Allergy Information</a>
                             </li>
                             <li>
-                              <a data-toggle="tab" role="tab" href="#tab-reviews">Reviews (1)</a>
+                              <a data-toggle="tab" role="tab" href="#tab-reviews">Reviews ({{sizeof($reviews)}})</a>
                             </li>
                           </ul>
                           <div class="tab-content">
@@ -163,52 +163,29 @@
                             <div class="tab-pane" id="tab-reviews">
                               <div id="reviews">
                                 <div id="comments">
-                                  <h2>1 review for Cras rhoncus duis viverra</h2>
                                   <ol class="commentlist">
-                                    <li>
-                                      <div class="comment_container">
-                                        <img alt='' src='http://placehold.it/32x32' class='avatar' height='60' width='60'/>
-                                        <div class="comment-text">
-                                          <div class="star-rating">
-                                            <span style="width:80%"></span>
-                                          </div>
-                                          <p class="meta">
-                                            <strong>sitesao</strong> &ndash; <time datetime="2015-08-05T10:09:45+00:00">August 5, 2015</time>:
-                                          </p>
-                                          <div class="description"><p>Lorem ipsum dolor</p></div>
-                                        </div>
-                                      </div>
-                                      <ol class="children">
-                                        <li>
-                                          <div class="comment_container">
-                                            <img alt='' src='http://placehold.it/32x32' class='avatar' height='60' width='60'/>
-                                            <div class="comment-text">
-                                              <div class="star-rating">
-                                                <span style="width:80%"></span>
-                                              </div>
-                                              <p class="meta">
-                                                <strong>sitesao</strong> &ndash; <time datetime="2015-08-05T10:09:45+00:00">August 5, 2015</time>:
-                                              </p>
-                                              <div class="description"><p>Lorem ipsum dolor</p></div>
+                                    @forelse($reviews as $review)
+                                      <li>
+                                        <div class="comment_container">
+                                          <img alt='avatar' src="{{url('uploads/profile/',Auth::user()->user_photo ?? 'default-profile.png')}}" class='avatar' height='60' width='60'/>
+                                          <div class="comment-text">
+                                            <div class="star-rating">
+                                              <span style="width:{{$review->rating * 20}}%"></span>
                                             </div>
+                                            <?php
+                                              $dateTime = $review->created_at->toDateTimeString();
+                                              $formattedDate = date('M d Y', strtotime($dateTime));
+                                            ?>
+                                            <p class="meta">
+                                              <strong>{{Auth::user()->username}}</strong> &ndash; <time datetime="{{$dateTime}}">{{$formattedDate}}</time>
+                                            </p>
+                                            <div class="description"><p>{{$review->review_detail}}</p></div>
                                           </div>
-                                        </li>
-                                      </ol>
-                                    </li>
-                                    <li>
-                                      <div class="comment_container">
-                                        <img alt='' src='http://placehold.it/32x32' class='avatar' height='60' width='60'/>
-                                        <div class="comment-text">
-                                          <div class="star-rating">
-                                            <span style="width:80%"></span>
-                                          </div>
-                                          <p class="meta">
-                                            <strong>sitesao</strong> &ndash; <time datetime="2015-08-05T10:09:45+00:00">August 5, 2015</time>:
-                                          </p>
-                                          <div class="description"><p>Lorem ipsum dolor</p></div>
                                         </div>
-                                      </div>
-                                    </li> 
+                                      </li> 
+                                    @empty
+                                       <p>No reviews yet.</p>
+                                    @endforelse
                                   </ol>
                                 </div>
                                 <div id="respond-wrap">
