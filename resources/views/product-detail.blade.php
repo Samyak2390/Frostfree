@@ -165,19 +165,21 @@
                                 <div id="comments">
                                   <ol class="commentlist">
                                     @forelse($reviews as $review)
+                                      <?php
+                                        $dateTime = $review->created_at->toDateTimeString();
+                                        $formattedDate = date('M d Y', strtotime($dateTime));
+
+                                        $user = \App\User::findOrFail($review->user_id);
+                                      ?>
                                       <li>
                                         <div class="comment_container">
-                                          <img alt='avatar' src="{{url('uploads/profile/',Auth::user()->user_photo ?? 'default-profile.png')}}" class='avatar' height='60' width='60'/>
+                                          <img alt='avatar' src="{{url('uploads/profile/',$user->user_photo ?? 'default-profile.png')}}" class='avatar' height='60' width='60'/>
                                           <div class="comment-text">
                                             <div class="star-rating">
                                               <span style="width:{{$review->rating * 20}}%"></span>
                                             </div>
-                                            <?php
-                                              $dateTime = $review->created_at->toDateTimeString();
-                                              $formattedDate = date('M d Y', strtotime($dateTime));
-                                            ?>
                                             <p class="meta">
-                                              <strong>{{Auth::user()->username}}</strong> &ndash; <time datetime="{{$dateTime}}">{{$formattedDate}}</time>
+                                              <strong>{{$user->username}}</strong> &ndash; <time datetime="{{$dateTime}}">{{$formattedDate}}</time>
                                             </p>
                                             <div class="description"><p>{{$review->review_detail}}</p></div>
                                           </div>
