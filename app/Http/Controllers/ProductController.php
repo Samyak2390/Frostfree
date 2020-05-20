@@ -40,7 +40,7 @@ class ProductController extends Controller
             'min_order'=>'required|numeric|min:1|max:100',
             'max_order'=>'required|numeric|min:1|max:100',
             'description'=>'required',
-            'allergy_info'=>'',
+            'allergy_info'=>'required',
             'product_image'=>'required|image|mimes:png,jpg,jpeg|max:1000',
         ]);
 

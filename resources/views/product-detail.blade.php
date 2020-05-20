@@ -13,6 +13,52 @@
         margin-top: 5em;
       }
     }
+
+    .hide {
+      display: none;
+    }
+
+    .clear {
+      float: none;
+      clear: both;
+    }
+
+    .rating {
+      font-size: 35px;
+      width: 193px;
+      unicode-bidi: bidi-override;
+      direction: rtl;
+      text-align: center;
+      position: relative;
+    }
+
+    .rating > label {
+        float: right;
+        display: inline;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        width: 1.1em;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .rating > label:hover,
+    .rating > label:hover ~ label,
+    .rating > input.radio-btn:checked ~ label {
+        color: transparent;
+    }
+
+    .rating > label:hover:before,
+    .rating > label:hover ~ label:before,
+    .rating > input.radio-btn:checked ~ label:before,
+    .rating > input.radio-btn:checked ~ label:before {
+        content: "\2605";
+        position: absolute;
+        left: 0;
+        color: #FFD700;
+    }
+
   </style>
 @endsection
 @section('content')
@@ -168,21 +214,45 @@
                                 <div id="respond-wrap">
                                   <div id="respond" class="comment-respond">
                                     <h3 class="comment-reply-title">
-                                      <span>Leave a reply</span>
+                                      <span>Leave a review</span>
                                     </h3>
-                                    <form class="comment-form">
-                                      <p class="comment-form-name">
-                                        <label>Your name</label>
-                                        <input class="form-control" name="name" />
-                                      </p>
-                                      <p class="comment-form-comment">
-                                        <label>Comment</label>
-                                        <textarea class="form-control" name="comment" cols="45" rows="8" aria-required="true"></textarea>
-                                      </p>
-                                      <p>
-                                        <input name="submit" class="btn" value="Post Comment" type="submit" />
-                                      </p>
-                                    </form>
+                                    @if(Auth::user())
+                                      <form class="comment-form" method="POST" action="{{route('reviews.store', $product->id)}}">
+                                        @csrf
+                                        <p class="comment-form-comment">
+                                          <label>Your rating</label>
+                                        </p>
+                                        <div class="rating">
+                                          <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                                          <label for="star5" >☆</label>
+                                          <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                                          <label for="star4" >☆</label>
+                                          <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                                          <label for="star3" >☆</label>
+                                          <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                                          <label for="star2" >☆</label>
+                                          <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                                          <label for="star1" >☆</label>
+                                          <div class="clear"></div>
+                                        </div>
+                                        <span style="color: red">{{$errors->first('star')}}</span>
+                                        {{-- <p class="comment-form-name">
+                                          <label>Your name</label>
+                                          <input class="form-control" name="name" />
+                                        </p> --}}
+                                        <br/>
+                                        <p class="comment-form-comment">
+                                          <label>Comment</label>
+                                          <textarea class="form-control" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                                          <span style="color: red">{{$errors->first('comment')}}</span>
+                                        </p>
+                                        <p>
+                                          <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+                                        </p>
+                                      </form>
+                                    @else 
+                                      <label>Login to leave a review.</label>
+                                    @endif
                                   </div>
                                 </div>
                               </div>

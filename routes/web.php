@@ -58,6 +58,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/shops/{shop}', 'ShopController@index')->name('shops.index');
 Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
 Route::get('/products/{product}', 'ProductController@show')->name('products.show');
+Route::post('/products/{product}/reviews', 'ReviewController@store')->name('reviews.store');
 
 Route::get('/carts/{cart?}', 'CartController@show')->name('carts.show');
 Route::post('/carts/products/{product}', 'CartController@store')->name('carts.store');
