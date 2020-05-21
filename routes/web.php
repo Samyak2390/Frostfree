@@ -70,15 +70,8 @@ Route::view('/about', 'about');
 Route::post('/contact/sendMail', 'MailController@sendMail')->name('send.mail');
 Route::view('/contact', 'contactus');
 Route::view('/faq', 'faq');
-Route::get('mailable', function (Request $request) {
-	$invoiceInfo = new App\Http\Controllers\CheckoutController;
-	$orderData = $invoiceInfo->invoiceInfo($request);
-	// foreach($orderData['traders'] as $trader){
 
-	// }
-	dd($orderData);
-	return new App\Mail\OrderInvoice($orderData['traders']['21']);
-});
+Route::get('/search', 'SearchController@show')->name('search.show');
 
 
 

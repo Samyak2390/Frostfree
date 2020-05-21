@@ -451,8 +451,9 @@
               <div class="header-search-overlay hide">
                 <div class="container">
                   <div class="header-search-overlay-wrap">
-                    <form class="searchform">
-                      <input type="search" class="searchinput" name="s" value="" placeholder="Search..." />
+                    <form class="searchform" method="GET" action="/search">
+                      @csrf
+                      <input type="search" class="searchinput" name="search" value="" placeholder="Search..." />
                       <input type="submit" class="searchsubmit hidden" name="submit" value="Search" />
                     </form>
                     <button type="button" class="close">
