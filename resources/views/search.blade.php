@@ -1,5 +1,14 @@
 @extends('layouts.app')
 @section('title', 'FrostFree | Search')
+@section('addCss')
+  <style>
+    @media (max-width: 700px){
+      .remove {
+        display: none;
+      }
+    }
+  </style>
+@endsection
 @section('content')
 
 <div id="wrapper" class="wide-wrap">
@@ -20,7 +29,7 @@
       </div>
     </div>
   </div>
-  <div class="shop-toolbar">
+  <div class="shop-toolbar remove">
     <div class="container">
       <div class="row">
         <div class="col-md-9 main-wrap pull-right">

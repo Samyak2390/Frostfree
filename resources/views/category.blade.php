@@ -1,7 +1,16 @@
 @extends('layouts.app')
 @section('title', 'FrostFree | Category')
-@section('content')
+@section('addCss')
+  <style>
+    @media (max-width: 700px){
+      .remove {
+        display: none;
+      }
+    }
+  </style>
+@endsection
 
+@section('content')
 <div id="wrapper" class="wide-wrap">
   <div class="offcanvas-overlay"></div>
   <div class="heading-container heading-resize heading-button">
@@ -20,7 +29,7 @@
       </div>
     </div>
   </div>
-  <div class="shop-toolbar">
+  <div class="shop-toolbar remove">
     <div class="container">
       <div class="row">
         <div class="col-md-9 main-wrap pull-right">
@@ -46,17 +55,6 @@
                 <i class="fa fa-angle-down"></i>
               </div>
             </div>
-            {{-- <div class="shop-ordering-select">
-              <label class="hide">Show:</label>
-              <div class="form-flat-select">
-                <select name="per_page" class="per_page">
-                  <option value="12" selected='selected'>12</option>
-                  <option value="24">24</option>
-                  <option value="36">36</option>
-                </select>
-                <i class="fa fa-angle-down"></i>
-              </div>
-            </div> --}}
           </form>
         </div>
       </div>
