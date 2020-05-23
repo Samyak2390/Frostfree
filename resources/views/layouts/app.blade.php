@@ -168,8 +168,10 @@
           <nav class="offcanvas-navbar">
             <ul class="offcanvas-nav">
               <li class="menu-item-has-children dropdown">
-                {{-- {{dd(\Request::path())}} --}}
                 <a href="{{url('/')}}">Home</a>
+              </li>
+              <li class="menu-item-has-children dropdown">
+                <a href="{{url('/profile/create')}}">Profile</a>
               </li>
               <li class="menu-item-has-children dropdown">
                 <a class="dropdown-hover">Shop <span class="caret"></span></a>
