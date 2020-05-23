@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Product;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -67,6 +68,13 @@ class HomeController extends Controller
     }
 
     public function admin(){
-        return '<p> You are admin</p>';
+        $traders = DB::table('users')->where('role', '1')->get();
+        return view('admin.index', compact('traders'));
+    }
+
+    public function traderLogin($id){
+        $user = User::findOrFail($id);
+        auth()->loginUsingId($id);
+        return redirect("/trader");
     }
 }

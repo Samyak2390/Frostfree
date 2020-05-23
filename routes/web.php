@@ -22,6 +22,7 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware'=>'auth'], function () {
 	Route::get('/admin',['middleware'=>'check-role:admin','uses'=>'HomeController@admin'])->middleware('verified');
+	Route::get('/admin/traders/{trader}',['middleware'=>'check-role:admin','uses'=>'HomeController@traderLogin'])->middleware('verified');
 
 	Route::get('/trader',['middleware'=>'check-role:admin|trader','uses'=>'TraderController@index'])->middleware('verified');
 
