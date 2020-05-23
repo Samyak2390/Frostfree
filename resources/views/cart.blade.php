@@ -20,6 +20,16 @@
       .margin-top{
         margin-top: 6em
       }
+
+      .hide-l{
+        display:none;
+      }
+    }
+
+    @media (max-width: 700px){
+      .hide-s{
+        display:none;
+      }
     }
 
     .notification{
@@ -121,7 +131,7 @@
                       </tr>
                     @endforelse 
                     @if(sizeOf($cartProducts) > 0)
-                      <tr>
+                      <tr class="hide-s">
                         <td colspan="5" class="actions">
                           <input type="button" onclick="event.preventDefault();document.getElementById('remove-all').submit()" class="button update-cart-button" name="empty_cart" value="Remove all"/>
                         </td>
@@ -129,6 +139,15 @@
                           <input type="submit" class="button update-cart-button" name="update_cart" value="Update Cart"/>
                         </td>
                       </tr>
+                      <tr class="hide-l">
+                        <td colspan="2" class="actions">
+                          <input style="width: 100%" type="button" onclick="event.preventDefault();document.getElementById('remove-all').submit()" class="button update-cart-button" name="empty_cart" value="Remove all"/>
+                        </td>
+                        <td colspan="2" class="actions">
+                          <input style="width: 100%" type="submit" class="button update-cart-button" name="update_cart" value="Update Cart"/>
+                        </td>
+                      </tr>
+
                     @endif
                   </tbody>
                 </table>
