@@ -97,9 +97,21 @@
                             </div>
                             <div class="info-meta">
                               <div class="info-price">
+                                <?php
+                                  $discountRate = DB::table('discounts')->where('product_id',"$product->id")->get();
+                                ?>
                                 <span class="price">
-                                  {{-- <del><span class="amount">&#36;20.50</span></del>--}} 
-                                  <ins><span class="amount">&pound;{{$product->price}}</span></ins> 
+                                  @if(!isset($discountRate) || sizeof($discountRate) <= 0)
+                                    <span class="amount">&pound;{{$product->price}}</span>
+                                  @else
+                                    <?php
+                                      $discount = $discountRate[0]->discount;
+                                      $netPrice = $product->price - ($discount/100 * $product->price);
+                                    ?>
+                                    <span class="amount" style="text-decoration: line-through">&pound;{{$product->price}}</span>
+                                    &nbsp;
+                                    <span class="amount">&pound;{{$netPrice}}</span>
+                                  @endif
                                 </span>
                               </div>
                               <div class="loop-add-to-cart">
@@ -123,9 +135,21 @@
                             </div>
                             <div class="list-info-meta clearfix">
                               <div class="info-price">
+                                <?php
+                                  $discountRate = DB::table('discounts')->where('product_id',"$product->id")->get();
+                                ?>
                                 <span class="price">
-                                  {{-- <del><span class="amount">&#36;20.50</span></del>  --}}
-                                  <ins><span class="amount">&pound;{{$product->price}}</span></ins>
+                                  @if(!isset($discountRate) || sizeof($discountRate) <= 0)
+                                    <span class="amount">&pound;{{$product->price}}</span>
+                                  @else
+                                    <?php
+                                      $discount = $discountRate[0]->discount;
+                                      $netPrice = $product->price - ($discount/100 * $product->price);
+                                    ?>
+                                    <span class="amount" style="text-decoration: line-through">&pound;{{$product->price}}</span>
+                                    &nbsp;
+                                    <span class="amount">&pound;{{$netPrice}}</span>
+                                  @endif
                                 </span>
                               </div>
                               <div class="list-action clearfix">
@@ -188,8 +212,22 @@
                       <img width="100" height="150" src="{{ URL::asset("uploads/products/$recent->product_image")}}" alt="Product-13"/> 
                       <span class="product-title">{{$recent->product_name}}</span>
                     </a>
-                    {{-- <del><span class="amount">&#36;20.50</span></del> --}}
-                    <ins><span class="amount">&pound;{{$recent->price}}</span></ins> 
+                    <?php
+                      $discountRate = DB::table('discounts')->where('product_id',"$recent->id")->get();
+                    ?>
+                    <span class="price">
+                      @if(!isset($discountRate) || sizeof($discountRate) <= 0 )
+                        <span class="amount">&pound;{{$recent->price}}</span>
+                      @else
+                        <?php
+                          $discount = $discountRate[0]->discount;
+                          $netPrice = $recent->price - ($discount/100 * $recent->price);
+                        ?>
+                        <span class="amount" style="text-decoration: line-through">&pound;{{$recent->price}}</span>
+                        &nbsp;
+                        <span class="amount">&pound;{{$netPrice}}</span>
+                      @endif
+                    </span> 
                   </li>
                 @empty 
                   <li>No recently added.</li>

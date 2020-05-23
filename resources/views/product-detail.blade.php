@@ -91,7 +91,24 @@
                           </div>
                           <a href="#reviews" class="shop-review-link">(<span class="count">{{sizeof($reviews)}}</span> customer review)</a>
                         </div>
-                        <p class="price"><span class="amount">&pound;{{$product->price}}</span></p>
+                        <p class="price">
+                          <?php
+                            $discountRate = DB::table('discounts')->where('product_id',"$product->id")->get();
+                          ?>
+                          <span class="price">
+                            @if(!isset($discountRate) || sizeof($discountRate) <= 0)
+                              <span class="amount">&pound;{{$product->price}}</span>
+                            @else
+                              <?php
+                                $discount = $discountRate[0]->discount;
+                                $netPrice = $product->price - ($discount/100 * $product->price);
+                              ?>
+                              <span class="amount" style="text-decoration: line-through">&pound;{{$product->price}}</span>
+                              &nbsp;
+                              <span class="amount">&pound;{{$netPrice}}</span>
+                            @endif
+                          </span>
+                        </p>
                         <div class="product-excerpt">
                           <p>
                             {{substr($product->description, 0, 250)}}...
@@ -268,8 +285,21 @@
                                       </div>
                                       <div class="info-meta">
                                         <div class="info-price">
+                                          <?php
+                                            $discountRate = DB::table('discounts')->where('product_id',"$relatedProduct->id")->get();
+                                          ?>
                                           <span class="price">
-                                            <span class="amount">&pound;{{$relatedProduct->price}}</span>
+                                            @if(!isset($discountRate) || sizeof($discountRate) <= 0)
+                                              <span class="amount">&pound;{{$relatedProduct->price}}</span>
+                                            @else
+                                              <?php
+                                                $discount = $discountRate[0]->discount;
+                                                $netPrice = $relatedProduct->price - ($discount/100 * $relatedProduct->price);
+                                              ?>
+                                              <span class="amount" style="text-decoration: line-through">&pound;{{$relatedProduct->price}}</span>
+                                              &nbsp;
+                                              <span class="amount">&pound;{{$netPrice}}</span>
+                                            @endif
                                           </span>
                                         </div>
                                         <div class="loop-add-to-cart">

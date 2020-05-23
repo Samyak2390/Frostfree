@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'FrostFree | Home')
 @section('content')
+
   <div class="content-container no-padding">
     <div class="container-full">
       <div class="row">
@@ -112,7 +113,17 @@
                                                   </div>
                                                   <div class="info-price">
                                                     <span class="price">
-                                                      <span class="amount">&pound;{{$meatFish->price}}</span>
+                                                      @if(!isset($meatFish->discount->discount))
+                                                        <span class="amount">&pound;{{$meatFish->price}}</span>
+                                                      @else
+                                                        <?php
+                                                          $discount = $meatFish->discount->discount;
+                                                          $netPrice = $meatFish->price - ($discount/100 * $meatFish->price);
+                                                        ?>
+                                                        <span class="amount" style="text-decoration: line-through">&pound;{{$meatFish->price}}</span>
+                                                        &nbsp;
+                                                        <span class="amount">&pound;{{$netPrice}}</span>
+                                                      @endif
                                                     </span>
                                                   </div>
                                                 </div>
@@ -192,7 +203,17 @@
                                                   </div>
                                                   <div class="info-price">
                                                     <span class="price">
-                                                      <span class="amount">&#36;{{$green_grocery->price}}</span>
+                                                      @if(!isset($green_grocery->discount->discount))
+                                                        <span class="amount">&pound;{{$green_grocery->price}}</span>
+                                                      @else
+                                                        <?php
+                                                          $discount = $green_grocery->discount->discount;
+                                                          $netPrice = $green_grocery->price - ($discount/100 * $green_grocery->price);
+                                                        ?>
+                                                        <span class="amount" style="text-decoration: line-through">&pound;{{$green_grocery->price}}</span>
+                                                        &nbsp;
+                                                        <span class="amount">&pound;{{$netPrice}}</span>
+                                                      @endif
                                                     </span>
                                                   </div>
                                                 </div>
@@ -271,7 +292,17 @@
                                                   </div>
                                                   <div class="info-price">
                                                     <span class="price">
-                                                      <span class="amount">&pound;{{$delicacy->price}}</span>
+                                                      @if(!isset($delicacy->discount->discount))
+                                                        <span class="amount">&pound;{{$delicacy->price}}</span>
+                                                      @else
+                                                        <?php
+                                                          $discount = $delicacy->discount->discount;
+                                                          $netPrice = $delicacy->price - ($discount/100 * $delicacy->price);
+                                                        ?>
+                                                        <span class="amount" style="text-decoration: line-through">&pound;{{$delicacy->price}}</span>
+                                                        &nbsp;
+                                                        <span class="amount">&pound;{{$netPrice}}</span>
+                                                      @endif
                                                     </span>
                                                   </div>
                                                 </div>
