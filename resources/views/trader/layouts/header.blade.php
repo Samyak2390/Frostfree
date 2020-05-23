@@ -14,10 +14,10 @@
                 <i class="fa fa-user-circle" aria-hidden="true"></i>
             </div>
         @endif
-        <div style="color: white; font-size: 18px; margin-right: 13px;">
-            <a href="{{url('/trader/profile/create')}}">{{$user->username}}</a>
-            <div class="trader-logout" style="color: white; font-size: 13px"> 
-                <a class="dropdown-item" href="{{ route('logout') }}"
+        <div style="font-size: 18px; margin-right: 13px;">
+            <a style="color: white" href="{{url('/trader/profile/create')}}">{{$user->username}}</a>
+            <div class="trader-logout" style="font-size: 13px"> 
+                <a style="color: white" class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                     <i class="icon icon-share-alt"></i>{{ __('Logout') }}

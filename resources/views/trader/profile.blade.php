@@ -50,29 +50,12 @@
       <div class="col-lg-1"> 
       </div>
       <div class="col-lg-8 order-lg-2" style="float:right">
-        {{-- <ul class="nav nav-tabs">
-          <li class="nav-itemm">
-            <a class="nav-link active">Edit</a>
-          </li>
-        </ul> --}}
-        <h2>Your Profile </h2>
+        <h2 style="margin-bottom: 35px">Your Profile </h2>
         <div class=" py-4">
           <div class="tab-pane active" id="edit">
             <form role="form" method="post" action="{{route('profile.update')}}" enctype="multipart/form-data">
               {{ csrf_field() }}
               {{method_field("PUT")}}
-              {{--            <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                            <div class="col-lg-9">
-                              <input class="form-control" type="text" placeholder="FName" value="{{ Auth::user()->firstname }}">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                            <div class="col-lg-9">
-                              <input class="form-control" type="text" placeholder="LName" value="{{ Auth::user()->lastname }}">
-                            </div>
-                          </div>--}}
               <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
                 <div class="col-lg-9">
@@ -98,15 +81,6 @@
                   <span style="color: red">{{$errors->first('address')}}</span>
                 </div>
               </div>
-              {{--           <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label"></label>
-                      <div class="col-lg-6">
-                          <input class="form-control" type="text" value="" placeholder="City" value="{{ Auth::user()->city }}">
-                        </div>
-                        <div class="col-lg-3">
-                          <input class="form-control" type="text" value="" placeholder="State" value="{{ Auth::user()->state }}">
-                        </div>
-                </div>--}}
               <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
                 <div class="col-lg-9">
