@@ -52,6 +52,14 @@ class LoginController extends Controller
       abort(404);
     }
 
+    protected function credentials(Request $request){
+        $credentials = [
+            $this->username() => strtolower($request->input($this->username())),
+            'password' => $request->get('password'),
+        ];
+        return $credentials;
+    }
+
     public function redirectTo(){
         // User role
         $role = auth()->user()->role; 

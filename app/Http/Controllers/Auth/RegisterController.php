@@ -76,6 +76,7 @@ class RegisterController extends Controller
     { 
 
         // dd($data);
+        $data['username'] = strtolower($data['username']);
         $user = User::create([
             'role' => $data['role'],
             'username' => $data['username'],
