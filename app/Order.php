@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['cart_id', 'collection_slot_id', 'delivery_status'];
+    protected $fillable = ['cart_id', 'collection_slot_id', 'delivery_status', 'created_at', 'updated_at'];
 
     public function collection_slot()
     {

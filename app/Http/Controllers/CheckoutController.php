@@ -88,20 +88,36 @@ class CheckoutController extends Controller
     }
 
     protected function fillPayments($orderId, $payment){
+        date_default_timezone_set('Asia/Kathmandu');
+        $timestamp = new \DateTime();
+
         $userId = Auth::user()->id;
         DB::table('payments')->insert([
-            ['order_id'=>$orderId, 'user_id'=>$userId, 'price'=>$payment],
+            [
+                'order_id'=>$orderId, 
+                'user_id'=>$userId, 
+                'price'=>$payment,
+                'created_at'=> $timestamp, 
+                'updated_at'=> $timestamp
+            ]
         ]);
     }
 
-    protected function fillOrderProducts(Request $request, $orderId){
+    public function fillOrderProducts(Request $request, $orderId){
         $total = 0;
         $cartProducts = array();
         if ($request->session()->exists('cart')) {
             $cartProducts = $request->session()->get('cart');
+            date_default_timezone_set('Asia/Kathmandu');
+
+            $timestamp = new \DateTime();
             foreach($cartProducts as $key=>$value){
                 DB::table('order_products')->insert([
-                    ['order_id'=>$orderId, 'product_id'=>$key],
+                    ['order_id'=>$orderId, 
+                    'product_id'=>$key, 
+                    'quantity'=>$value['quantity'], 
+                    'created_at'=> $timestamp, 
+                    'updated_at'=> $timestamp]
                 ]);
                 $subTotal = ($value['product_price'] - (($value['discount']/100) * $value['product_price'])) * $value['quantity'];
                 $total = $total + $subTotal;
@@ -113,6 +129,7 @@ class CheckoutController extends Controller
 
     protected function fillOrders(){
         date_default_timezone_set('Asia/Kathmandu');
+        $timestamp = new \DateTime();
         $timeAfterOneDay = time() + 86400;
         $collectionDetails = $this->findCollectionDetails($timeAfterOneDay);
        
@@ -123,7 +140,9 @@ class CheckoutController extends Controller
                 'cart_id' => $cartId, 
                 'collection_slot_id' => $collectionDetails['collectionSlotId'],
                 'delivery_status' => false,
-                'collection_date' => $collectionDetails['collectionDate']
+                'collection_date' => $collectionDetails['collectionDate'],
+                'created_at'=> $timestamp, 
+                'updated_at'=> $timestamp
             ]
         );
 
@@ -149,7 +168,7 @@ class CheckoutController extends Controller
                 $collectionTime = '16-19';
             }
             $collectionSlotId = $this->findCollectionSlotId($collectionDay, $collectionTime);
-            $collectionDate = $this->findNearestDate($collectionDay, $timeAfterOneDay);
+            $collectionDate = $this->findNearestDate($collectionDay, time());
             if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 20){
                 $this->countRecursionNo = $this->countRecursionNo + 1;
                 $addTime = $timeAfterOneDay + ($this->countRecursionNo * 11000);
@@ -165,7 +184,7 @@ class CheckoutController extends Controller
                 $collectionTime = '16-19';
             }
             $collectionSlotId = $this->findCollectionSlotId($collectionDay, $collectionTime);
-            $collectionDate = $this->findNearestDate($collectionDay, $timeAfterOneDay);
+            $collectionDate = $this->findNearestDate($collectionDay, time());
             if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 20){
                 $this->countRecursionNo = $this->countRecursionNo + 1;
                 $addTime = time() + ($this->countRecursionNo * 11000);
@@ -181,7 +200,7 @@ class CheckoutController extends Controller
                 $collectionTime = '16-19';
             }
             $collectionSlotId = $this->findCollectionSlotId($collectionDay, $collectionTime);
-            $collectionDate = $this->findNearestDate($collectionDay, $timeAfterOneDay);
+            $collectionDate = $this->findNearestDate($collectionDay, time());
             if($this->findCollectionNumbers($collectionSlotId, $collectionDate) >= 20){
                 $this->countRecursionNo = $this->countRecursionNo + 1;
                 $addTime = time() + ($this->countRecursionNo * 11000);

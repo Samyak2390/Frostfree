@@ -183,32 +183,24 @@
       // Set up the payment:
       // 1. Add a payment callback
       payment: function(data, actions) {
-        // 2. Make a request to your server
+        // 2. Make a request to server
         return actions.request.post('/api/create-payment')
           .then(function(res) {
             // 3. Return res.id from the response
-            console.log('>>>>>>>>>>>>>>>>'+res);
             return res.id;
           })
-          .catch(function(error){
-            console.log('Error>>>>>>'+error);
-          });
       },
       // Execute the payment:
       // 1. Add an onAuthorize callback
       onAuthorize: function(data, actions) {
-        // 2. Make a request to your server
+        // 2. Make a request to server
         return actions.request.post('/api/execute-payment', {
           paymentID: data.paymentID,
           payerID:   data.payerID
         })
           .then(function(res) {
-            console.log('lalalal'+res);
             fetch('/api/checkout-succed', 
             {method:'POST'})
-            .then(res=>{
-              console.log('res>>>>' + res);
-            })
           });
       }
     }, '#paypal-button');
