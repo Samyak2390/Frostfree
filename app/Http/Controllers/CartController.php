@@ -193,11 +193,6 @@ class CartController extends Controller
     }
 
     public function update(Request $request){
-        if(!$this->checkStockQuantity($productId, $request->input('quantity'))){
-            session()->flash('snackbar-message', "Product is out of Stock!");
-            session()->flash('snack-style', 'background-color: red');
-            return redirect()->back();
-        }
         $data = $request->all();
         if(Auth::User()){
             $cartId = User::find(auth()->id())->cart->id;
