@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    /**
+     * Check if quantity in cart is less than stock quantity and stock quantity is atleast 1
+     * returns true if stock quantity is greater than one and quantity in cart is less than the stock quantity 
+     */
+    protected function checkStockQuantity($id, $quantityInCart){
+        $quantity = Product::findOrFail($id)->stock_quantity;
+        return $quantity > 1 && $quantityInCart < $quantity;
+    }
+
     public function show(Request $request, $id = null){
         $cartProducts = array();
         $collectionInfo = array();
@@ -83,6 +92,11 @@ class CartController extends Controller
     }
 
     public function store(Request $request, $productId){
+        if(!$this->checkStockQuantity($productId, $request->input('quantity'))){
+            session()->flash('snackbar-message', "Product is out of Stock!");
+            session()->flash('snack-style', 'background-color: red');
+            return redirect()->back();
+        }
 
         //If the user is logged in, fill the product_details table
 
@@ -179,6 +193,11 @@ class CartController extends Controller
     }
 
     public function update(Request $request){
+        if(!$this->checkStockQuantity($productId, $request->input('quantity'))){
+            session()->flash('snackbar-message', "Product is out of Stock!");
+            session()->flash('snack-style', 'background-color: red');
+            return redirect()->back();
+        }
         $data = $request->all();
         if(Auth::User()){
             $cartId = User::find(auth()->id())->cart->id;
