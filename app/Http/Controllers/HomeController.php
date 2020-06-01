@@ -33,17 +33,23 @@ class HomeController extends Controller
         $products = Product::all();
         foreach($products as $product){
            $category =  DB::table('categories')->where('id', $product->category_id)->value('category_name');
-            if(strtolower($category) == 'meat' || strtolower($category) == 'fish'){
-                array_push($meat_fish, $product);
-            }
+           if(sizeof($meat_fish) < 8){
+                if(strtolower($category) == 'meat' || strtolower($category) == 'fish'){
+                    array_push($meat_fish, $product);
+                }
+           }
 
-            if(strtolower($category) == 'green groceries'){
-                array_push($green_groceries, $product);
-            }
+           if(sizeof($green_groceries) < 8){
+                if(strtolower($category) == 'green groceries'){
+                    array_push($green_groceries, $product);
+                }
+           }
 
-            if(strtolower($category) == 'bakery' || strtolower($category) == 'delicacies'){
-                array_push($bakery_delicacies, $product);
-            }
+           if(sizeof($bakery_delicacies) < 8){
+                if(strtolower($category) == 'bakery' || strtolower($category) == 'delicacies'){
+                    array_push($bakery_delicacies, $product);
+                }
+           }
         }
 
 
