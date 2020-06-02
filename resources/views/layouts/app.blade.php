@@ -59,6 +59,10 @@
       100% {top: -100vh;}
     }
 
+    body{
+      font-size: 16px;
+    }
+
   </style>
   {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 </head>
