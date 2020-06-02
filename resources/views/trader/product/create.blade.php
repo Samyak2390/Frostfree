@@ -1,6 +1,14 @@
 @extends('trader.layouts.master')
 @section('title','Add Products Page')
 
+@section('addCss')
+<style>
+    form input{
+        max-width: 300px;
+    }
+</style>
+@endsection
+
 @section('content')
     <div id="breadcrumb"> <a href="{{url('/trader')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Products</a> <a href="#" class="current">Add New Product</a> </div>
     <div class="container-fluid">
@@ -20,14 +28,14 @@
                     <div class="control-group">
                         <label for="product_name" class="control-label">Name</label>
                         <div class="controls{{$errors->has('product_name')?' has-error':''}}">
-                            <input type="text" name="product_name" id="product_name" class="form-control" value="{{old('product_name')}}" title="" required="required">
+                            <input style="max-width: 300px" type="text" name="product_name" id="product_name" class="form-control" value="{{old('product_name')}}" title="" required="required">
                             <span class="text-danger">{{$errors->first('product_name')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Select Category</label>
                         <div class="controls">
-                            <select name="category_id">
+                            <select name="category_id" style="max-width: 300px">
                                 @foreach($categories as $key=>$value)
                                     <option value="{{$value}}">{{$key}}</option>
                                 @endforeach
@@ -42,21 +50,16 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="price" class="control-label">Price</label>
+                        <label for="price" class="control-label">Price(&pound;)</label>
                         <div class="controls{{$errors->has('price')?' has-error':''}}">
-                            <div class="input-prepend"> <span class="add-on">$</span>
-                                <input type="number" name="price" id="price" class="" value="{{old('price')}}" title="" required="required" min="0" step=".01">
-                                
-                            </div>
+                            <input type="number" name="price" id="price" class="" value="{{old('price')}}" title="" required="required" min="0" step=".01">
                             <span class="text-danger">{{$errors->first('price')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="discount" class="control-label">Discount</label>
+                        <label for="discount" class="control-label">Discount(%)</label>
                         <div class="controls{{$errors->has('discount')?' has-error':''}}">
-                            <div class="input-prepend"> <span class="add-on">%</span>
-                                <input type="number" name="discount" id="discount" class="" value="{{old('discount')}}" title="" min="0" max="100">
-                            </div>
+                            <input type="number" name="discount" id="discount" class="" value="{{old('discount')}}" title="" min="0" max="100">
                             <span style="color: red">{{$errors->first('discount')}}</span>
                         </div>
                     </div>
@@ -78,7 +81,7 @@
                     <div class="control-group">
                         <label for="description" class="control-label">Description</label>
                         <div class="controls{{$errors->has('description')?' has-error':''}}">
-                            <textarea class="textarea_editor span12 areaText" name="description" id="description" rows="6" placeholder="Product Description" >{{old('description')}}</textarea>
+                            <textarea style="max-width: 300px" class="textarea_editor span12 areaText" name="description" id="description" rows="6" placeholder="Product Description" >{{old('description')}}</textarea>
                             <span class="text-danger">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -86,7 +89,7 @@
                     <div class="control-group">
                         <label for="allergy_info" class="control-label">Allergy Information</label>
                         <div class="controls{{$errors->has('allergy_info')?' has-error':''}}">
-                            <textarea class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info')}}</textarea>
+                            <textarea style="max-width: 300px" class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info')}}</textarea>
                             <span class="text-danger">{{$errors->first('allergy_info')}}</span>
                         </div>
                     </div>
@@ -94,7 +97,7 @@
                     <div class="control-group">
                         <label class="control-label">Image upload</label>
                         <div class="controls">
-                            <input type="file" name="product_image" id="product_image"/>
+                            <input style="max-width: 300px" type="file" name="product_image" id="product_image"/>
                             <span class="text-danger">{{$errors->first('product_image')}}</span>
                         </div>
                     </div>

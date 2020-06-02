@@ -30,7 +30,7 @@
               </span>
             @enderror
           </div>
-          <div class="checkbox clearfix">
+          {{-- <div class="checkbox clearfix">
             <div class="form-flat-checkbox pull-left">
               <input type="checkbox" name="rememberme" id="rememberme" value="forever"><i></i>&nbsp;Remember
               Me
@@ -39,7 +39,7 @@
               <a href="#lostpasswordModal" data-rel="lostpasswordModal">Lost your
                 password?</a>
             </span>
-          </div>
+          </div> --}}
         </div>
         <div class="modal-footer">
           <span class="user-login-modal-register pull-left">
