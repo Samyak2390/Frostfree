@@ -14,7 +14,7 @@
 <div id="wrapper" class="wide-wrap">
   <div class="offcanvas-overlay"></div>
   <div class="heading-container heading-resize heading-button">
-    <div class="heading-background heading-parallax bg-3" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/parallax/{{$parallax}})">
+    <div class="heading-background heading-parallax bg-3" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/parallax/{{$parallax}})">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
