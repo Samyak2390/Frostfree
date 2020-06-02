@@ -64,7 +64,6 @@
     }
 
   </style>
-  {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 </head>
 <body id="theBody">
   <?php 
