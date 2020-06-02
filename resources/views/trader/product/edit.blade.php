@@ -43,21 +43,16 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="price" class="control-label">Price</label>
+                        <label for="price" class="control-label">Price(&pound;)</label>
                         <div class="controls{{$errors->has('price')?' has-error':''}}">
-                            <div class="input-prepend"> <span class="add-on">$</span>
-                                <input type="number" name="price" id="price" class="" value="{{old('price') ?? $product->price}}" title="" required="required" min="0" step=".01">
-                                
-                            </div>
+                            <input type="number" name="price" id="price" class="" value="{{old('price') ?? $product->price}}" title="" required="required" min="0" step=".01">
                             <span style="color:red">{{$errors->first('price')}}</span>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="discount" class="control-label">Discount</label>
+                        <label for="discount" class="control-label">Discount(%)</label>
                         <div class="controls{{$errors->has('discount')?' has-error':''}}">
-                            <div class="input-prepend"> <span class="add-on">%</span>
-                                <input type="number" name="discount" id="discount" class="" value="{{old('discount') ?? $product->discount->discount ?? 0}}" title="" min="0" max="100">
-                            </div>
+                            <input type="number" name="discount" id="discount" class="" value="{{old('discount') ?? $product->discount->discount ?? 0}}" title="" min="0" max="100">
                             <span style="color: red">{{$errors->first('discount')}}</span>
                         </div>
                     </div>
@@ -79,7 +74,7 @@
                     <div class="control-group">
                         <label for="description" class="control-label">Description</label>
                         <div class="controls{{$errors->has('description')?' has-error':''}}">
-                            <textarea class="textarea_editor span12 areaText" name="description" id="description" rows="6" placeholder="Product Description" >{{old('description') ?? $product->description}}</textarea>
+                            <textarea style="max-width: 300px" class="textarea_editor span12 areaText" name="description" id="description" rows="6" placeholder="Product Description" >{{old('description') ?? $product->description}}</textarea>
                             <span style="color:red">{{$errors->first('description')}}</span>
                         </div>
                     </div>
@@ -87,7 +82,7 @@
                     <div class="control-group">
                         <label for="allergy_info" class="control-label">Allergy Information</label>
                         <div class="controls{{$errors->has('allergy_info')?' has-error':''}}">
-                            <textarea class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info') ?? $product->allergy_info}}</textarea>
+                            <textarea style="max-width: 300px" class="textarea_editor2 span12" name="allergy_info" id="allergy_info" rows="6" placeholder="Allergy Information" >{{old('allergy_info') ?? $product->allergy_info}}</textarea>
                             <span style="color:red">{{$errors->first('allergy_info')}}</span>
                         </div>
                     </div>
