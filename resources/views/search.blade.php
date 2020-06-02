@@ -143,7 +143,7 @@
                               </div> --}}
                             </div>
                             <div class="info-excerpt">
-                              {{substr($product->description, 0, 300)}}...
+                              {{substr($product->description, 0, 150)}}...
                             </div>
                             <div class="list-info-meta clearfix">
                               <div class="info-price">

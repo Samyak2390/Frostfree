@@ -3,12 +3,12 @@
 @section('content')
 	<section class="accordion-section clearfix mt-3" aria-label="Question Accordions" style="margin-top: 7%">
 		<div class="container">
-			<h2>General Questions :</h2>
+			<h3>General Questions :</h3>
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			<div class="panel panel-default">
 				<div class="panel-heading p-3 mb-3" role="tab" id="heading0">
 				<h3 class="panel-title">
-					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0" style="font-size:100%;">
+					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0" style="font-size:70%;">
 					<i class="fa fa-plus-square"></i>&nbsp;&nbsp;How do I contact you?
 					</a>
 				</h3>
@@ -23,7 +23,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading p-3 mb-3" role="tab" id="heading1">
 				<h3 class="panel-title">
-					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1" style="font-size:100%;">
+					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1" style="font-size:70%;">
 					<i class="fa fa-plus-square"></i>&nbsp;&nbsp;Where are you located?
 					</a>
 				</h3>
@@ -38,7 +38,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading p-3 mb-3" role="tab" id="heading2">
 				<h3 class="panel-title">
-					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2" style="font-size:100%;">
+					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2" style="font-size:70%;">
 					<i class="fa fa-plus-square"></i>&nbsp;&nbsp;What forms of payment do you accept?
 					</a>
 				</h3>
@@ -53,7 +53,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading p-3 mb-3" role="tab" id="heading3">
 				<h3 class="panel-title">
-					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3" style="font-size:100%;">
+					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3" style="font-size:70%;">
 					<i class="fa fa-plus-square"></i>&nbsp;&nbsp;Do you have more than current vendors?
 					</a>
 				</h3>
@@ -65,11 +65,10 @@
 				</div>
 			</div>
 
-
 			<div class="panel panel-default">
 				<div class="panel-heading p-3 mb-3" role="tab" id="heading4">
 				<h3 class="panel-title">
-					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4" style="font-size:100%;">
+					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4" style="font-size:70%;">
 					<i class="fa fa-plus-square"></i>&nbsp;&nbsp;How do I cancel an order?
 					</a>
 				</h3>
@@ -80,12 +79,11 @@
 				</div>
 				</div>
 			</div>
-			</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading p-3 mb-3" role="tab" id="heading5">
 				<h3 class="panel-title">
-					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="true" aria-controls="collapse5" style="font-size:100%;">
+					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="true" aria-controls="collapse5" style="font-size:70%;">
 					<i class="fa fa-plus-square"></i>&nbsp;&nbsp;What if something is wrong with my order?
 					</a>
 				</h3>
@@ -97,12 +95,10 @@
 				</div>
 			</div>
 
-
-
 			<div class="panel panel-default">
 				<div class="panel-heading p-3 mb-3" role="tab" id="heading6">
 				<h3 class="panel-title">
-					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="true" aria-controls="collapse6" style="font-size:100%;">
+					<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="true" aria-controls="collapse6" style="font-size:70%;">
 					<i class="fa fa-plus-square"></i>&nbsp;&nbsp;Do you have more than current vendors?
 					</a>
 				</h3>
@@ -113,95 +109,93 @@
 				</div>
 				</div>
 			</div>
-			
 
 		<div class="col-span-12">
 			<h1><br></h1>
 		</div>
 
-		<h2>Collection Questions :</h2>
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
-					<div class="panel-heading p-3 mb-3" role="tab" id="heading7">
-					<h3 class="panel-title">
-						<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="true" aria-controls="collapse7" style="font-size:100%;">
-						<i class="fa fa-plus-square"></i>&nbsp;&nbsp;How do I contact you for Collection informations?
-						</a>
-					</h3>
-					</div>
-					<div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
-					<div class="panel-body px-3 mb-4">
-						<p>You can email us at frostfree@customercare.com or you can call us at 1234 567 </p>
-					</div>
-					</div>
-				</div>
-				
-				<div class="panel panel-default">
-					<div class="panel-heading p-3 mb-3" role="tab" id="heading8">
-					<h3 class="panel-title">
-						<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="true" aria-controls="collapse8" style="font-size:100%;">
-						<i class="fa fa-plus-square"></i>&nbsp;&nbsp;Where are you collection located?
-						</a>
-					</h3>
-					</div>
-					<div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
-					<div class="panel-body px-3 mb-4">
-						<p>We&#8217;re located in King St, Huddersfield HD1 2QB, United Kingdom </p>
-					</div>
-					</div>
-				</div>
-				
-				<div class="panel panel-default">
-					<div class="panel-heading p-3 mb-3" role="tab" id="heading13">
-					<h3 class="panel-title">
-						<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse13" aria-expanded="true" aria-controls="collapse13" style="font-size:100%;">
-						<i class="fa fa-plus-square"></i>&nbsp;&nbsp;What time do we have to collect the products?
-						</a>
-					</h3>
-					</div>
-					<div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
-					<div class="panel-body px-3 mb-4">
-						<p>All timming will be provided by the site.</p>
-					</div>
-					</div>
-				</div>
-				
-				<div class="panel panel-default">
-					<div class="panel-heading p-3 mb-3" role="tab" id="heading9">
-					<h3 class="panel-title">
-						<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse9" aria-expanded="true" aria-controls="collapse9" style="font-size:100%;">
-						<i class="fa fa-plus-square"></i>&nbsp;&nbsp;Do you have a other collection spots?
-						</a>
-					</h3>
-					</div>
-					<div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
-					<div class="panel-body px-3 mb-4">
-						<p>Currently we have only one collection spot.</p>
-					</div>
-					</div>
-				</div>
+		<h3>Collection Questions :</h3>
+		<div class="panel panel-default">
+			<div class="panel-heading p-3 mb-3" role="tab" id="heading7">
+			<h3 class="panel-title">
+				<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="true" aria-controls="collapse7" style="font-size:70%;">
+				<i class="fa fa-plus-square"></i>&nbsp;&nbsp;How do I contact you for Collection informations?
+				</a>
+			</h3>
+			</div>
+			<div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+			<div class="panel-body px-3 mb-4">
+				<p>You can email us at frostfree@customercare.com or you can call us at 1234 567 </p>
+			</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading p-3 mb-3" role="tab" id="heading8">
+			<h3 class="panel-title">
+				<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="true" aria-controls="collapse8" style="font-size:70%;">
+				<i class="fa fa-plus-square"></i>&nbsp;&nbsp;Where are you collection located?
+				</a>
+			</h3>
+			</div>
+			<div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+			<div class="panel-body px-3 mb-4">
+				<p>We&#8217;re located in King St, Huddersfield HD1 2QB, United Kingdom </p>
+			</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading p-3 mb-3" role="tab" id="heading13">
+			<h3 class="panel-title">
+				<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse13" aria-expanded="true" aria-controls="collapse13" style="font-size:70%;">
+				<i class="fa fa-plus-square"></i>&nbsp;&nbsp;What time do we have to collect the products?
+				</a>
+			</h3>
+			</div>
+			<div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
+			<div class="panel-body px-3 mb-4">
+				<p>All timming will be provided by the site.</p>
+			</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading p-3 mb-3" role="tab" id="heading9">
+			<h3 class="panel-title">
+				<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse9" aria-expanded="true" aria-controls="collapse9" style="font-size:70%;">
+				<i class="fa fa-plus-square"></i>&nbsp;&nbsp;Do you have a other collection spots?
+				</a>
+			</h3>
+			</div>
+			<div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+			<div class="panel-body px-3 mb-4">
+				<p>Currently we have only one collection spot.</p>
+			</div>
+			</div>
+		</div>
 
 
-				<div class="panel panel-default">
-					<div class="panel-heading p-3 mb-3" role="tab" id="heading10">
-					<h3 class="panel-title">
-						<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse10" aria-expanded="true" aria-controls="collapse10" style="font-size:100%;">
-						<i class="fa fa-plus-square"></i>&nbsp;&nbsp;How do I collect my product?
-						</a>
-					</h3>
-					</div>
-					<div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
-					<div class="panel-body px-3 mb-4">
-						<p>You just have to go to the collection center and recieve your product.</p>
-					</div>
-					</div>
-				</div>
-				</div>
+		<div class="panel panel-default">
+			<div class="panel-heading p-3 mb-3" role="tab" id="heading10">
+			<h3 class="panel-title">
+				<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse10" aria-expanded="true" aria-controls="collapse10" style="font-size:70%;">
+				<i class="fa fa-plus-square"></i>&nbsp;&nbsp;How do I collect my product?
+				</a>
+			</h3>
+			</div>
+			<div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+			<div class="panel-body px-3 mb-4">
+				<p>You just have to go to the collection center and recieve your product.</p>
+			</div>
+			</div>
+		</div>
+		</div>
 
-				<div class="panel panel-default">
+		<div class="panel panel-default">
 					<div class="panel-heading p-3 mb-3" role="tab" id="heading11">
 					<h3 class="panel-title">
-						<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="true" aria-controls="collapse11" style="font-size:100%;">
+						<a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="true" aria-controls="collapse11" style="font-size:70%;">
 						<i class="fa fa-plus-square"></i>&nbsp;&nbsp;My product is not at the collection center, then what do I do?
 						</a>
 					</h3>
@@ -212,11 +206,6 @@
 					</div>
 					</div>
 				</div>
-
-
-				
-
-
 		</div>
 	</section>
 @endsection

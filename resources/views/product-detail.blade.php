@@ -111,7 +111,7 @@
                         </p>
                         <div class="product-excerpt">
                           <p>
-                            {{substr($product->description, 0, 250)}}...
+                            {{substr($product->description, 0, 150)}}...
                           </p>
                         </div>
                         <div class="product-actions res-color-attr">
