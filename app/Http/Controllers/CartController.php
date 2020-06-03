@@ -19,8 +19,10 @@ class CartController extends Controller
      * returns true if stock quantity is greater than one and quantity in cart is less than the stock quantity 
      */
     protected function checkStockQuantity($id, $quantityInCart){
-        $quantity = Product::findOrFail($id)->stock_quantity;
-        return $quantity > 1 && $quantityInCart < $quantity;
+        $product = Product::findOrFail($id);
+        $quantity = $product->stock_quantity;
+        $maxQuantity = $product->max_order;
+        return $quantity > 1 && $quantityInCart < $quantity && $quantityInCart < $maxQuantity;
     }
 
     public function show(Request $request, $id = null){
@@ -93,7 +95,7 @@ class CartController extends Controller
 
     public function store(Request $request, $productId){
         if(!$this->checkStockQuantity($productId, $request->input('quantity'))){
-            session()->flash('snackbar-message', "Product is out of Stock!");
+            session()->flash('snackbar-message', "Product is out of Stock or reached max limit!");
             session()->flash('snack-style', 'background-color: red');
             return redirect()->back();
         }
