@@ -46,7 +46,7 @@ class HomeController extends Controller
            }
 
            if(sizeof($bakery_delicacies) < 8){
-                if(strtolower($category) == 'bakery' || strtolower($category) == 'delicacies'){
+                if(strtolower($category) == 'bakery'){
                     array_push($bakery_delicacies, $product);
                 }
            }
