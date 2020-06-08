@@ -4,7 +4,7 @@ This is an e-commerce website named FrostFree.
 ## Run the project
 ```
 composer install
-php artisan migrate
+php artisan migrate:fresh
 php artisan serve
 ```
 ## Built With
