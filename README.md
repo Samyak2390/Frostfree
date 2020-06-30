@@ -1,6 +1,9 @@
 # FrostFree
 This is an e-commerce website named FrostFree.
 
+## Database Design
+![Database Design](https://github.com/Samyak2390/Frostfree/blob/master/erd.JPG)
+
 ## Run the project
 ```
 composer install
